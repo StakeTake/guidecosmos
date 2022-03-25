@@ -127,7 +127,7 @@ break
 "Request tokens in discord")
 echo "========================================================================================================================"
 echo "In order to receive tokens, you need to go to the Discord server
-echo and request tokens in the faucet channel in the format !faucet send <your_kyve_address>"
+and request tokens in the faucet channel in the format !faucet send <your_kyve_address>"
 echo "========================================================================================================================"
 
 break
