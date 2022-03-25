@@ -1,6 +1,6 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
-___In this guide, we have made setting up a closed beta node as easy as possible(bold italic)___
+___In this guide, we have made setting up a closed beta node as easy as possible___
 
 
 ```html
