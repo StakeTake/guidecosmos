@@ -1,1 +1,142 @@
+#!/bin/bash
 
+while true
+do
+
+# Logo
+
+echo "========================================================================================================================"
+curl -s https://raw.githubusercontent.com/StakeTake/script/main/logo.sh | bash
+echo "========================================================================================================================"
+
+# Menu
+
+PS3='Select an action: '
+options=(
+"Install Node"
+"Check Log"
+"Check balance"
+"Request tokens in discord"
+"Create Validator"
+"Exit")
+select opt in "${options[@]}"
+do
+case $opt in
+
+"Install Node")
+echo "============================================================"
+echo "Install start"
+echo "============================================================"
+echo "Setup NodeName:"
+echo "============================================================"
+read NODENAME
+echo "============================================================"
+echo "Setup WalletName:"
+echo "============================================================"
+read WALLETNAME
+echo export NODENAME=NODENAME >> $HOME/.profile
+echo export WALLETNAME=WALLETNAME >> $HOME/.profile
+source $HOME/.profile
+
+#UPDATE APT
+sudo apt update
+sudo apt install zip -y
+
+#INSTALL
+mkdir kyvebinary && cd kyvebinary
+wget https://nc.breithecker.de/index.php/s/L8QoGPY5cJ2ze4T/download/kyve_beta-2022-03-23.zip
+unzip kyve_beta-2022-03-23.zip
+tar -xvf  chain_linux_amd64.tar.gz
+sudo mv chaind kyved
+sudo mv kyved /usr/bin/
+
+kyved init $NODENAME
+
+mv genesis.json ~/.kyve/config/
+
+cd $HOME && rm -rf kyvebinary
+
+kyved version
+echo "============================================================"
+echo "Be sure to write down the mnemonic!"
+echo "============================================================"
+#WALLET
+kyved keys add $KYVEWALLET
+
+wget https://raw.githubusercontent.com/Errorist79/seeds/main/seeds.txt -O $HOME/.kyve/config/seeds.txt
+sed -i.bak 's/seeds = \"\"/seeds = \"'$(cat $HOME/.kyve/config/seeds.txt)'\"/g' $HOME/.kyve/config/config.toml
+
+sudo tee <<EOF >/dev/null /etc/systemd/system/kyved.service
+[Unit]
+Description=Kyved Cosmos daemon
+After=network-online.target
+
+[Service]
+User=$USER
+ExecStart=/usr/bin/kyved start
+Restart=on-failure
+RestartSec=3
+LimitNOFILE=4096
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat /etc/systemd/system/kyved.service
+sudo systemctl enable kyved
+
+sudo systemctl daemon-reload
+sudo systemctl restart kyved
+
+sed -i 's/#Storage=auto/Storage=persistent/g' /etc/systemd/journald.conf
+sudo systemctl restart systemd-journald
+
+echo export CHAIN_ID=kyve-beta >> $HOME/.profile
+source $HOME/.profile
+
+break
+;;
+
+"Check Log")
+
+journalctl -u kyved.service -f -n 100
+
+break
+;;
+
+
+"Check balance")
+kyved q bank balances $WALLETNAME
+break
+;;
+
+"Create Validator")
+kyved tx staking create-validator --yes \
+ --amount 19000000000tkyve \
+ --moniker $NODENAME \
+ --commission-rate "0.10" \
+ --commission-max-rate "0.20" \
+ --commission-max-change-rate "0.01" \
+ --min-self-delegation "1" \
+ --pubkey "$(kyved tendermint show-validator)" \
+ --from validator \
+ --chain-id $CHAIN_ID
+break
+;;
+
+"Request tokens in discord")
+echo "========================================================================================================================"
+curl "In order to receive tokens, you need to go to the Discord server
+and request tokens in the faucet channel in the format !faucet send <your_kyve_address>"
+echo "========================================================================================================================"
+
+break
+;;
+
+"Exit")
+exit
+;;
+*) echo "invalid option $REPLY";;
+esac
+done
+done
