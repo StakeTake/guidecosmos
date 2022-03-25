@@ -61,7 +61,7 @@ echo "============================================================"
 echo "Be sure to write down the mnemonic!"
 echo "============================================================"
 #WALLET
-kyved keys add $KYVEWALLET
+kyved keys add $WALLETNAME
 
 wget https://raw.githubusercontent.com/Errorist79/seeds/main/seeds.txt -O $HOME/.kyve/config/seeds.txt
 sed -i.bak 's/seeds = \"\"/seeds = \"'$(cat $HOME/.kyve/config/seeds.txt)'\"/g' $HOME/.kyve/config/config.toml
