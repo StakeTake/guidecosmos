@@ -34,9 +34,9 @@ echo "============================================================"
 echo "Setup WalletName:"
 echo "============================================================"
 read WALLETNAME
-echo export NODENAME=$NODENAME >> $HOME/.profile
-echo export WALLETNAME=$WALLETNAME >> $HOME/.profile
-source $HOME/.profile
+echo 'export NODENAME='${NODENAME} >> $HOME/.bash_profile
+echo 'export WALLETNAME='${WALLETNAME} >> $HOME/.bash_profile
+source ~/.bash_profile
 
 #UPDATE APT
 sudo apt update
@@ -91,8 +91,8 @@ sudo systemctl restart kyved
 sed -i 's/#Storage=auto/Storage=persistent/g' /etc/systemd/journald.conf
 sudo systemctl restart systemd-journald
 
-echo export CHAIN_ID=kyve-beta >> $HOME/.profile
-source $HOME/.profile
+echo export CHAIN_ID=kyve-beta >> $HOME/.bash_profile
+source ~/.bash_profile
 
 break
 ;;
