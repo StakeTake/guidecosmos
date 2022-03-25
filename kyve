@@ -34,8 +34,8 @@ echo "============================================================"
 echo "Setup WalletName:"
 echo "============================================================"
 read WALLETNAME
-echo export NODENAME=NODENAME >> $HOME/.profile
-echo export WALLETNAME=WALLETNAME >> $HOME/.profile
+echo export NODENAME=$NODENAME >> $HOME/.profile
+echo export WALLETNAME=$WALLETNAME >> $HOME/.profile
 source $HOME/.profile
 
 #UPDATE APT
