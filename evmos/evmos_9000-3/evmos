@@ -103,7 +103,7 @@ break
 
 "Check Log")
 
-journalctl -u evmosd.service -f -n 100
+journalctl -u evmosd -f -o cat
 
 break
 ;;
