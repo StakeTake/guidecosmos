@@ -57,6 +57,7 @@ git clone https://github.com/tharsis/evmos.git
 cd evmos
 git checkout tags/3.0.0-beta
 make install
+evmosd version
 
 evmosd config chain-id evmos_9000-3
 evmosd init $NODENAME chain-id $CHAIN_ID
