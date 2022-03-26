@@ -60,7 +60,7 @@ make install
 evmosd version
 
 evmosd config chain-id evmos_9000-3
-evmosd init $NODENAME chain-id $CHAIN_ID
+evmosd init $NODENAME --chain-id $CHAIN_ID
 
 evmosd unsafe-reset-all
 rm ~/.evmosd/config/genesis.json
