@@ -99,7 +99,7 @@ break
 
 "Check Log")
 
-journalctl -u kyved.service -f -n 100
+journalctl -u kyved -f -o cat
 
 break
 ;;
