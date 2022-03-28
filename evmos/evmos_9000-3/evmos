@@ -116,7 +116,7 @@ break
 
 "Create Validator")
 evmosd tx staking create-validator \
-  --amount=1000000000000atevmos \
+  --amount 1000000000000000000atevmos \
   --pubkey=$(evmosd tendermint show-validator) \
   --moniker=$NODENAME \
   --chain-id=$CHAIN_ID \
@@ -124,8 +124,9 @@ evmosd tx staking create-validator \
   --commission-max-rate="0.20" \
   --commission-max-change-rate="0.01" \
   --min-self-delegation="1000000" \
-  --gas="auto" \
+  --gas=300000 \
   --gas-prices="0.025atevmos" \
+  --from=$WALLETNAME \
   -y
   
 break
