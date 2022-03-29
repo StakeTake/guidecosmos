@@ -119,7 +119,7 @@ kyved tx staking create-validator --yes \
  --commission-max-change-rate "0.01" \
  --min-self-delegation "1" \
  --pubkey "$(kyved tendermint show-validator)" \
- --from validator \
+ --from $WALLETNAME \
  --chain-id $CHAIN_ID
 break
 ;;
