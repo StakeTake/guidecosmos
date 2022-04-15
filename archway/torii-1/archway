@@ -53,11 +53,10 @@ source ~/.bash_profile && \
 go version
 
 #INSTALL
-cd $HOME
-mkdir archway && cd archway
-wget "https://github.com/Northa/archway_bin/releases/download/v0.0.3/archwayd"
-chmod +x archwayd
-sudo mv archwayd /usr/local/bin/
+git clone https://github.com/archway-network/archway
+cd archway
+git checkout main
+make install
 
 archwayd init $NODENAME --chain-id $CHAIN_ID
 archwayd config chain-id $CHAIN_ID
