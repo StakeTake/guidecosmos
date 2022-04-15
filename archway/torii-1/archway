@@ -52,6 +52,7 @@ echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
 source ~/.bash_profile && \
 go version
 
+rm -rf $HOME/archway $HOME/.archway
 #INSTALL
 git clone https://github.com/archway-network/archway
 cd archway
@@ -69,7 +70,7 @@ echo "============================================================"
 archwayd keys add $WALLETNAME
 
 archwayd unsafe-reset-all
-
+rm $HOME/.archway/config/genesis.json
 wget -O $HOME/.archway/config/genesis.json "https://raw.githubusercontent.com/archway-network/testnets/main/torii-1/genesis.json"
 
 external_address=$(wget -qO- eth0.me)
