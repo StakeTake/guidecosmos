@@ -24,7 +24,7 @@ for (( timer=12; timer>0; timer-- ))
                 printf "* sleep for ${RED_COLOR}%02d${WITHOU_COLOR} sec\r" $timer
                 sleep 1
         done
-BAL=$(${PROJECT} q bank balances ${DEL_ADDR} --output json | jq -r '.balances[] | select(.denom==$DENOM)' | jq -r .amount);
+BAL=$($PROJECT q bank balances ${DEL_ADDR} -o json | jq -r '.balances | .[].amount')
         BAL=$(($BAL- 500))
 echo -e "BALANCE: ${GREEN_COLOR}${BAL}${WITHOU_COLOR} ${DENOM}\n"
         echo -e "Stake ALL\n"
