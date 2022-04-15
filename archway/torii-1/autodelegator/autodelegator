@@ -32,6 +32,7 @@ echo "Setup your password of wallet"
 echo "============================================================"
 read PWDDD
 echo export PWDDD=${PWDDD} >> $HOME/.bash_profile
+source $HOME/.bash_profile
 echo "============================================================"
 echo "Enter the password of wallet for set the validator address"
 echo "============================================================"
