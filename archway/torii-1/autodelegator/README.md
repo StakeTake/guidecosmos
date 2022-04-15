@@ -2,6 +2,10 @@
 
 ___In this guide, we have written how to set up an autodelegator for your validator node of Archway___
 
+```html
+curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/archway/torii-1/autodelegator/autodelegator > autodelegator.sh && chmod +x autodelegator.sh && ./autodelegator.sh
+```
+
 We need to do is set the variables correctly
 
 1. The name of the wallet that you wrote when installing the node
@@ -11,9 +15,9 @@ We need to do is set the variables correctly
 **After you have set the variables, go to the launch of the redelegator**
 
 The script will automatically open the screen window, where all you have to do is run the redelegator with the command
-
-__cd $HOME/autodelegate && ./start.sh__
-
+```html
+cd $HOME/autodelegate && ./start.sh
+```
 and exit the window by pressing
 
 __ctrl + a + d__
