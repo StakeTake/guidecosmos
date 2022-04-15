@@ -4,9 +4,8 @@
 LOG_FILE="/root/alerts/nodealerts.log"
 # Your node RPC address, e.g. "http://127.0.0.1:26657"
 NODE_RPC="http://127.0.0.1:26657"
-source 
 # Trusted node RPC address, e.g. "https://rpc.cosmos.network:26657"
-SIDE_RPC="http://51.79.25.38:26657/"
+SIDE_RPC="http://localhost:26657"
 ip=$(wget -qO- eth0.me)
 
 touch $LOG_FILE
