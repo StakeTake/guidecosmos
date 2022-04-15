@@ -9,7 +9,7 @@ DELAY=300 #in secs - how often restart the script
 
 for (( ;; )); do
         echo -e "Get reward from Delegation"
-        echo -e "${PWDDD}\ny\n" | $PROJECT tx distribution withdraw-rewards ${VAL_ADDR} --chain-id ${CHAIN_ID} --from ${WALLET_NAME} --commission --fees ${FEES}${DENOM} -y
+        echo -e "${PWDDD}\ny\n" | $PROJECT tx distribution withdraw-rewards ${VAL_ADDR} --chain-id ${CHAIN_ID} --from ${WALLETNAME} --commission --fees ${FEES}${DENOM} -y
 for (( timer=12; timer>0; timer-- ))
         do
                 printf "* sleep for ${RED_COLOR}%02d${WITHOUT_COLOR} sec\r" $timer
