@@ -1,0 +1,163 @@
+#!/bin/bash
+
+while true
+do
+
+# Logo
+
+echo "========================================================================================================================"
+curl -s https://raw.githubusercontent.com/StakeTake/script/main/logo.sh | bash
+echo "========================================================================================================================"
+
+# Menu
+
+PS3='Select an action: '
+options=(
+"Install Node"
+"Check Log"
+"Check balance"
+"Request tokens in discord"
+"Create Validator"
+"Exit")
+select opt in "${options[@]}"
+do
+case $opt in
+
+"Install Node")
+echo "============================================================"
+echo "Install start"
+echo "============================================================"
+echo "Setup NodeName:"
+echo "============================================================"
+read NODENAME
+echo "============================================================"
+echo "Setup WalletName:"
+echo "============================================================"
+read WALLETNAME
+echo export NODENAME=${NODENAME} >> $HOME/.bash_profile
+echo export WALLETNAME=${WALLETNAME} >> $HOME/.bash_profile
+echo export CHAIN_ID=tgrade-dryrunnet >> $HOME/.bash_profile
+source ~/.bash_profile
+
+#UPDATE APT
+sudo apt update && sudo apt upgrade -y
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+
+#INSTALL GO
+wget https://golang.org/dl/go1.17.5.linux-amd64.tar.gz; \
+rm -rv /usr/local/go; \
+tar -C /usr/local -xzf go1.17.5.linux-amd64.tar.gz && \
+rm -v go1.17.5.linux-amd64.tar.gz && \
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
+source ~/.bash_profile && \
+go version
+
+git clone https://github.com/confio/tgrade
+cd tgrade
+git checkout v0.9.0
+make build
+sudo mv build/tgrade /usr/local/bin
+
+tgrade init $NODENAME --chain-id $CHAIN_ID
+tgrade config chain-id $CHAIN_ID
+
+
+echo "============================================================"
+echo "Be sure to write down the mnemonic!"
+echo "============================================================"
+#WALLET
+tgrade keys add $WALLETNAME
+
+tgrade unsafe-reset-all
+rm $HOME/.tgrade/config/genesis.json
+ wget https://raw.githubusercontent.com/confio/public-testnets/main/dryrunnet/config/genesis.json -O ~/.tgrade/config/genesis.json
+
+external_address=$(wget -qO- eth0.me)
+peers="9c70e7fb4237de7dfb842c51d0c8a2bee6b843c0@168.119.252.165:26656,f0976ec13d3498397b0a891b44c9a024f8eebb4a@188.34.162.243:26656,ee664babe18b1005fee0548c8818143e745ad80a@142.132.225.3:26656"
+sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.tgrade/config/config.toml
+
+# config pruning
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.tgrade/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.tgrade/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.tgrade/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.tgrade/config/app.toml
+
+sed -i.bak -e 's/^minimum-gas-prices = .*$/minimum-gas-prices = "0.05utgd"/;' ~/.tgrade/config/app.toml
+
+
+tee $HOME/tgrade.service > /dev/null <<EOF
+[Unit]
+Description=TGRADE
+After=network.target
+[Service]
+Type=simple
+User=$USER
+ExecStart=$(which tgrade) start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo mv $HOME/tgrade.service /etc/systemd/system/
+
+# start service
+sudo systemctl daemon-reload
+sudo systemctl enable tgrade
+sudo systemctl restart tgrade
+
+break
+;;
+
+"Check Log")
+
+journalctl -u tgrade -f -o cat
+
+break
+;;
+
+
+"Check balance")
+tgrade q bank balances $WALLETNAME
+break
+;;
+
+"Create Validator")
+tgrade tx staking create-validator \
+  --amount 1000000utgd \
+  --from $WALLETNAME \
+  --commission-max-change-rate "0.05" \
+  --commission-max-rate "0.20" \
+  --commission-rate "0.05" \
+  --min-self-delegation "1" \
+  --pubkey $(tgrade tendermint show-validator) \
+  --moniker $NODENAME \
+  --chain-id $CHAIN_ID \
+  --gas 200000 \
+  --fees 1000utgd \
+  -y
+break
+;;
+
+"Request tokens in discord")
+echo "========================================================================================================================"
+echo "In order to receive tokens, you need to go to the Discord server
+and request tokens in the validator channel"
+echo "========================================================================================================================"
+
+break
+;;
+
+"Exit")
+exit
+;;
+*) echo "invalid option $REPLY";;
+esac
+done
+done
