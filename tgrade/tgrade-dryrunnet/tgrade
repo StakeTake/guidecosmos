@@ -70,7 +70,8 @@ tgrade keys add $WALLETNAME
 
 tgrade unsafe-reset-all
 rm $HOME/.tgrade/config/genesis.json
- wget https://raw.githubusercontent.com/confio/public-testnets/main/dryrunnet/config/genesis.json -O ~/.tgrade/config/genesis.json
+wget https://raw.githubusercontent.com/confio/public-testnets/main/dryrunnet/config/genesis.json -O ~/.tgrade/config/genesis.json
+wget https://raw.githubusercontent.com/StakeTake/guidecosmos/main/tgrade/tgrade-dryrunnet/addrbook.json -O ~/.tgrade/config/addrbook.json
 
 external_address=$(wget -qO- eth0.me)
 peers="9c70e7fb4237de7dfb842c51d0c8a2bee6b843c0@168.119.252.165:26656,f0976ec13d3498397b0a891b44c9a024f8eebb4a@188.34.162.243:26656,ee664babe18b1005fee0548c8818143e745ad80a@142.132.225.3:26656"
