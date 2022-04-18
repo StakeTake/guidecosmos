@@ -16,7 +16,6 @@ options=(
 "Install Node"
 "Check Log"
 "Check balance"
-"Request tokens in discord"
 "Create Validator"
 "Exit")
 select opt in "${options[@]}"
@@ -141,15 +140,6 @@ mantleNode tx staking create-validator \
   --gas 200000 \
   --fees 200umntl \
   -y
-break
-;;
-
-"Request tokens in discord")
-echo "========================================================================================================================"
-echo "In order to receive tokens, you need to go to the Discord server
-and request tokens in the validator channel"
-echo "========================================================================================================================"
-
 break
 ;;
 
