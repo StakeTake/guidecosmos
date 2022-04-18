@@ -121,11 +121,13 @@ break
 
 
 "Check balance")
+
 mantleNode q bank balances $WALLETNAME
 break
 ;;
 
 "Create Validator")
+
 mantleNode tx staking create-validator \
   --amount 1000000umntl \
   --from $WALLETNAME \
@@ -139,12 +141,15 @@ mantleNode tx staking create-validator \
   --gas 200000 \
   --fees 200umntl \
   -y
+  
 break
 ;;
 
 "Exit")
+
 exit
 ;;
+
 *) echo "invalid option $REPLY";;
 esac
 done
