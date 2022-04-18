@@ -44,10 +44,10 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu unzip snapd -y
 
 #INSTALL GO
-wget https://golang.org/dl/go1.17.5.linux-amd64.tar.gz; \
+wget https://golang.org/dl/go1.17.9.linux-amd64.tar.gz; \
 rm -rv /usr/local/go; \
-tar -C /usr/local -xzf go1.17.5.linux-amd64.tar.gz && \
-rm -v go1.17.5.linux-amd64.tar.gz && \
+tar -C /usr/local -xzf go1.17.9.linux-amd64.tar.gz && \
+rm -v go1.17.9.linux-amd64.tar.gz && \
 echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
 source ~/.bash_profile && \
 go version
@@ -55,13 +55,16 @@ go version
 #INSTALL
 git clone https://github.com/tharsis/evmos.git
 cd evmos
+git checkout tags/v3.0.0-beta1
 make install
 evmosd version
 
 evmosd config chain-id evmos_9000-4
+
+rm ~/.evmosd/config/genesis.json
 evmosd init $NODENAME --chain-id $CHAIN_ID
 
-evmosd unsafe-reset-all
+
 rm ~/.evmosd/config/genesis.json
 wget -P ~/.evmosd/config https://github.com/tharsis/testnets/raw/main/evmos_9000-4/genesis.zip
 cd ~/.evmosd/config
@@ -99,6 +102,10 @@ EOF
 
 sudo systemctl daemon-reload
 sudo systemctl enable evmosd
+
+
+evmosd unsafe-reset-all
+wget https://raw.githubusercontent.com/StakeTake/guidecosmos/main/evmos/evmos_9000-4/addrbook.json -O ~/.evmosd/config/addrbook.json
 sudo systemctl restart evmosd
 
 break
