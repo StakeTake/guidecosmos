@@ -70,6 +70,7 @@ echo "============================================================"
 mantleNode keys add $WALLETNAME
 
 mantleNode unsafe-reset-all
+rm $HOME/.mantleNode/config/genesis.json
 wget -O $HOME/.mantleNode/config/genesis.json "https://raw.githubusercontent.com/AssetMantle/genesisTransactions/main/mantle-1/final_genesis.json"
 
 external_address=$(wget -qO- eth0.me)
