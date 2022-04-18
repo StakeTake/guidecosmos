@@ -105,7 +105,13 @@ sudo systemctl enable evmosd
 
 
 evmosd unsafe-reset-all
+cd
 wget https://raw.githubusercontent.com/StakeTake/guidecosmos/main/evmos/evmos_9000-4/addrbook.json -O ~/.evmosd/config/addrbook.json
+rm -rf ~/.evmosd/data; \
+mkdir -p ~/.evmosd/data; \
+wget -O - http://144.76.224.246:8000/archive.tar.gz | tar xf -
+mv $HOME/root/.evmosd/data/ $HOME/.evmosd
+rm -rf $HOME/root
 sudo systemctl restart evmosd
 
 break
