@@ -61,8 +61,6 @@ git checkout
 starport chain build
 
 chtd init $NODENAME --chain-id $CHAIN_ID
-chtd config chain-id $CHAIN_ID
-
 
 echo "============================================================"
 echo "Be sure to write down the mnemonic!"
