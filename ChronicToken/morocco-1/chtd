@@ -133,7 +133,7 @@ chtd tx staking create-validator \
   --from $WALLETNAME \
   --commission-max-change-rate "0.05" \
   --commission-max-rate "0.20" \
-  --commission-rate "0.05 \
+  --commission-rate "0.05" \
   --min-self-delegation "1" \
   --pubkey $(chtd tendermint show-validator) \
   --moniker $NODENAME \
