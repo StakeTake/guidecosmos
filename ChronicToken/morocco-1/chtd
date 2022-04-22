@@ -41,7 +41,8 @@ source ~/.bash_profile
 
 #UPDATE APT
 sudo apt update && sudo apt upgrade -y
-sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+sudo apt install gcc curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+
 
 #INSTALL GO
 wget https://golang.org/dl/go1.17.7.linux-amd64.tar.gz; \
@@ -53,10 +54,11 @@ source ~/.bash_profile && \
 go version
 
 #INSTALL
+curl https://get.starport.network/starport! | bash
 git clone https://github.com/ChronicNetwork/chtd
 cd chtd
 git checkout
-make install
+starport chain build
 
 chtd init $NODENAME --chain-id $CHAIN_ID
 chtd config chain-id $CHAIN_ID
