@@ -55,7 +55,7 @@ go version
 
 #INSTALL
 curl https://get.starport.network/starport! | bash
-https://github.com/cosmic-horizon/coho.git
+git clone https://github.com/cosmic-horizon/coho.git
 cd coho
 git checkout v0.1
 starport chain build
