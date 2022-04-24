@@ -68,7 +68,7 @@ echo "============================================================"
 #WALLET
 chtd keys add $WALLETNAME
 
-chtd unsafe-reset-all
+cohod unsafe-reset-all
 rm $HOME/.coho/config/genesis.json
 wget -O $HOME/.coho/config/genesis.json https://raw.githubusercontent.com/cosmic-horizon/testnets/main/darkenergy-1/genesis.json
 
@@ -137,7 +137,7 @@ cohod tx staking create-validator \
   --pubkey $(cohod tendermint show-validator) \
   --moniker $NODENAME \
   --chain-id $CHAIN_ID \
-  --gas 200000 \
+  --gas 300000 \
   -y
 break
 ;;
