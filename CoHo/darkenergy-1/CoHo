@@ -66,7 +66,7 @@ echo "============================================================"
 echo "Be sure to write down the mnemonic!"
 echo "============================================================"
 #WALLET
-chtd keys add $WALLETNAME
+cohod keys add $WALLETNAME
 
 cohod unsafe-reset-all
 rm $HOME/.coho/config/genesis.json
@@ -122,7 +122,7 @@ break
 
 
 "Check balance")
-chtd q bank balances $WALLETNAME
+cohod q bank balances $WALLETNAME
 break
 ;;
 
