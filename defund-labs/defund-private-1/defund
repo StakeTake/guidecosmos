@@ -1,0 +1,162 @@
+#!/bin/bash
+
+while true
+do
+
+# Logo
+
+echo "========================================================================================================================"
+curl -s https://raw.githubusercontent.com/StakeTake/script/main/logo.sh | bash
+echo "========================================================================================================================"
+
+# Menu
+
+PS3='Select an action: '
+options=(
+"Install Node"
+"Check Log"
+"Check balance"
+"Request tokens in discord"
+"Create Validator"
+"Exit")
+select opt in "${options[@]}"
+do
+case $opt in
+
+"Install Node")
+echo "============================================================"
+echo "Install start"
+echo "============================================================"
+echo "Setup NodeName:"
+echo "============================================================"
+read NODENAME
+echo "============================================================"
+echo "Setup WalletName:"
+echo "============================================================"
+read WALLETNAME
+echo export NODENAME=${NODENAME} >> $HOME/.bash_profile
+echo export WALLETNAME=${WALLETNAME} >> $HOME/.bash_profile
+echo export CHAIN_ID=defund-private-1 >> $HOME/.bash_profile
+source ~/.bash_profile
+
+#UPDATE APT
+sudo apt update && sudo apt upgrade -y
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+
+#INSTALL GO
+wget https://golang.org/dl/go1.17.5.linux-amd64.tar.gz; \
+rm -rv /usr/local/go; \
+tar -C /usr/local -xzf go1.17.5.linux-amd64.tar.gz && \
+rm -v go1.17.5.linux-amd64.tar.gz && \
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
+source ~/.bash_profile && \
+go version
+
+#INSTALL
+git clone git clone https://github.com/defund-labs/defund
+cd defund
+git checkout main
+make install
+
+defundd init $NODENAME --chain-id $CHAIN_ID
+defundd config chain-id $CHAIN_ID
+
+
+echo "============================================================"
+echo "Be sure to write down the mnemonic!"
+echo "============================================================"
+#WALLET
+defundd keys add $WALLETNAME
+
+defundd unsafe-reset-all
+rm $HOME/.defund/config/genesis.json
+wget -O $HOME/.defund/config/genesis.json "https://raw.githubusercontent.com/schnetzlerjoe/defund/main/testnet/private/genesis.json"
+
+external_address=$(wget -qO- eth0.me)
+peers="111ba4e5ae97d5f294294ea6ca03c17506465ec5@208.68.39.221:26656,f114c02efc5aa7ee3ee6733d806a1fae2fbfb66b@5.189.178.222:46656,8980faac5295875a5ecd987a99392b9da56c9848@85.10.216.151:26656,3c3170f0bcbdcc1bef12ed7b92e8e03d634adf4e@65.108.103.236:27656"
+sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.defund/config/config.toml
+seeds="8e1590558d8fede2f8c9405b7ef550ff455ce842@51.79.30.9:26656,bfffaf3b2c38292bd0aa2a3efe59f210f49b5793@51.91.208.71:26656,106c6974096ca8224f20a85396155979dbd2fb09@198.244.141.176:26656"
+sed -i.bak -e "s/^seeds =.*/seeds = \"$seeds\"/" $HOME/.defund/config/config.toml
+
+# config pruning
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.defund/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.defund/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.defund/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.defund/config/app.toml
+sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0025ufetf\"/;" ~/.defund/config/app.toml
+
+tee $HOME/defundd.service > /dev/null <<EOF
+[Unit]
+Description=DEFUND
+After=network.target
+[Service]
+Type=simple
+User=$USER
+ExecStart=$(which defundd) start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo mv $HOME/defundd.service /etc/systemd/system/
+
+# start service
+sudo systemctl daemon-reload
+sudo systemctl enable defundd
+sudo systemctl restart defundd
+
+break
+;;
+
+"Check Log")
+
+journalctl -u defundd -f -o cat
+
+break
+;;
+
+
+"Check balance")
+defundd q bank balances $WALLETNAME
+break
+;;
+
+"Create Validator")
+defundd tx staking create-validator \
+  --amount 1000000ufetf \
+  --from $WALLETNAME \
+  --commission-max-change-rate "0.05" \
+  --commission-max-rate "0.20" \
+  --commission-rate "0.05" \
+  --min-self-delegation "1" \
+  --pubkey $(defundd tendermint show-validator) \
+  --moniker $NODENAME \
+  --chain-id $CHAIN_ID \
+  --gas 300000 \
+  -y
+break
+;;
+
+"Request tokens in discord")
+echo "========================================================================================================================"
+echo "In order to receive tokens, you need to go to the Discord server
+and request tokens in the validator channel"
+echo "========================================================================================================================"
+
+break
+;;
+
+"Exit")
+exit
+;;
+*) echo "invalid option $REPLY";;
+esac
+done
+done
