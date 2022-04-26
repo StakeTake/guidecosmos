@@ -9,7 +9,8 @@ To install, you just need to take the script and go through the installation ord
 If you have any difficulties with synchronization - use the address book from our repository. You can replace it with the commands
 ```html
 sudo systemctl stop defundd
-```
+
 wget -O $HOME/.defund/config/addrbook.json https://raw.githubusercontent.com/sowell-owen/defund-addrbook/main/addrbook.json
 
 sudo systemctl restart defundd
+```
