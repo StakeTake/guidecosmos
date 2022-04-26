@@ -53,9 +53,8 @@ source ~/.bash_profile && \
 go version
 
 #INSTALL
-git clone git clone https://github.com/defund-labs/defund
+git clone https://github.com/defund-labs/defund
 cd defund
-git checkout main
 make install
 
 defundd init $NODENAME --chain-id $CHAIN_ID
