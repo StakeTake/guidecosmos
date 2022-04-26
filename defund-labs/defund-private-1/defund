@@ -58,8 +58,8 @@ cd defund
 git checkout main
 make install
 
-archwayd init $NODENAME --chain-id $CHAIN_ID
-archwayd config chain-id $CHAIN_ID
+defundd init $NODENAME --chain-id $CHAIN_ID
+defundd config chain-id $CHAIN_ID
 
 
 echo "============================================================"
