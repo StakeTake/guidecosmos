@@ -1,0 +1,155 @@
+#!/bin/bash
+
+while true
+do
+
+# Logo
+
+echo "========================================================================================================================"
+curl -s https://raw.githubusercontent.com/StakeTake/script/main/logo.sh | bash
+echo "========================================================================================================================"
+
+# Menu
+
+PS3='Select an action: '
+options=(
+"Install Node"
+"Check Log"
+"Check balance"
+"Request tokens in website"
+"Create Validator"
+"Exit")
+select opt in "${options[@]}"
+do
+case $opt in
+
+"Install Node")
+echo "============================================================"
+echo "Install start"
+echo "============================================================"
+echo "Setup NodeName:"
+echo "============================================================"
+read NODENAME
+echo "============================================================"
+echo "Setup WalletName:"
+echo "============================================================"
+read WALLETNAME
+echo export NODENAME=${NODENAME} >> $HOME/.bash_profile
+echo export WALLETNAME=${WALLETNAME} >> $HOME/.bash_profile
+echo export CHAIN_ID=evmos_9001-2 >> $HOME/.bash_profile
+source ~/.bash_profile
+
+#UPDATE APT
+sudo apt update && sudo apt upgrade -y
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu unzip snapd -y
+
+#INSTALL GO
+wget https://golang.org/dl/go1.17.9.linux-amd64.tar.gz; \
+rm -rv /usr/local/go; \
+tar -C /usr/local -xzf go1.17.9.linux-amd64.tar.gz && \
+rm -v go1.17.9.linux-amd64.tar.gz && \
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
+source ~/.bash_profile && \
+go version
+
+#INSTALL
+git clone https://github.com/tharsis/evmos.git
+cd evmos
+git checkout tags/v3.0.0
+make install
+evmosd version
+
+evmosd config chain-id $CHAIN_ID
+
+rm ~/.evmosd/config/genesis.json
+evmosd init $NODENAME --chain-id $CHAIN_ID
+
+
+rm ~/.evmosd/config/genesis.json
+wget -P ~/.evmosd/config https://github.com/tharsis/mainnet/raw/main/evmos_9001-2/genesis.json.zip
+cd ~/.evmosd/config
+unzip genesis.zip
+rm genesis.json.zip
+external_address=$(wget -qO- eth0.me)
+peers="b406094a8d5ed6eafe4bedfef7c44693f8e82234@154.53.39.71:26656,ae024b54cc16dd7f33e83550c150796b2cd7450b@95.214.55.43:26656,6ab587b638fa58b638c882731e1a27f39207c528@34.220.177.42:30758,cc321917ce82b6c541c687420ad5ae0b4b5e055a@144.76.224.246:26656,b02259a11e4ee46b29668cfc957e530022a3fca1@62.171.142.145:26656,1a7bee67d6337d09380b824b952872bdc5dca86f@38.242.194.56:26656,1915b0217865b968646768e2761a8669d5e24bd5@65.108.44.149:26656,d5d418256279900c3d1fbf2137ce7142d6f6c682@65.108.139.20:26656,d8ac979da3dbe2f796e2344616096160dc5cfdc1@164.92.191.127:26656,7aa31684d201f8ebc0b1e832d90d7490345d77ee@52.10.99.253:26656,68463241c325da80baac51dc7ca342aed9c871bc@35.162.50.97:26656,906840c2f447915f3d0e37bc68221f5494f541db@3.39.58.32:26656,8336788E5AE5DC5650F21734AD8093AFA376B84B@65.108.43.26:26656,c130c7ec8f901f86fd5eca910ccb94ca008f6f2f@65.108.135.140:26656"
+sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.evmosd/config/config.toml
+seeds="40f4fac63da8b1ce8f850b0fa0f79b2699d2ce72@seed.evmos.jerrychong.com:26656"
+sed -i.bak -e "s/^seeds =.*/seeds = \"$seeds\"/" $HOME/.evmosd/config/config.toml
+
+
+echo "============================================================"
+echo "Be sure to write down the mnemonic!"
+echo "============================================================"
+#WALLET
+evmosd keys add $WALLETNAME
+
+
+sudo tee /etc/systemd/system/evmosd.service > /dev/null <<EOF
+[Unit]
+Description=Evmos
+After=network.target
+[Service]
+Type=simple
+User=$USER
+ExecStart=$(which evmosd) start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable evmosd
+sudo systemctl restart evmosd
+
+break
+;;
+
+"Check Log")
+
+journalctl -u evmosd -f -o cat
+
+break
+;;
+
+
+"Check balance")
+evmosd q bank balances $WALLETNAME
+break
+;;
+
+"Create Validator")
+evmosd tx staking create-validator \
+  --amount 1000000000000000000atevmos \
+  --pubkey=$(evmosd tendermint show-validator) \
+  --moniker=$NODENAME \
+  --chain-id=$CHAIN_ID \
+  --commission-rate="0.05" \
+  --commission-max-rate="0.20" \
+  --commission-max-change-rate="0.05" \
+  --min-self-delegation="1000000" \
+  --gas=300000 \
+  --gas-prices="0.025atevmos" \
+  --from=$WALLETNAME \
+  -y
+  
+break
+;;
+
+"Request tokens in website")
+echo "========================================================================================================================"
+echo "In order to receive tokens, you need to go to the website https://faucet.evmos.dev/
+and request your address wallet. If the faucet does not work, try asking for tokens in the validator discord channel"
+echo "========================================================================================================================"
+
+break
+;;
+
+"Exit")
+exit
+;;
+*) echo "invalid option $REPLY";;
+esac
+done
+done
