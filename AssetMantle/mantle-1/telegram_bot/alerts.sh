@@ -7,7 +7,6 @@ NODE_RPC="http://127.0.0.1:26657"
 # Trusted node RPC address, e.g. "https://rpc.cosmos.network:26657"
 SIDE_RPC="http://localhost:26657"
 ip=$(wget -qO- eth0.me)
-THRESHOLD=90
 
 touch $LOG_FILE
 REAL_BLOCK=$(curl -s "$SIDE_RPC/status" | jq '.result.sync_info.latest_block_height' | xargs )
@@ -16,7 +15,6 @@ CATCHING_UP=$(echo $STATUS | jq '.result.sync_info.catching_up')
 LATEST_BLOCK=$(echo $STATUS | jq '.result.sync_info.latest_block_height' | xargs )
 VOTING_POWER=$(echo $STATUS | jq '.result.validator_info.voting_power' | xargs )
 ADDRESS=$(echo $STATUS | jq '.result.validator_info.address' | xargs )
-CURRENT=$(df / | grep / | awk '{ print $5}' | sed 's/%//g')
 
 source $LOG_FILE
 #REAL_BLOCK=350000
@@ -31,13 +29,6 @@ if [[ $? -ne 0 ]]; then
     MSG="$ip node is stopped!!! ( узел остановлен )"
     MSG="AssetMantle $MSG"
     SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG"); exit 1
-fi
-
-if [ "$CURRENT" -gt "$THRESHOLD" ] ; then
-
-MSG=$ip Running out of disk space. Used $CURRENT% (Заканчивается дисковое пространство. Используется: $CURRENT%)
-MSG="AssetMantle $MSG"
-SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG")
 fi
 
 if [[ $LAST_POWER -ne $VOTING_POWER ]]; then
