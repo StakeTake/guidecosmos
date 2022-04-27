@@ -110,7 +110,7 @@ break
 
 
 "Check balance")
-evmosd q bank balances $WALLETNAME
+evmosd q bank balances $(evmosd keys show $WALLETNAME -a --bech acc)
 break
 ;;
 
