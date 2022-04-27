@@ -114,7 +114,7 @@ break
 
 
 "Check balance")
-archwayd q bank balances $WALLETNAME
+archwayd q bank balances $(archwayd keys show $WALLETNAME -a --bech acc)
 break
 ;;
 
