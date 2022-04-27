@@ -122,7 +122,7 @@ break
 
 
 "Check balance")
-cohod q bank balances $WALLETNAME
+cohod q bank balances $(cohod keys show $WALLETNAME -a --bech acc)
 break
 ;;
 
