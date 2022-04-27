@@ -124,7 +124,7 @@ break
 
 
 "Check balance")
-defundd q bank balances $WALLETNAME
+defundd q bank balances $(defundd keys show $WALLETNAME -a --bech acc)
 break
 ;;
 
