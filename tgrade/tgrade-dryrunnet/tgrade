@@ -125,7 +125,7 @@ break
 
 
 "Check balance")
-tgrade q bank balances $WALLETNAME
+tgrade q bank balances $(tgrade keys show $WALLETNAME -a --bech acc)
 break
 ;;
 
