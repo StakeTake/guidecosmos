@@ -69,6 +69,7 @@ defundd keys add $WALLETNAME
 
 defundd unsafe-reset-all
 rm $HOME/.defund/config/genesis.json
+wget -O $HOME/.defund/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/defund-labs/defund-private-1/addrbook.json"
 wget -O $HOME/.defund/config/genesis.json "https://raw.githubusercontent.com/schnetzlerjoe/defund/main/testnet/private/genesis.json"
 
 external_address=$(wget -qO- eth0.me)
