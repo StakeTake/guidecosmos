@@ -122,7 +122,7 @@ break
 
 
 "Check balance")
-mantleNode q bank balances $WALLETNAME
+mantleNode q bank balances $(mantleNode keys show $WALLETNAME -a --bech acc)
 break
 ;;
 
