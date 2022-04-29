@@ -127,19 +127,19 @@ break
 
 
 "Check balance")
-kyved q bank balances $(kyved keys show $WALLETNAME -a --bech acc)
+chaind q bank balances $(kyved keys show $WALLETNAME -a --bech acc)
 break
 ;;
 
 "Create Validator")
-kyved tx staking create-validator --yes \
+chaind tx staking create-validator --yes \
  --amount 1000000tkyve \
  --moniker $NODENAME \
  --commission-rate "0.05" \
  --commission-max-rate "0.20" \
  --commission-max-change-rate "0.05" \
  --min-self-delegation "1" \
- --pubkey "$(kyved tendermint show-validator)" \
+ --pubkey "$(chaind tendermint show-validator)" \
  --from $WALLETNAME \
  --chain-id $CHAIN_ID
 break
