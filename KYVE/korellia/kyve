@@ -75,7 +75,7 @@ peers="a3fd6919ec3c5eb0fcd26dd9758ad8183bb7a93d@51.15.104.178:26656,52880e07804a
 sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.kyve/config/config.toml
 rm /root/.kyve/config/genesis.json
 wget -O $HOME/.kyve/config/genesis.json "https://github.com/KYVENetwork/chain/releases/download/v0.0.1/genesis.json"
-wget -O $HOME/.kyve/config/addrbook.json "https://raw.githubusercontent.com/Aleksandr7793/guidecosmos/main/KYVE/korellia/addrbook.json"
+wget -O $HOME/.kyve/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/KYVE/korellia/addrbook.json"
 go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.0.0
 mkdir -p $HOME/.kyve/cosmovisor/genesis/bin
 mkdir $HOME/.kyve/cosmovisor/upgrades
