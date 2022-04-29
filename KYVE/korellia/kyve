@@ -43,58 +43,25 @@ source ~/.bash_profile
 sudo apt update
 sudo apt install zip -y
 
+#INSTALL GO
+wget https://golang.org/dl/go1.18.1.linux-amd64.tar.gz; \
+rm -rv /usr/local/go; \
+tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz && \
+rm -v go1.18.1.linux-amd64.tar.gz && \
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
+source ~/.bash_profile && \
+go version
+
 #INSTALL
 cd $HOME
 wget https://github.com/KYVENetwork/chain/releases/download/v0.0.1/chain_linux_amd64.tar.gz
 tar -xvzf chain_linux_amd64.tar.gz
-wget https://github.com/KYVENetwork/chain/releases/download/v0.0.1/cosmovisor_linux_amd64
-mv cosmovisor_linux_amd64 cosmovisor
-chmod +x cosmovisor
-mkdir -p ~/.kyve/cosmovisor/genesis/bin/
-echo "{}" > ~/.kyve/cosmovisor/genesis/upgrade-info.json
-cp chaind ~/.kyve/cosmovisor/genesis/bin/chaind
-export DAEMON_HOME="$HOME/.kyve"
-export DAEMON_NAME="chaind"
-export DAEMON_ALLOW_DOWNLOAD_BINARIES="true"
-mv chaind ~/.kyve/cosmovisor/upgrades/$UPGRADE_NAME/bin/chaind
-
-
-
-
-
-kyved version
-echo "============================================================"
-echo "Be sure to write down the mnemonic!"
-echo "============================================================"
-#WALLET
-kyved keys add $WALLETNAME
-
-tee <<EOF > /dev/null /etc/systemd/system/kyved.service
-[Unit]
-Description=KYVE Chain-Node daemon
-After=network-online.target
-
-[Service]
-User=$USER
-ExecStart=/home/$USER/cosmovisor start
-Restart=on-failure
-RestartSec=3
-LimitNOFILE=infinity
-
-Environment="DAEMON_HOME=/home/$USER/.kyve"
-Environment="DAEMON_NAME=chaind"
-Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=true"
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-cat /etc/systemd/system/kyved.service
-sudo systemctl enable kyved
-sudo systemctl daemon-reload
-kyved unsafe-all-reset
-kyved init $NODENAME --chain-id korellia
-
+mkdir -p $HOME/go/bin
+cp chaind $HOME/go/bin
+chaind unsafe-reset-all
+rm /root/.kyve/config/genesis.json
+chaind init $NODENAME --chain-id korellia
+rm /root/.kyve/config/genesis.json
 pruning="custom"
 pruning_keep_recent="100"
 pruning_keep_every="0"
@@ -106,13 +73,43 @@ sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $
 external_address=$(wget -qO- eth0.me)
 peers="a3fd6919ec3c5eb0fcd26dd9758ad8183bb7a93d@51.15.104.178:26656,52880e07804a612a3611025b4283e845084c2b26@38.242.241.164:26256,6215a7936b5410dd4b8ec1d25d80b80aaee275bc@45.10.43.108:26656,e56574f922ff41c68b80700266dfc9e01ecae383@18.156.198.41:26656,022399338c77a6be4bf26d6b0735030c6c95732f@194.163.189.114:56656,f85664da0bb5787b6d7e93c4d4cbb344374f1fce@178.20.43.103:26656,52be70508d5bceb14dd8745471f437182201e59b@135.181.6.243:26632,6fac99ff534a905f3339b400547d2c731ad3d6f7@45.10.42.125:26656,eb2172370e3e1f77fadef9018e1c503e12839b7e@62.113.119.150:26656,522bf8fe88ee84316a06c9f94a195fa0096ff2ad@77.83.92.238:26656,8813c8167b8f5a91e10bee676e9738c7d928ad7a@139.59.100.3:26656,e1a13fab199f489b41c0a0f705bf06cf46dc4d3f@165.227.202.155:26656"
 sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.kyve/config/config.toml
+rm /root/.kyve/config/genesis.json
 wget -O $HOME/.kyve/config/genesis.json "https://github.com/KYVENetwork/chain/releases/download/v0.0.1/genesis.json"
-wget -O $HOME/.kyve/confid/addrbook.json "
+wget -O $HOME/.kyve/config/addrbook.json "https://raw.githubusercontent.com/Aleksandr7793/guidecosmos/main/KYVE/korellia/addrbook.json"
+go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.0.0
+mkdir -p $HOME/.kyve/cosmovisor/genesis/bin
+mkdir $HOME/.kyve/cosmovisor/upgrades
+cp $(which chaind) $HOME/.kyve/cosmovisor/genesis/bin/
 
 
+echo "============================================================"
+echo "Be sure to write down the mnemonic!"
+echo "============================================================"
 #WALLET
-kyved keys add $WALLETNAME
+chaind keys add $WALLETNAME
 
+sudo tee /etc/systemd/system/kyved.service > /dev/null <<EOF  
+[Unit]
+Description=cosmovisor
+After=network-online.target
+[Service]
+User=$USER
+ExecStart=$(which cosmovisor) start
+Restart=on-failure
+RestartSec=12
+LimitNOFILE=65535
+Environment="DAEMON_HOME=$HOME/.kyve"
+Environment="DAEMON_NAME=chaind"
+Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=true"
+Environment="DAEMON_RESTART_AFTER_UPGRADE=true"
+Environment="UNSAFE_SKIP_BACKUP=true"
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat /etc/systemd/system/kyved.service
+sudo systemctl enable kyved
+sudo systemctl daemon-reload
 sudo systemctl restart kyved
 
 sed -i 's/#Storage=auto/Storage=persistent/g' /etc/systemd/journald.conf
