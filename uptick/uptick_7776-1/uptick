@@ -69,7 +69,7 @@ echo "============================================================"
 #WALLET
 uptickd keys add $WALLETNAME
 
-uptickd unsafe-reset-all
+uptickd tendermint unsafe-reset-all --home $HOME/.uptickd 
 rm $HOME/.uptickd/config/genesis.json
 wget -O $HOME/.uptickd/config/genesis.json "https://raw.githubusercontent.com/UptickNetwork/uptick-testnet/main/uptick_7776-1/genesis.json"
 
