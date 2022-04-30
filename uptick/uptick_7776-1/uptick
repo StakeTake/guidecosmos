@@ -1,0 +1,162 @@
+#!/bin/bash
+
+while true
+do
+
+# Logo
+
+echo "========================================================================================================================"
+curl -s https://raw.githubusercontent.com/StakeTake/script/main/logo.sh | bash
+echo "========================================================================================================================"
+
+# Menu
+
+PS3='Select an action: '
+options=(
+"Install Node"
+"Check Log"
+"Check balance"
+"Request tokens in discord"
+"Create Validator"
+"Exit")
+select opt in "${options[@]}"
+do
+case $opt in
+
+"Install Node")
+echo "============================================================"
+echo "Install start"
+echo "============================================================"
+echo "Setup NodeName:"
+echo "============================================================"
+read NODENAME
+echo "============================================================"
+echo "Setup WalletName:"
+echo "============================================================"
+read WALLETNAME
+echo export NODENAME=${NODENAME} >> $HOME/.bash_profile
+echo export WALLETNAME=${WALLETNAME} >> $HOME/.bash_profile
+echo export CHAIN_ID=uptick_7776-1 >> $HOME/.bash_profile
+source ~/.bash_profile
+
+#UPDATE APT
+sudo apt update && sudo apt upgrade -y
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+
+#INSTALL GO
+wget https://golang.org/dl/go1.18.1.linux-amd64.tar.gz; \
+rm -rv /usr/local/go; \
+tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz && \
+rm -v go1.18.1.linux-amd64.tar.gz && \
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
+source ~/.bash_profile && \
+go version
+
+rm -rf $HOME/archway $HOME/.archway
+#INSTALL
+cd $HOME
+git clone https://github.com/UptickNetwork/uptick.git
+cd uptick
+make install
+rm $HOME/.uptickd/config/genesis.json
+uptickd init $NODENAME --chain-id $CHAIN_ID
+uptickd config chain-id $CHAIN_ID
+
+
+echo "============================================================"
+echo "Be sure to write down the mnemonic!"
+echo "============================================================"
+#WALLET
+uptickd keys add $WALLETNAME
+
+uptickd unsafe-reset-all
+rm $HOME/.uptickd/config/genesis.json
+wget -O $HOME/.uptickd/config/genesis.json "https://raw.githubusercontent.com/UptickNetwork/uptick-testnet/main/uptick_7776-1/genesis.json"
+
+external_address=$(wget -qO- eth0.me)
+peers="f046ee3ead7e709b0fd6d5b30898e96959c1144d@peer0.testnet.uptick.network:26656,02ee3a0f3a2002d11c5eeb7aa813b64c59d6b60e@peer1.testnet.uptick.network:26656,51c2c58bba454c2fc7dcd6f6c32125c6b1ef3f87@161.97.130.125:26656"
+sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.uptickd/config/config.toml
+
+# config pruning
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.uptickd/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.uptickd/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.uptickd/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.uptickd/config/app.toml
+
+
+tee $HOME/uptickd.service > /dev/null <<EOF
+[Unit]
+Description=uptick
+After=network.target
+[Service]
+Type=simple
+User=$USER
+ExecStart=$(which uptickd) start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo mv $HOME/uptickd.service /etc/systemd/system/
+
+# start service
+sudo systemctl daemon-reload
+sudo systemctl enable uptickd
+sudo systemctl restart uptickd
+
+break
+;;
+
+"Check Log")
+
+journalctl -u uptickd -f -o cat
+
+break
+;;
+
+
+"Check balance")
+uptickd q bank balances $(uptickd keys show $WALLETNAME -a --bech acc)
+break
+;;
+
+"Create Validator")
+uptickd tx staking create-validator \
+  --amount 1000000uuptick \
+  --from $WALLETNAME \
+  --commission-max-change-rate "0.10" \
+  --commission-max-rate "0.10" \
+  --commission-rate "0.10" \
+  --min-self-delegation "1" \
+  --pubkey $(uptickd tendermint show-validator) \
+  --moniker $NODENAME \
+  --chain-id $CHAIN_ID \
+  --gas 200000 \
+  --fees 1uuptick \
+  -y
+break
+;;
+
+"Request tokens in discord")
+echo "========================================================================================================================"
+echo "In order to receive tokens, you need to go to the Discord server
+and request tokens in the validator channel"
+echo "========================================================================================================================"
+
+break
+;;
+
+"Exit")
+exit
+;;
+*) echo "invalid option $REPLY";;
+esac
+done
+done
