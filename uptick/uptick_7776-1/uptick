@@ -129,17 +129,16 @@ break
 
 "Create Validator")
 uptickd tx staking create-validator \
-  --amount 1000000uuptick \
+  --amount 1000000auptick \
   --from $WALLETNAME \
-  --commission-max-change-rate "0.10" \
-  --commission-max-rate "0.10" \
-  --commission-rate "0.10" \
+  --commission-max-change-rate "0.05" \
+  --commission-max-rate "0.20" \
+  --commission-rate "0.05" \
   --min-self-delegation "1" \
   --pubkey $(uptickd tendermint show-validator) \
   --moniker $NODENAME \
   --chain-id $CHAIN_ID \
-  --gas 200000 \
-  --fees 1uuptick \
+  --gas 300000 \
   -y
 break
 ;;
