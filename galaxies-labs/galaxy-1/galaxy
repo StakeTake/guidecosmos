@@ -134,9 +134,9 @@ break
 galaxyd tx staking create-validator \
   --amount 1000000uglx \
   --from $WALLETNAME \
-  --commission-max-change-rate "0.05\
-  --commission-max-rate "0.20\
-  --commission-rate "0.05\
+  --commission-max-change-rate "0.05"\
+  --commission-max-rate "0.20"\
+  --commission-rate "0.05"\
   --min-self-delegation "1" \
   --pubkey $(galaxyd tendermint show-validator) \
   --moniker $NODENAME \
