@@ -3,5 +3,5 @@
 
 In this guide, we have made setting up a node as easy as possible
 
-    curl -s https://raw.githubusercontent.com/Aleksandr7793/guidecosmos/main/quicksilver/quicktest-1/quicksilver > quicksilver.sh && chmod +x quicksilver.sh && ./quicksilver.sh
+    curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/quicksilver/quicktest-1/quicksilver > quicksilver.sh && chmod +x quicksilver.sh && ./quicksilver.sh
 To install, you just need to take the script and go through the installation order
