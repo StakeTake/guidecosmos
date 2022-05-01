@@ -38,7 +38,7 @@ echo export NODENAME=${NODENAME} >> $HOME/.bash_profile
 echo export WALLETNAME=${WALLETNAME} >> $HOME/.bash_profile
 echo export CHAIN_ID=quicktest-1 >> $HOME/.bash_profile
 echo export BINARY="./build/quicksilverd" >> $HOME/.bash_profile
-echo export NODE_HOME="$HOME/.quicksilverdd" >> $HOME/.bash_profile
+echo export NODE_HOME="$HOME/.quicksilverd" >> $HOME/.bash_profile
 source ~/.bash_profile
 
 #UPDATE APT
