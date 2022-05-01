@@ -37,8 +37,6 @@ read WALLETNAME
 echo export NODENAME=${NODENAME} >> $HOME/.bash_profile
 echo export WALLETNAME=${WALLETNAME} >> $HOME/.bash_profile
 echo export CHAIN_ID=quicktest-1 >> $HOME/.bash_profile
-echo export BINARY="./build/quicksilverd" >> $HOME/.bash_profile
-echo export NODE_HOME="$HOME/.quicksilverd" >> $HOME/.bash_profile
 source ~/.bash_profile
 
 #UPDATE APT
@@ -59,19 +57,21 @@ rm -rf $HOME/quicksilver $HOME/.quicksilverd
 git clone https://github.com/ingenuity-build/quicksilver.git --branch v0.1.1
 cd quicksilver
 make build
+mkdir -p $HOME/go/bin
+mv $HOME/quicksilver/build/quicksilverd $HOME/go/bin
 
-$BINARY init $NODENAME --chain-id $CHAIN_ID
-$BINARY config chain-id $CHAIN_ID
-$BINARY config broadcast-mode block
+quicksilverd init $NODENAME --chain-id $CHAIN_ID
+quicksilverd config chain-id $CHAIN_ID
+quicksilverd config broadcast-mode block
 
 
 echo "============================================================"
 echo "Be sure to write down the mnemonic!"
 echo "============================================================"
 #WALLET
-$BINARY keys add $WALLETNAME
+quicksilverd keys add $WALLETNAME
 
-$BINARY unsafe-reset-all
+quicksilverd unsafe-reset-all
 rm $HOME/.quicksilverd/config/genesis.json
 wget -O $HOME/.quicksilverd/config/genesis.json "https://raw.githubusercontent.com/ingenuity-build/testnets/main/rhapsody/genesis.json"
 
@@ -79,7 +79,7 @@ external_address=$(wget -qO- eth0.me)
 peers=""
 sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.quicksilverd/config/config.toml
 SEEDS="dd3460ec11f78b4a7c4336f22a356fe00805ab64@seed.quicktest-1.quicksilver.zone:26656"
-sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $NODE_HOME/config/config.toml
+sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $$HOME/.quicksilverd/config/config.toml
 
 # config pruning
 pruning="custom"
@@ -100,7 +100,7 @@ After=network.target
 [Service]
 Type=simple
 User=$USER
-ExecStart=$(which $BINARY) start
+ExecStart=$(which quicksilverd) start
 Restart=on-failure
 RestartSec=10
 LimitNOFILE=65535
@@ -127,19 +127,19 @@ break
 
 
 "Check balance")
-$BINARY q bank balances $($BINARY keys show $WALLETNAME -a --bech acc)
+quicksilverd q bank balances $(quicksilverd keys show $WALLETNAME -a --bech acc)
 break
 ;;
 
 "Create Validator")
-$BINARY tx staking create-validator \
+$quicksilverd tx staking create-validator \
   --amount 1000000uqck \
   --from $WALLETNAME \
   --commission-max-change-rate "0.05" \
   --commission-max-rate "0.20" \
   --commission-rate "0.05" \
   --min-self-delegation "1" \
-  --pubkey $($BINARY tendermint show-validator) \
+  --pubkey $(quicksilverd tendermint show-validator) \
   --moniker $NODENAME \
   --chain-id $CHAIN_ID \
   --gas 300000 \
