@@ -1,0 +1,165 @@
+#!/bin/bash
+
+while true
+do
+
+# Logo
+
+echo "========================================================================================================================"
+curl -s https://raw.githubusercontent.com/StakeTake/script/main/logo.sh | bash
+echo "========================================================================================================================"
+
+# Menu
+
+PS3='Select an action: '
+options=(
+"Install Node"
+"Check Log"
+"Check balance"
+"Request tokens in discord"
+"Create Validator"
+"Exit")
+select opt in "${options[@]}"
+do
+case $opt in
+
+"Install Node")
+echo "============================================================"
+echo "Install start"
+echo "============================================================"
+echo "Setup NodeName:"
+echo "============================================================"
+read NODENAME
+echo "============================================================"
+echo "Setup WalletName:"
+echo "============================================================"
+read WALLETNAME
+echo export NODENAME=${NODENAME} >> $HOME/.bash_profile
+echo export WALLETNAME=${WALLETNAME} >> $HOME/.bash_profile
+echo export CHAIN_ID=quicktest-1 >> $HOME/.bash_profile
+source ~/.bash_profile
+
+#UPDATE APT
+sudo apt update && sudo apt upgrade -y
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+
+#INSTALL GO
+wget https://golang.org/dl/go1.18.1.linux-amd64.tar.gz; \
+rm -rv /usr/local/go; \
+tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz && \
+rm -v go1.18.1.linux-amd64.tar.gz && \
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
+source ~/.bash_profile && \
+go version
+
+rm -rf $HOME/quicksilver $HOME/.quicksilverd
+#INSTALL
+git clone https://github.com/ingenuity-build/quicksilver.git --branch v0.1.1
+cd quicksilver
+make build
+mkdir -p $HOME/go/bin
+mv $HOME/quicksilver/build/quicksilverd $HOME/go/bin
+
+quicksilverd init $NODENAME --chain-id $CHAIN_ID
+quicksilverd config chain-id $CHAIN_ID
+quicksilverd config broadcast-mode block
+
+
+echo "============================================================"
+echo "Be sure to write down the mnemonic!"
+echo "============================================================"
+#WALLET
+quicksilverd keys add $WALLETNAME
+
+quicksilverd unsafe-reset-all
+rm $HOME/.quicksilverd/config/genesis.json
+wget -O $HOME/.quicksilverd/config/genesis.json "https://raw.githubusercontent.com/ingenuity-build/testnets/main/rhapsody/genesis.json"
+
+external_address=$(wget -qO- eth0.me)
+peers=""
+sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.quicksilverd/config/config.toml
+SEEDS="dd3460ec11f78b4a7c4336f22a356fe00805ab64@seed.quicktest-1.quicksilver.zone:26656"
+sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $HOME/.quicksilverd/config/config.toml
+
+# config pruning
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.quicksilverd/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.quicksilverd/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.quicksilverd/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.quicksilverd/config/app.toml
+
+
+tee $HOME/quicksilverd.service > /dev/null <<EOF
+[Unit]
+Description=quicksilver
+After=network.target
+[Service]
+Type=simple
+User=$USER
+ExecStart=$(which quicksilverd) start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo mv $HOME/quicksilverd.service /etc/systemd/system/
+
+# start service
+sudo systemctl daemon-reload
+sudo systemctl enable quicksilverd
+sudo systemctl restart quicksilverd
+
+break
+;;
+
+"Check Log")
+
+journalctl -u quicksilverd -f -o cat
+
+break
+;;
+
+
+"Check balance")
+quicksilverd q bank balances $(quicksilverd keys show $WALLETNAME -a --bech acc)
+break
+;;
+
+"Create Validator")
+$quicksilverd tx staking create-validator \
+  --amount 1000000uqck \
+  --from $WALLETNAME \
+  --commission-max-change-rate "0.05" \
+  --commission-max-rate "0.20" \
+  --commission-rate "0.05" \
+  --min-self-delegation "1" \
+  --pubkey $(quicksilverd tendermint show-validator) \
+  --moniker $NODENAME \
+  --chain-id $CHAIN_ID \
+  --gas 300000 \
+  -y
+break
+;;
+
+"Request tokens in discord")
+echo "========================================================================================================================"
+echo "In order to receive tokens, you need to go to the Discord server
+and request tokens in the validator channel"
+echo "========================================================================================================================"
+
+break
+;;
+
+"Exit")
+exit
+;;
+*) echo "invalid option $REPLY";;
+esac
+done
+done
