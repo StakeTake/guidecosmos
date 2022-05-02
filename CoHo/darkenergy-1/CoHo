@@ -70,6 +70,7 @@ cohod keys add $WALLETNAME
 
 cohod unsafe-reset-all
 rm $HOME/.coho/config/genesis.json
+wget -O $HOME/.coho/config/addrbook.json https://raw.githubusercontent.com/StakeTake/guidecosmos/main/CoHo/darkenergy-1/addrbook.json
 wget -O $HOME/.coho/config/genesis.json https://raw.githubusercontent.com/cosmic-horizon/testnets/main/darkenergy-1/genesis.json
 
 external_address=$(wget -qO- eth0.me)
