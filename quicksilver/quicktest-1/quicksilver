@@ -60,6 +60,7 @@ make build
 mkdir -p $HOME/go/bin
 mv $HOME/quicksilver/build/quicksilverd $HOME/go/bin
 
+rm $HOME/.quicksilverd/config/genesis.json
 quicksilverd init $NODENAME --chain-id $CHAIN_ID
 quicksilverd config chain-id $CHAIN_ID
 quicksilverd config broadcast-mode block
