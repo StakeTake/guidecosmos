@@ -135,9 +135,9 @@ break
 pylonsdd tx staking create-validator \
   --amount 1000000ubedrock \
   --from $WALLETNAME \
-  --commission-max-change-rate "0.10" \
-  --commission-max-rate "0.10" \
-  --commission-rate "0.10" \
+  --commission-max-change-rate "0.05" \
+  --commission-max-rate "0.20" \
+  --commission-rate "0.05" \
   --min-self-delegation "1" \
   --pubkey $(pylonsd tendermint show-validator) \
   --moniker $NODENAME \
