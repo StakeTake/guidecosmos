@@ -43,18 +43,14 @@ source ~/.bash_profile
 sudo apt update && sudo apt upgrade -y
 sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
 
-sudo rm -rf /usr/local/go
-
-curl https://dl.google.com/go/go1.17.6.linux-amd64.tar.gz | sudo tar -C/usr/local -zxvf -
-
-cat <<'EOF' >>$HOME/.profile
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-export GO111MODULE=on
-export GOBIN=$HOME/go/bin
-export PATH=$PATH:/usr/local/go/bin:$GOBIN
-EOF
-source $HOME/.profile
+#INSTALL GO
+wget https://golang.org/dl/go1.17.6.linux-amd64.tar.gz; \
+rm -rv /usr/local/go; \
+tar -C /usr/local -xzf go1.17.6.linux-amd64.tar.gz && \
+rm -v go1.17.6.linux-amd64.tar.gz && \
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
+source ~/.bash_profile && \
+go version
 
 #INSTALL
 git clone https://github.com/deweb-services/deweb.git
