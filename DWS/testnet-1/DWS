@@ -57,10 +57,10 @@ EOF
 source $HOME/.profile
 
 #INSTALL
-cd $HOME
-wget https://github.com/deweb-services/deweb/releases/download/v0.2/dewebd
-chmod +x dewebd
-sudo mv dewebd /usr/local/bin/
+git clone https://github.com/deweb-services/deweb.git
+cd deweb
+git checkout v0.2
+make build
 
 rm $HOME/.deweb/config/genesis.json
 dewebd init $NODENAME --chain-id $CHAIN_ID
