@@ -1,0 +1,165 @@
+#!/bin/bash
+
+while true
+do
+
+# Logo
+
+echo "========================================================================================================================"
+curl -s https://raw.githubusercontent.com/StakeTake/script/main/logo.sh | bash
+echo "========================================================================================================================"
+
+# Menu
+
+PS3='Select an action: '
+options=(
+"Install Node"
+"Check Log"
+"Check balance"
+"Request tokens in discord"
+"Create Validator"
+"Exit")
+select opt in "${options[@]}"
+do
+case $opt in
+
+"Install Node")
+echo "============================================================"
+echo "Install start"
+echo "============================================================"
+echo "Setup NodeName:"
+echo "============================================================"
+read NODENAME
+echo "============================================================"
+echo "Setup WalletName:"
+echo "============================================================"
+read WALLETNAME
+echo export NODENAME=${NODENAME} >> $HOME/.bash_profile
+echo export WALLETNAME=${WALLETNAME} >> $HOME/.bash_profile
+echo export CHAIN_ID=pylons-testnet-3 >> $HOME/.bash_profile
+source ~/.bash_profile
+
+#UPDATE APT
+sudo apt update && sudo apt upgrade -y
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+
+#INSTALL GO
+wget https://golang.org/dl/go1.18.1.linux-amd64.tar.gz; \
+rm -rv /usr/local/go; \
+tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz && \
+rm -v go1.18.1.linux-amd64.tar.gz && \
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
+source ~/.bash_profile && \
+go version
+
+cd $HOME
+rm -rf pylons .pylons
+#INSTALL
+git clone https://github.com/Pylons-tech/pylons
+cd pylons
+git checkout v0.4.2
+make install
+cd $HOME
+
+rm $HOME/.pylons/config/genesis.json
+pylonsd init $NODENAME --chain-id $CHAIN_ID
+pylonsd config chain-id $CHAIN_ID
+
+
+echo "============================================================"
+echo "Be sure to write down the mnemonic!"
+echo "============================================================"
+#WALLET
+pylonsd keys add $WALLETNAME
+
+pylonsd unsafe-reset-all
+rm $HOME/.pylons/config/genesis.json
+curl http://95.214.55.4:26657/genesis | jq .result.genesis > genesis.json
+mv genesis.json $HOME/.pylons/config/genesis.json
+
+external_address=$(wget -qO- eth0.me)
+peers="2c50b8171af784f1dca3d37d5dda5e90f1e1add8@95.214.55.4:26656,4f90babf520599ffe606157b0151c4c9bc0ec23f@194.163.172.115:26666,ebecc93e7865036fbdf8d3d54a624941d6e41ba1@104.200.136.57:26656,f6a9cc00142a4ce2fc1cbe536ba7ac9701f0786f@62.113.119.213:11221"
+sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.pylons/config/config.toml
+
+# config pruning
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.archway/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.pylons/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.pylons/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.pylons/config/app.toml
+
+
+tee $HOME/pylonsd.service > /dev/null <<EOF
+[Unit]
+Description=ARCHWAY
+After=network.target
+[Service]
+Type=simple
+User=$USER
+ExecStart=$(which pylonsd) start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo mv $HOME/pylonsd.service /etc/systemd/system/
+
+# start service
+sudo systemctl daemon-reload
+sudo systemctl enable pylonsd
+sudo systemctl restart pylonsd
+
+break
+;;
+
+"Check Log")
+
+journalctl -u pylonsd -f -o cat
+
+break
+;;
+
+
+"Check balance")
+pylonsd q bank balances $(pylonsd keys show $WALLETNAME -a --bech acc)
+break
+;;
+
+"Create Validator")
+pylonsdd tx staking create-validator \
+  --amount 1000000ubedrock \
+  --from $WALLETNAME \
+  --commission-max-change-rate "0.10" \
+  --commission-max-rate "0.10" \
+  --commission-rate "0.10" \
+  --min-self-delegation "1" \
+  --pubkey $(pylonsd tendermint show-validator) \
+  --moniker $NODENAME \
+  --chain-id $CHAIN_ID \
+  --gas 200000 \
+  -y
+break
+;;
+
+"Request tokens in discord")
+echo "========================================================================================================================"
+echo "In order to receive tokens, you need to go to the Discord server
+and request tokens in the validator channel"
+echo "========================================================================================================================"
+
+break
+;;
+
+"Exit")
+exit
+;;
+*) echo "invalid option $REPLY";;
+esac
+done
+done
