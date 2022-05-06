@@ -127,7 +127,7 @@ break
 
 
 "Check balance")
-chaind q bank balances $(kyved keys show $WALLETNAME -a --bech acc)
+chaind q bank balances $(chaind keys show $WALLETNAME -a --bech acc)
 break
 ;;
 
