@@ -1,0 +1,119 @@
+#!/bin/bash
+
+while true
+do
+
+# Logo
+
+echo "========================================================================================================================"
+curl -s https://raw.githubusercontent.com/StakeTake/script/main/logo.sh | bash
+echo "========================================================================================================================"
+
+# Menu
+
+PS3='Select an action: '
+options=(
+"Install Node"
+"Check your account"
+"Request tokens"
+"Check balance"
+"Create a board"
+"Exit")
+select opt in "${options[@]}"
+do
+case $opt in
+
+"Install Node")
+echo "============================================================"
+echo "Install start"
+echo "============================================================"
+
+#INSTALL APT
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+
+#INSTALL GO
+wget https://golang.org/dl/go1.18.1.linux-amd64.tar.gz; \
+rm -rv /usr/local/go; \
+tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz && \
+rm -v go1.18.1.linux-amd64.tar.gz && \
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
+source ~/.bash_profile && \
+go version
+
+#INSTALL
+cd $HOME
+git clone https://github.com/gnolang/gno/
+cd ./gno
+make
+
+#CREATE MNEMONIC
+./build/gnokey generate
+echo "============================================================"
+echo "Save your mnemonic, you will need it later!"
+echo "============================================================"
+echo "Write the name of your wallet:"
+echo "============================================================"
+read WALLET
+echo export WALLET=${WALLET} >> $HOME/.bash_profile
+source ~/.bash_profile
+./build/gnokey add $WALLET --recover
+echo "============================================================"
+echo "Paste the received wallet address:"
+echo "============================================================"
+read WALLETADRESS
+echo export WALLETADRESS=${WALLETADRESS} >> $HOME/.bash_profile
+source ~/.bash_profile
+break
+;;
+
+"Check your account")
+
+./build/gnokey list
+
+break
+;;
+
+
+"Check balance")
+./build/gnokey query auth/accounts/$WALLETADRESS --remote gno.land:36657
+break
+;;
+
+"Request tokens")
+echo "========================================================================================================================"
+echo "Requesting tokens on the site - https://gno.land/faucet"
+echo "========================================================================================================================"
+break
+;;
+
+"Create a board")
+./build/gnokey query auth/accounts/$WALLETADRESS --remote gno.land:36657
+echo "============================================================"
+echo "Setup your account number:"
+echo "============================================================"
+read ACCNUMBER
+echo export ACCNUMBER=${ACCNUMBER} >> $HOME/.bash_profile
+echo "============================================================"
+echo "Setup your sequence number:"
+echo "============================================================"
+read SEQ
+echo export SEQ=${SEQ} >> $HOME/.bash_profile
+echo "============================================================"
+echo "Setup your board name:"
+echo "============================================================"
+read BOARDNAME
+echo export BOARDNAME=${BOARDNAME} >> $HOME/.bash_profile
+source ~/.bash_profile
+./build/gnokey maketx call $WALLET --pkgpath "gno.land/r/boards" --func CreateBoard --args "$BOARDNAME" --gas-fee 1gnot --gas-wanted 2000000 > createboard.unsigned.txt
+./build/gnokey sign $WALLET --txpath createboard.unsigned.txt --chainid "testchain" --number $ACCNUMBER --sequence $SEQ > createboard.signed.txt
+./build/gnokey broadcast createboard.signed.txt --remote gno.land:36657
+break
+;;
+
+"Exit")
+exit
+;;
+*) echo "invalid option $REPLY";;
+esac
+done
+done
