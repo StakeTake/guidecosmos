@@ -1,0 +1,165 @@
+#!/bin/bash
+
+while true
+do
+
+# Logo
+
+echo "========================================================================================================================"
+curl -s https://raw.githubusercontent.com/StakeTake/script/main/logo.sh | bash
+echo "========================================================================================================================"
+
+# Menu
+
+PS3='Select an action: '
+options=(
+"Install Node"
+"Check Log"
+"Check balance"
+"Request tokens in discord"
+"Create Validator"
+"Exit")
+select opt in "${options[@]}"
+do
+case $opt in
+
+"Install Node")
+echo "============================================================"
+echo "Install start"
+echo "============================================================"
+echo "Setup NodeName:"
+echo "============================================================"
+read NODENAME
+echo "============================================================"
+echo "Setup WalletName:"
+echo "============================================================"
+read WALLETNAME
+echo export NODENAME=${NODENAME} >> $HOME/.bash_profile
+echo export WALLETNAME=${WALLETNAME} >> $HOME/.bash_profile
+echo export CHAIN_ID=meme-1 >> $HOME/.bash_profile
+source ~/.bash_profile
+
+#UPDATE APT
+sudo apt update && sudo apt upgrade -y
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+
+#INSTALL GO
+wget https://golang.org/dl/go1.18.1.linux-amd64.tar.gz; \
+rm -rv /usr/local/go; \
+tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz && \
+rm -v go1.18.1.linux-amd64.tar.gz && \
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
+source ~/.bash_profile && \
+go version
+
+rm -rf $HOME/meme $HOME/.memed
+cd $HOME
+#INSTALL
+git clone https://github.com/MEMECosmos/meme
+cd meme
+git checkout main
+make install
+
+rm $HOME/.memed/config/genesis.json
+memed init $NODENAME --chain-id $CHAIN_ID
+memed config chain-id $CHAIN_ID
+
+
+echo "============================================================"
+echo "Be sure to write down the mnemonic!"
+echo "============================================================"
+#WALLET
+memed keys add $WALLETNAME
+
+memed unsafe-reset-all
+rm $HOME/.memed/config/genesis.json
+wget -O $HOME/.memed/config/genesis.json "https://raw.githubusercontent.com/memecosmos/mainnet/main/meme-1/genesis.json"
+
+external_address=$(wget -qO- eth0.me)
+peers="8db6d048af7c3cbbded64a13e107deac0ecd4e0b@157.230.58.197:26656,0bff1a09a775f3f48125e2608e5425d9916be9ec@157.230.58.200:26656,f51b8d710dd6a556694a5bd414c0e21753027b95@188.166.97.38:26656,7f8d0d370ea72608fa74d0b6698a7979ab510449@188.166.104.46:26656,bbce4f689582db49d7a93cb2baf94d95aa72f43b@137.184.13.23:26656,81ca4565e35d3c3f9cf6cf6d8d1fe7e6c4a2e490@207.148.2.119:26656,1e2a4e7c513d1ba267fe2e689d4dfe6d6105f644@155.138.255.208:26656"
+sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.memed/config/config.toml
+sed -i -E 's/minimum-gas-prices = \"\"/minimum-gas-prices = \"0.025umeme\"/g' ~/.memed/config/app.toml
+
+# config pruning
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.memed/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.memed/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.memed/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.memed/config/app.toml
+
+
+tee $HOME/memed.service > /dev/null <<EOF
+[Unit]
+Description=MEME
+After=network.target
+[Service]
+Type=simple
+User=$USER
+ExecStart=$(which memed) start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo mv $HOME/memed.service /etc/systemd/system/
+
+# start service
+sudo systemctl daemon-reload
+sudo systemctl enable memed
+sudo systemctl restart memed
+
+break
+;;
+
+"Check Log")
+
+journalctl -u memed -f -o cat
+
+break
+;;
+
+
+"Check balance")
+memed q bank balances $(memed keys show $WALLETNAME -a --bech acc)
+break
+;;
+
+"Create Validator")
+memed tx staking create-validator \
+  --amount 1000000umeme \
+  --from $WALLETNAME \
+  --commission-max-change-rate "0.05" \
+  --commission-max-rate "0.20" \
+  --commission-rate "0.05" \
+  --min-self-delegation "1" \
+  --pubkey $(memed tendermint show-validator) \
+  --moniker $NODENAME \
+  --chain-id $CHAIN_ID \
+  --gas 300000 \
+  --fees 200umeme \
+  -y
+break
+;;
+
+"Request tokens in discord")
+echo "========================================================================================================================"
+echo "In order to receive tokens, you need to go to the Discord server
+and request tokens in the validator channel"
+echo "========================================================================================================================"
+
+break
+;;
+
+"Exit")
+exit
+;;
+*) echo "invalid option $REPLY";;
+esac
+done
+done
