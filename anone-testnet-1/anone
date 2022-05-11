@@ -1,0 +1,147 @@
+#!/bin/bash
+
+while true
+do
+
+# Logo
+
+echo "========================================================================================================================"
+curl -s https://raw.githubusercontent.com/StakeTake/script/main/logo.sh | bash
+echo "========================================================================================================================"
+
+# Menu
+
+PS3='Select an action: '
+options=(
+"Install Node"
+"Check Log"
+"Check balance"
+"Request tokens in discord"
+"Create Validator"
+"Exit")
+select opt in "${options[@]}"
+do
+case $opt in
+
+"Install Node")
+echo "============================================================"
+echo "Install start"
+echo "============================================================"
+echo "Setup NodeName:"
+echo "============================================================"
+read NODENAME
+echo "============================================================"
+echo "Setup WalletName:"
+echo "============================================================"
+read WALLETNAME
+echo export NODENAME=${NODENAME} >> $HOME/.bash_profile
+echo export WALLETNAME=${WALLETNAME} >> $HOME/.bash_profile
+echo export CHAIN_ID=anone-testnet-1 >> $HOME/.bash_profile
+source ~/.bash_profile
+
+#UPDATE APT
+sudo apt update && sudo apt upgrade -y
+sudo apt install gcc curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+
+
+#INSTALL GO
+wget https://golang.org/dl/go1.18.1.linux-amd64.tar.gz; \
+rm -rv /usr/local/go; \
+tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz && \
+rm -v go1.18.1.linux-amd64.tar.gz && \
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
+source ~/.bash_profile && \
+go version
+
+#INSTALL
+git clone https://github.com/notional-labs/anone
+cd ~/anone
+git checkout testnet-1.0.3
+make install
+anoned version
+
+anoned init $NODENAME --chain-id $CHAIN_ID
+
+echo "============================================================"
+echo "Be sure to write down the mnemonic!"
+echo "============================================================"
+#WALLET
+anoned keys add $WALLETNAME
+
+wget -O ~/.anone/config/genesis.json https://raw.githubusercontent.com/notional-labs/anone/master/networks/testnet-1/genesis.json
+
+sed -E -i 's/minimum-gas-prices = \".*\"/minimum-gas-prices = \"0.0001uan1\"/' $HOME/.anone/config/app.toml
+sed -E -i 's/pruning = \".*\"/pruning = \"custom\"/' $HOME/.anone/config/app.toml
+sed -E -i 's/pruning-keep-recent = \".*\"/pruning-keep-recent = \"100\"/' $HOME/.anone/config/app.toml
+sed -E -i 's/pruning-interval = \".*\"/pruning-interval = \"10\"/' $HOME/.anone/config/app.toml
+sed -E -i 's/seeds = \".*\"/seeds = \"49a49db05e945fc38b7a1bc00352cafdaef2176c@95.217.121.243:2280,80f0ef5d7c432d2bae99dc8437a9c3db464890cd@65.108.128.139:2280,3afac655e3be5c5fc4a64ec5197346ffb5a855c1@49.12.213.105:2280\"/' $HOME/.anone/config/config.toml
+
+
+sudo tee <<EOF >/dev/null /etc/systemd/system/anoned.service
+[Unit]
+Description=Anone Node
+After=network-online.target
+[Service]
+User=$USER
+ExecStart=$HOME/go/bin/anoned start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=10000
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# start service
+sudo systemctl daemon-reload
+sudo systemctl enable anoned
+sudo systemctl restart anoned
+
+break
+;;
+
+"Check Log")
+
+sudo journalctl -u anoned -f
+
+break
+;;
+
+
+"Check balance")
+anoned q bank balances $(anoned keys show $WALLETNAME -a --bech acc)
+break
+;;
+
+"Create Validator")
+anoned tx staking create-validator \
+  --amount=1990000000uan1 \
+  --pubkey=$(anoned tendermint show-validator) \
+  --moniker=<YOUR_MONIKER> \
+  --chain-id=anone-testnet-1 \
+  --commission-rate="0.1" \
+  --commission-max-rate="0.2" \
+  --commission-max-change-rate="0.01" \
+  --min-self-delegation=1 \
+  --gas 200000 \
+  --fees 250000uan1 \
+  --from=wallet \
+  -y
+break
+;;
+
+"Request tokens in discord")
+echo "========================================================================================================================"
+echo "In order to receive tokens, you need to go to the Discord server
+and request tokens in fauccet bot"
+echo "========================================================================================================================"
+
+break
+;;
+
+"Exit")
+exit
+;;
+*) echo "invalid option $REPLY";;
+esac
+done
+done
