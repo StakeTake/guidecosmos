@@ -1,6 +1,6 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
-___In this guide, we have written how to set up an autodelegator for your validator node of Archway___
+___In this guide, we have written how to set up an autodelegator for your validator node of Stafihub___
 
 ```html
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stafihub/stafihub-public-testnet-2/autodelegator/autodelegator > autodelegator.sh && chmod +x autodelegator.sh && ./autodelegator.sh
