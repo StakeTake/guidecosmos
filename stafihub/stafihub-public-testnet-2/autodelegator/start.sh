@@ -4,7 +4,7 @@ source $HOME/.bash_profile
 GREEN_COLOR='\033[0;32m'
 RED_COLOR='\033[0;31m'
 WITHOU_COLOR='\033[0m'
-DELAY=1000 #in secs - how often restart the script
+DELAY=9000 #in secs - how often restart the script
 
 
 for (( ;; )); do
@@ -25,10 +25,10 @@ for (( timer=30; timer>0; timer-- ))
                 sleep 1
         done
 BAL=$($PROJECT q bank balances ${DEL_ADDR} -o json | jq -r '.balances | .[].amount')
-        BAL=$(($BAL- 500))
+        BAL=$(($BAL- 200000))
 echo -e "BALANCE: ${GREEN_COLOR}${BAL}${WITHOU_COLOR} ${DENOM}\n"
         echo -e "Stake ALL\n"
-if (( BAL > 500 )); then
+if (( BAL > 0 )); then
             echo -e "${PWDDD}\n${PWDDD}\n" | $PROJECT tx staking delegate ${VAL_ADDR} ${BAL}${DENOM} --from ${DEL_ADDR} --chain-id ${CHAIN_ID} --fees ${FEES}${DENOM} -y
         else
                                 echo -e "BALANCE: ${GREEN_COLOR}${BAL}${WITHOU_COLOR} $DENOM BAL < 0 ((((\n"
