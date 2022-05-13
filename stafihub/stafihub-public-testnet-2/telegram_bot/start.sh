@@ -29,7 +29,7 @@ echo "============================================================"
 echo "Setup your Chat ID"
 echo "============================================================"
 read TG_ID
-echo export TG_ID=${TG_ID} >> $HOME/.bash_profile \
+echo export TG_ID=${TG_ID} >> $HOME/.bash_profile
 source $HOME/.bash_profile
 
 mkdir $HOME/alerts
