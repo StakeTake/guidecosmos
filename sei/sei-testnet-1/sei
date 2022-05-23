@@ -75,7 +75,7 @@ seid keys add $WALLETNAME
 seid unsafe-reset-all
 rm $HOME/.sei-chain/config/genesis.json
 wget -O $HOME/.sei-chain/config/genesis.json "https://raw.githubusercontent.com/sei-protocol/testnet/master/sei-testnet-1/genesis.json"
-wget -O $HOME/.sei-chain/config/addrbook.json "https://raw.githubusercontent.com/sei-protocol/testnet/master/sei-testnet-1/addrbook.json"
+wget -O $HOME/.sei-chain/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/sei/sei-testnet-1/addrbook.json"
 
 external_address=$(wget -qO- eth0.me)
 peers=""
