@@ -55,7 +55,7 @@ go version
 #INSTALL
 git clone https://github.com/tharsis/evmos.git
 cd evmos
-git checkout tags/v3.0.0
+git checkout tags/v4.0.1
 make install
 evmosd version
 
