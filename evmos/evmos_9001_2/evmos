@@ -82,6 +82,21 @@ echo "============================================================"
 #WALLET
 evmosd keys add $WALLETNAME
 
+# config pruning
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.evmosd/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.evmosd/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.evmosd/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.evmosd/config/app.toml
+sed -i.bak -e "s/^minimum-gas-prices *=.*/minimum-gas-prices = \"0.0025aevmos\"/;" ~/.evmosd/config/app.toml
+sed -i.bak -e "s/indexer *=.*/indexer = \"null\"/g" $HOME/.evmosd/config/config.toml
+sed -i "s/tracer *=.*/tracer = \"\"/g" $HOME/.evmosd/config/app.toml
+sed -i "s/snapshot-interval *=.*/snapshot-interval = 0/g" $HOME/.evmosd/config/app.toml
+
 
 sudo tee /etc/systemd/system/evmosd.service > /dev/null <<EOF
 [Unit]
