@@ -55,11 +55,9 @@ go version
 cd $HOME
 rm -rf $HOME/sei-chain $HOME/.sei-chain
 #INSTALL
-git clone --depth 1 --branch 1.0.0beta https://github.com/sei-protocol/sei-chain.git
+git clone --depth 1 --branch 1.0.1beta https://github.com/sei-protocol/sei-chain.git
 cd sei-chain
-go build -o build/seid ./cmd/sei-chaind/
-mkdir -p $HOME/go/bin
-mv $HOME/sei-chain/build/seid $HOME/go/bin
+make install
 
 seid init $NODENAME --chain-id $CHAIN_ID
 seid config chain-id $CHAIN_ID
@@ -73,15 +71,15 @@ echo "============================================================"
 seid keys add $WALLETNAME
 
 seid unsafe-reset-all
-rm $HOME/.sei-chain/config/genesis.json
-wget -O $HOME/.sei-chain/config/genesis.json "https://raw.githubusercontent.com/sei-protocol/testnet/master/sei-testnet-1/genesis.json"
-wget -O $HOME/.sei-chain/config/addrbook.json "https://raw.githubusercontent.com/sei-protocol/testnet/master/sei-testnet-1/addrbook.json"
+rm $HOME/.sei/config/genesis.json
+wget -O $HOME/.sei/config/genesis.json "https://raw.githubusercontent.com/sei-protocol/testnet/master/sei-testnet-1/genesis.json"
+wget -O $HOME/.sei/config/addrbook.json "https://raw.githubusercontent.com/sei-protocol/testnet/master/sei-testnet-1/addrbook.json"
 
 external_address=$(wget -qO- eth0.me)
 peers=""
-sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.sei-chain/config/config.toml
+sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.sei/config/config.toml
 SEEDS=""
-sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $HOME/.sei-chain/config/config.toml
+sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $HOME/.sei/config/config.toml
 
 # config pruning
 pruning="custom"
@@ -90,9 +88,9 @@ pruning_keep_every="0"
 pruning_interval="10"
 
 sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.sei-chain/config/app.toml
-sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.sei-chain/config/app.toml
-sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.sei-chain/config/app.toml
-sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.sei-chain/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.sei/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.sei/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.sei/config/app.toml
 
 
 tee $HOME/seid.service > /dev/null <<EOF
