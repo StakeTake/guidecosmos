@@ -53,7 +53,7 @@ source ~/.bash_profile && \
 go version
 
 cd $HOME
-rm -rf $HOME/sei-chain $HOME/.sei-chain
+rm -rf $HOME/sei-chain $HOME/.sei $HOME/.sei-chain
 #INSTALL
 git clone --depth 1 --branch 1.0.1beta https://github.com/sei-protocol/sei-chain.git
 cd sei-chain
