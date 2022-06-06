@@ -57,7 +57,7 @@ git clone https://github.com/deweb-services/deweb.git
 cd deweb
 git checkout v0.2
 make build
-make intsall
+make install
 
 rm $HOME/.deweb/config/genesis.json
 dewebd init $NODENAME --chain-id $CHAIN_ID
