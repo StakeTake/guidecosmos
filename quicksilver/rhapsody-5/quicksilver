@@ -57,7 +57,7 @@ rm -rf $HOME/quicksilver $HOME/.quicksilverd
 git clone https://github.com/ingenuity-build/quicksilver.git --branch v0.3.0
 cd quicksilver
 make build
-mv $HOME/quicksilver/build/quicksilverd /usr/go/bin
+mv $HOME/quicksilver/build/quicksilverd /usr/bin
 
 quicksilverd init $NODENAME --chain-id $CHAIN_ID
 quicksilverd config chain-id $CHAIN_ID
