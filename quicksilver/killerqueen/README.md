@@ -10,7 +10,9 @@ To install, you just need to take the script and go through the installation ord
 #START WITH STATE-SYNC
 
 sudo systemctl stop quicksilverd
+
 quicksilverd tendermint unsafe-reset-all
+
 SNAP_RPC1="http://node02.killerqueen-1.quicksilver.zone:26657" \
 && SNAP_RPC2="http://node04.killerqueen-1.quicksilver.zone:26657"
 
@@ -22,4 +24,5 @@ sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
 s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC1,$SNAP_RPC2\"| ; \
 s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/.galaxy/config/config.toml
+
 sudo systemctl restart quicksilverd
