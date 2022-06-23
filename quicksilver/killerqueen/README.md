@@ -8,6 +8,7 @@ To install, you just need to take the script and go through the installation ord
 
 
 #START WITH STATE-SYNC
+
 sudo systemctl stop quicksilverd
 quicksilverd tendermint unsafe-reset-all
 SNAP_RPC1="http://node02.killerqueen-1.quicksilver.zone:26657" \
