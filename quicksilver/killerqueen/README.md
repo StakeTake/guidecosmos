@@ -5,3 +5,19 @@ In this guide, we have made setting up a node as easy as possible
 
     curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/quicksilver/killerqueen/quicksilver > quicksilver.sh && chmod +x quicksilver.sh && ./quicksilver.sh
 To install, you just need to take the script and go through the installation order
+
+
+#START WITH STATE-SYNC
+sudo systemctl stop quicksilverd
+quicksilverd tendermint unsafe-reset-all
+SNAP_RPC1="http://node02.killerqueen-1.quicksilver.zone:26657" \
+&& SNAP_RPC2="http://node04.killerqueen-1.quicksilver.zone:26657"
+
+LATEST_HEIGHT=$(curl -s $SNAP_RPC1/block | jq -r .result.block.header.height) \
+&& BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)) \
+&& TRUST_HASH=$(curl -s "$SNAP_RPC1/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
+
+sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
+s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC1,$SNAP_RPC2\"| ; \
+s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
+s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/.galaxy/config/config.toml
