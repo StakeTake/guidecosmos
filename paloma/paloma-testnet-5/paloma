@@ -75,7 +75,7 @@ palomad keys add $WALLETNAME
 palomad tendermint unsafe-reset-all
 rm $HOME/.paloma/config/genesis.json
 wget -O $HOME/.paloma/config/genesis.json "https://raw.githubusercontent.com/palomachain/testnet/master/paloma-testnet-5/genesis.json"
-wget -O $HOME/.paloma/config/addrbook.json "https://raw.githubusercontent.com/palomachain/testnet/master/paloma-testnet-5/addrbook.json"
+wget -O $HOME/.paloma/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/paloma/paloma-testnet-5/addrbook.json"
 
 external_address=$(wget -qO- eth0.me)
 peers=""
