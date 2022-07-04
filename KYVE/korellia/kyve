@@ -56,8 +56,7 @@ go version
 cd $HOME
 wget https://github.com/KYVENetwork/chain/releases/download/v0.0.1/chain_linux_amd64.tar.gz
 tar -xvzf chain_linux_amd64.tar.gz
-mkdir -p $HOME/go/bin
-cp chaind $HOME/go/bin
+cp chaind /usr/bin
 chaind unsafe-reset-all
 rm /root/.kyve/config/genesis.json
 chaind init $NODENAME --chain-id korellia
