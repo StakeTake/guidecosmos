@@ -75,9 +75,9 @@ wget -O $HOME/.stride/config/genesis.json "https://raw.githubusercontent.com/Str
 
 external_address=$(wget -qO- eth0.me)
 peers="c73d5d83ae121dd9f2ebbfd381724c844a5e5106@stride-node1.poolparty.stridenet.co:26656"
-sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.quicksilverd/config/config.toml
+sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.stride/config/config.toml
 SEEDS=""
-sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $HOME/.strided/config/config.toml
+sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $HOME/.stride/config/config.toml
 
 
 # config pruning
@@ -89,9 +89,9 @@ pruning_interval="10"
 
 sed -i -e "s/^indexer *=.*/indexer = \"$indexer\"/" $HOME/.stride/config/config.toml
 sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.strided/config/app.toml
-sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.strided/config/app.toml
-sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.strided/config/app.toml
-sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.strided/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.stride/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.stride/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.stride/config/app.toml
 
 
 
