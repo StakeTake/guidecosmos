@@ -3,7 +3,7 @@
 
 In this guide, we have made setting up a node as easy as possible
 
-    curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/quicksilver/killerqueen/quicksilver > quicksilver.sh && chmod +x quicksilver.sh && ./quicksilver.sh
+    curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE/stride > stride.sh && chmod +x stride.sh && ./stride.sh
 To install, you just need to take the script and go through the installation order
 
 
