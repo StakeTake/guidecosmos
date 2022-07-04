@@ -76,7 +76,7 @@ wget -O $HOME/.stride/config/genesis.json "https://raw.githubusercontent.com/Str
 external_address=$(wget -qO- eth0.me)
 peers="c73d5d83ae121dd9f2ebbfd381724c844a5e5106@stride-node1.poolparty.stridenet.co:26656"
 sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.quicksilverd/config/config.toml
-SEEDS="dd3460ec11f78b4a7c4336f22a356fe00805ab64@seed.killerqueen-1.quicksilver.zone:26656,8603d0778bfe0a8d2f8eaa860dcdc5eb85b55982@seed02.killerqueen-1.quicksilver.zone:27676"
+SEEDS=""
 sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $HOME/.strided/config/config.toml
 
 
