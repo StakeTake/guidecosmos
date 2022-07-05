@@ -19,8 +19,8 @@ sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:2
 SEEDS="dd3460ec11f78b4a7c4336f22a356fe00805ab64@seed.killerqueen-1.quicksilver.zone:26656,8603d0778bfe0a8d2f8eaa860dcdc5eb85b55982@seed02.killerqueen-1.quicksilver.zone:27676"
 sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $HOME/.quicksilverd/config/config.toml
 
-SNAP_RPC1="http://node04.killerqueen-1.quicksilver.zone:26657" \
-&& SNAP_RPC2="http://node04.killerqueen-1.quicksilver.zone:26657"
+SNAP_RPC1="http://node03.killerqueen-1.quicksilver.zone:26657" \
+&& SNAP_RPC2="http://node02.killerqueen-1.quicksilver.zone:26657"
 
 LATEST_HEIGHT=$(curl -s $SNAP_RPC2/block | jq -r .result.block.header.height) \
 && BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)) \
