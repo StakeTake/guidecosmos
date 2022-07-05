@@ -55,10 +55,10 @@ go version
 rm -rf $HOME/quicksilver $HOME/.quicksilverd
 #INSTALL
 cd $HOME
-git clone --branch v0.4.0 https://github.com/ingenuity-build/quicksilver.git
+git clone --branch v0.4.1 https://github.com/ingenuity-build/quicksilver.git
 cd quicksilver
 make build
-mv $HOME/quicksilver/build/quicksilverd /usr/local/bin/quicksilverd
+mv $HOME/quicksilver/build/quicksilverd /usr/bin/
 
 quicksilverd init $NODENAME --chain-id $CHAIN_ID
 quicksilverd config chain-id $CHAIN_ID
