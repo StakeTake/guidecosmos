@@ -12,8 +12,11 @@ sudo systemctl stop chtd
 chtd tendermint unsafe-reset-all --home $HOME/.cht
 
 SEEDS="3f764ecb2f5f9fb6c8922c6ad2fbe1ac44310737@147.182.180.205:26656"
+
 sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $HOME/.cht/config/config.toml
+
 peers="f56d9bdb0e5f63edf73ca3e0d281be7298fc6e39@144.76.224.246:46656" 
+
 sed -i.bak -e s/^persistent_peers =./persistent_peers = "$peers"/" $HOME/.cht/config/config.toml
 
 SNAP_RPC=http://144.76.224.246:46657
