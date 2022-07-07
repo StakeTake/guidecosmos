@@ -45,20 +45,19 @@ sudo apt install gcc curl tar wget clang pkg-config libssl-dev jq build-essentia
 
 
 #INSTALL GO
-wget https://golang.org/dl/go1.17.7.linux-amd64.tar.gz; \
+wget https://golang.org/dl/go1.18.3.linux-amd64.tar.gz; \
 rm -rv /usr/local/go; \
-tar -C /usr/local -xzf go1.17.7.linux-amd64.tar.gz && \
-rm -v go1.17.7.linux-amd64.tar.gz && \
+tar -C /usr/local -xzf go1.18.3.linux-amd64.tar.gz && \
+rm -v go1.18.3.linux-amd64.tar.gz && \
 echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
 source ~/.bash_profile && \
 go version
 
 #INSTALL
-curl https://get.starport.network/starport! | bash
-git clone https://github.com/ChronicNetwork/chtd
-cd chtd
-git checkout
-starport chain build
+git clone https://github.com/ChronicNetwork/cht.git
+cd cht && git fetch --tags
+git checkout v1.1.0
+make build && make install
 
 chtd init $NODENAME --chain-id $CHAIN_ID
 
@@ -70,13 +69,13 @@ chtd keys add $WALLETNAME
 
 chtd unsafe-reset-all
 rm $HOME/.cht/config/genesis.json
-wget -O $HOME/.cht/config/genesis.json https://raw.githubusercontent.com/ChronicNetwork/net/main/mainnet/genesis.json
-wget -O $HOME/.cht/config/addrbook.json https://raw.githubusercontent.com/StakeTake/guidecosmos/main/ChronicToken/morocco-1/addrbook.json
+wget -O $HOME/.cht/config/genesis.json https://raw.githubusercontent.com/ChronicNetwork/net/main/mainnet/v1.1/genesis.json
 
 external_address=$(wget -qO- eth0.me)
-peers="24b5c9c7b7ff03005e9ec5dcd5cded6d13f59d6a@168.119.89.31:26656,47651428a4b8374f8b604d7b2be54f7dd0607abc@141.95.174.11:26656,4e9a1be76e5f2bf6c34748b85aed0cedca892cc8@164.92.148.142:26656,4fa1b4ea05c483946886030895a4ef23ac74ad6a@141.95.65.26:35656,63a0f4848dcdb5a7f59a1463c29b58f8fa129ef0@144.91.78.197:26656,7050ce66596d783df0db435106ae79b03d6ce325@185.229.119.29:26656,8da5565782a61d863293f1793cc06e54c86467d4@62.171.171.91:26656,a528b3aee82415bf1f675df76ca1ebf29dd188be@165.232.88.237:26656,baba59448c38ba9604784d50e8db4a311d9127e8@10.24.201.78:26656,bf719f34707da178a37cebcefd4b0efce233c923@202.61.198.96:26656,d068b49c77daea1ba3b37a16f21a04031e79f4b6@65.108.66.34:40256,e66d9cc95e208a39c34fede530a0187c789dc13a@3.22.172.109:26656,76428d36ac1369176b91e42e5fa6461721aff0fa@188.166.93.243:26656"
+peers="89e84cd96a91ff24ec0ae60bfdd46588768432c7@159.203.28.90:26656,4e9a1be76e5f2bf6c34748b85aed0cedca892cc8@143.244.182.230:26656,998340bc75690a0479fa028f5bdf275b829b9f1a@65.21.132.226:28656,31cc2cd1735ff7b51bb44dada4d984741208fc39@65.21.88.252:29656"
 sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.cht/config/config.toml
-
+SEEDS="3f764ecb2f5f9fb6c8922c6ad2fbe1ac44310737@147.182.180.205:26656"
+sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $HOME/.cht/config/config.toml
 # config pruning
 pruning="custom"
 pruning_keep_recent="100"
