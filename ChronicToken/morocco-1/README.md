@@ -9,7 +9,7 @@ To install, you just need to take the script and go through the installation ord
 
 sudo systemctl stop chtd
 
-strided tendermint unsafe-reset-all --home $HOME/.stride
+strided tendermint unsafe-reset-all --home $HOME/.cht
 
 external_address=$(wget -qO- eth0.me) 
 
