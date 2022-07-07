@@ -52,7 +52,7 @@ echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
 source ~/.bash_profile && \
 go version
 
-rm -rf $HOME/stride $HOME/.quicksilverd
+rm -rf $HOME/stride $HOME/.stride
 #INSTALL
 cd $HOME
 git clone https://github.com/Stride-Labs/stride.git
