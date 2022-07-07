@@ -11,11 +11,9 @@ sudo systemctl stop chtd
 
 strided tendermint unsafe-reset-all --home $HOME/.cht
 
-external_address=$(wget -qO- eth0.me) 
-
 peers="f56d9bdb0e5f63edf73ca3e0d281be7298fc6e39@144.76.224.246:46656" 
 
-sed -i.bak -e "s/^external_address =./external_address = "$external_address:26656"/; s/^persistent_peers =./persistent_peers = "$peers"/" $HOME/.cht/config/config.toml
+sed -i.bak -e s/^persistent_peers =./persistent_peers = "$peers"/" $HOME/.cht/config/config.toml
 
 SNAP_RPC=http://144.76.224.246:46657
 
