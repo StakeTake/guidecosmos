@@ -67,7 +67,7 @@ echo "============================================================"
 #WALLET
 chtd keys add $WALLETNAME
 
-chtd unsafe-reset-all
+chtd tendermint unsafe-reset-all --home $HOME/.cht
 rm $HOME/.cht/config/genesis.json
 wget -O $HOME/.cht/config/genesis.json https://raw.githubusercontent.com/ChronicNetwork/net/main/mainnet/v1.1/genesis.json
 
