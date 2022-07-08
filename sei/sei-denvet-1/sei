@@ -72,7 +72,7 @@ echo "============================================================"
 #WALLET
 seid keys add $WALLETNAME
 
-seid tendermint unsafe-reset-all
+seid tendermint unsafe-reset-all --home $HOME/.sei
 rm $HOME/.sei/config/genesis.json
 wget -O $HOME/.sei/config/genesis.json "https://raw.githubusercontent.com/sei-protocol/testnet/main/sei-devnet-1/genesis.json"
 wget -O $HOME/.sei/config/addrbook.json "https://raw.githubusercontent.com/sei-protocol/testnet/main/sei-devnet-1/addrbook.json"
