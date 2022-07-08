@@ -1,0 +1,166 @@
+#!/bin/bash
+
+while true
+do
+
+# Logo
+
+echo "========================================================================================================================"
+curl -s https://raw.githubusercontent.com/StakeTake/script/main/logo.sh | bash
+echo "========================================================================================================================"
+
+# Menu
+
+PS3='Select an action: '
+options=(
+"Install Node"
+"Check Log"
+"Check balance"
+"Request tokens in discord"
+"Create Validator"
+"Exit")
+select opt in "${options[@]}"
+do
+case $opt in
+
+"Install Node")
+echo "============================================================"
+echo "Install start"
+echo "============================================================"
+echo "Setup NodeName:"
+echo "============================================================"
+read NODENAME
+echo "============================================================"
+echo "Setup WalletName:"
+echo "============================================================"
+read WALLETNAME
+echo export NODENAME=${NODENAME} >> $HOME/.bash_profile
+echo export WALLETNAME=${WALLETNAME} >> $HOME/.bash_profile
+echo export CHAIN_ID=Antora >> $HOME/.bash_profile
+source ~/.bash_profile
+
+#UPDATE APT
+sudo apt update && sudo apt upgrade -y
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+
+#INSTALL GO
+wget https://golang.org/dl/go1.18.1.linux-amd64.tar.gz; \
+rm -rv /usr/local/go; \
+tar -C /usr/local -xzf go1.18.1.linux-amd64.tar.gz && \
+rm -v go1.18.1.linux-amd64.tar.gz && \
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
+source ~/.bash_profile && \
+go version
+
+rm -rf $HOME/.ion
+#INSTALL
+cd $HOME
+git clone https://github.com/IDEP-network/Antora.git
+sudo chmod +x Antora/iond
+cp Antora/iond /usr/local/bin/
+
+iond init $NODENAME --chain-id $CHAIN_ID
+
+
+echo "============================================================"
+echo "Be sure to write down the mnemonic!"
+echo "============================================================"
+#WALLET
+iond keys add $WALLETNAME
+
+iond tendermint unsafe-reset-all --home $HOME/.ion
+rm $HOME/.ion/config/genesis.json
+wget -O $HOME/.ion/config/genesis.json "https://github.com/IDEP-network/Antora/blob/main/genesis.json"
+
+external_address=$(wget -qO- eth0.me)
+peers="f14e7dd78fd2462541f59eac08a8107fca89c2b3@75.119.159.159:26641,8ffc74dbcd5ab32bc89e058ec53060d5762f88b5@178.63.100.102:26656,2a5c7fb6475f4edf5ea36dd1d40aecc70f55fa45@65.108.106.19:11343"
+sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.ion/config/config.toml
+SEEDS="6e52997400aaa1b3d2155e45cf2559bf7a4c5e76@164.92.161.91:26656"
+sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $HOME/.ion/config/config.toml
+
+
+# config pruning
+indexer="null"
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+
+sed -i -e "s/^indexer *=.*/indexer = \"$indexer\"/" $HOME/.ion/config/config.toml
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.ion/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.ion/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.ion/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.ion/config/app.toml
+
+
+
+tee $HOME/iond.service > /dev/null <<EOF
+[Unit]
+Description=IDEP
+After=network.target
+[Service]
+Type=simple
+User=$USER
+ExecStart=$(which iond) start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo mv $HOME/iond.service /etc/systemd/system/
+
+# start service
+sudo systemctl daemon-reload
+sudo systemctl enable iond
+sudo systemctl restart iond
+
+break
+;;
+
+"Check Log")
+
+journalctl -u iond -f -o cat
+
+break
+;;
+
+
+"Check balance")
+iond q bank balances $(iond keys show $WALLETNAME -a --bech acc)
+break
+;;
+
+"Create Validator")
+iond tx staking create-validator \
+  --amount 1000000ustrd \
+  --from $WALLETNAME \
+  --commission-max-change-rate "0.05" \
+  --commission-max-rate "0.20" \
+  --commission-rate "0.05" \
+  --min-self-delegation "1" \
+  --pubkey $(iond tendermint show-validator) \
+  --moniker $NODENAME \
+  --chain-id $CHAIN_ID \
+  --gas 300000 \
+  -y
+break
+;;
+
+"Request tokens in discord")
+echo "========================================================================================================================"
+echo "In order to receive tokens, you need to go to the Discord server
+and request tokens in the validator channel"
+echo "========================================================================================================================"
+
+break
+;;
+
+"Exit")
+exit
+;;
+*) echo "invalid option $REPLY";;
+esac
+done
+done
