@@ -17,6 +17,7 @@ clear data
 strided tendermint unsafe-reset-all --home $HOME/.stride
 ```
 add peer
+```
 peers="c73d5d83ae121dd9f2ebbfd381724c844a5e5106@stride-node1.poolparty.stridenet.co:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.stride/config/config.toml
 ```
