@@ -36,7 +36,7 @@ echo "============================================================"
 read WALLETNAME
 echo export NODENAME=${NODENAME} >> $HOME/.bash_profile
 echo export WALLETNAME=${WALLETNAME} >> $HOME/.bash_profile
-echo export CHAIN_ID=sei-testnet-2 >> $HOME/.bash_profile
+echo export CHAIN_ID=sei-devnet-1 >> $HOME/.bash_profile
 source ~/.bash_profile
 
 #UPDATE APT
