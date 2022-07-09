@@ -9,7 +9,7 @@ To install, you just need to take the script and go through the installation ord
 #START WITH STATE-SYNC
 stop stride node
 ```
-sudo systemctl stop strided
+sudo systemctl stop seid
 ```
 Add variables
 ```
@@ -28,4 +28,4 @@ s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.sei/config/config.toml
 ```
 restart ur node
 ```
-sudo systemctl restart strided && journalctl -u strided -f -o cat
+sudo systemctl restart seid && journalctl -u seid -f -o cat
