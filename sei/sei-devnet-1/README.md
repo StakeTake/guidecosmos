@@ -7,7 +7,7 @@ In this guide, we have made setting up a node as easy as possible
 To install, you just need to take the script and go through the installation order
 
 #START WITH STATE-SYNC
-stop stride node
+stop ur node
 ```
 sudo systemctl stop seid
 ```
