@@ -74,6 +74,7 @@ quicksilverd keys add $WALLETNAME
 quicksilverd tendermint unsafe-reset-all
 rm $HOME/.quicksilverd/config/genesis.json
 wget -O $HOME/.quicksilverd/config/genesis.json "https://raw.githubusercontent.com/ingenuity-build/testnets/main/killerqueen/genesis.json"
+wget -O $HOME/.quicksilverd/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/quicksilver/killerqueen/addrbook.json"
 
 external_address=$(wget -qO- eth0.me)
 peers=""
