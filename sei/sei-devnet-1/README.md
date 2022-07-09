@@ -7,12 +7,10 @@ In this guide, we have made setting up a node as easy as possible
 To install, you just need to take the script and go through the installation order
 
 #START WITH STATE-SYNC
-stop ur node
 ```
 sudo systemctl stop seid
-```
-Add variables
-```
+seid tendermint unsafe-reset-all --home $HOME/.sei
+wget -O $HOME/.sei/config/addrbook.json "https://raw.githubusercontent.com/sei-protocol/testnet/main/sei-devnet-1/addrbook.json"
 SNAP_RPC="http://116.203.35.46:36657"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
