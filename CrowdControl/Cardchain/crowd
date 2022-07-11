@@ -146,10 +146,9 @@ break
 "Request tokens in discord")
 echo "========================================================================================================================"
 echo 
-KEY=$(Cardchain keys show $WALLETNAME -a)
-curl -X POST https://cardchain.crowdcontrol.network/faucet/ -d "{\"address\": \"$KEY\"}"
-
-sleep 60
+echo KEY=$(Cardchain keys show $WALLETNAME -a)
+echo curl -X POST https://cardchain.crowdcontrol.network/faucet/ -d "{\"address\": \"$KEY\"}"
+echo sleep 60
 echo "========================================================================================================================"
 
 break
