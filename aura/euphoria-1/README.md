@@ -9,7 +9,7 @@ To install, you just need to take the script and go through the installation ord
 #START WITH STATE-SYNC
 ```
 sudo systemctl stop aurad
-aurad tendermint unsafe-reset-all --home $HOME/.aura
+aurad unsafe-reset-all
 SEEDS="705e3c2b2b554586976ed88bb27f68e4c4176a33@13.250.223.114:26656,b9243524f659f2ff56691a4b2919c3060b2bb824@13.214.5.1:26656"
 sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $HOME/.aura/config/config.toml
 SNAP_RPC="https://snapshot-2.euphoria.aura.network:443"
