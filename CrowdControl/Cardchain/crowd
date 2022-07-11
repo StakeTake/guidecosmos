@@ -67,7 +67,7 @@ Cardchain keys add $WALLETNAME
 
 Cardchain unsafe-reset-all
 rm $HOME/.Cardchain/config/genesis.json
-cp $HOME/Testnet1/genesis.json $HOME/.Cardchain/config/genesis.json
+wget -O $HOME/.Cardchain/config/genesis.json "https://raw.githubusercontent.com/DecentralCardGame/Testnet1/main/genesis.json"
 
 SEEDS=""
 PEERS="a506820ea90c5b0ddb9005ef720a121e9f6bbaeb@45.136.28.158:26658"; \
@@ -89,7 +89,7 @@ sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $
 
 
 
-tee $HOME/teritorid.service > /dev/null <<EOF
+tee $HOME/Cardchain.service > /dev/null <<EOF
 [Unit]
 Description=teritori
 After=network.target
@@ -104,7 +104,7 @@ LimitNOFILE=65535
 WantedBy=multi-user.target
 EOF
 
-sudo mv $HOME/teritorid.service /etc/systemd/system/
+sudo mv $HOME/Cardchain.service /etc/systemd/system/
 
 # start service
 sudo systemctl daemon-reload
@@ -146,7 +146,7 @@ break
 "Request tokens in discord")
 echo "========================================================================================================================"
 echo 
-KEY=$(Cardchain keys show validator --output=json | jq .address -r)
+KEY=$(Cardchain keys show $WALLETNAME --output=json | jq .address -r)
 curl -X POST https://cardchain.crowdcontrol.network/faucet/ -d "{\"address\": \"$KEY\"}"
 
 sleep 60
