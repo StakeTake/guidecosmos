@@ -70,7 +70,7 @@ rm $HOME/.Cardchain/config/genesis.json
 wget -O $HOME/.Cardchain/config/genesis.json "https://raw.githubusercontent.com/DecentralCardGame/Testnet1/main/genesis.json"
 
 SEEDS=""
-PEERS="a506820ea90c5b0ddb9005ef720a121e9f6bbaeb@45.136.28.158:26658"; \
+PEERS="407fd08d831eaec4be840bf762740a72c5c48ea6@159.69.11.174:36656,a506820ea90c5b0ddb9005ef720a121e9f6bbaeb@45.136.28.158:26658"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.Cardchain/config/config.toml
 
 
@@ -146,7 +146,7 @@ break
 "Request tokens in discord")
 echo "========================================================================================================================"
 echo 
-KEY=$(Cardchain keys show $WALLETNAME --output=json | jq .address -r)
+KEY=$(Cardchain keys show $WALLETNAME -a)
 curl -X POST https://cardchain.crowdcontrol.network/faucet/ -d "{\"address\": \"$KEY\"}"
 
 sleep 60
