@@ -129,7 +129,7 @@ break
 
 "Create Validator")
 Cardchain tx staking create-validator \
-  --amount 1000000muon \
+  --amount 1000000ubpf \
   --from $WALLETNAME \
   --commission-max-change-rate "0.05" \
   --commission-max-rate "0.20" \
