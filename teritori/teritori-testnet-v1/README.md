@@ -10,7 +10,7 @@ To install, you just need to take the script and go through the installation ord
 #START WITH STATE-SYNC
 ```
 sudo systemctl stop teritorid
-teritorid tendermint unsafe-reset-all --home $HOME/.stride
+teritorid tendermint unsafe-reset-all --home $HOME/.teritorid
 SEEDS=""
 PEERS="3a2fe8bb58a75a91394a456463ca08b6de170f87@167.235.78.2:26656,6bc9f80a5123d62c23aadb7b5d68b740a794b0c6@207.180.194.156:36656,3a2fe8bb58a75a91394a456463ca08b6de170f87@167.235.78.2:26656,0dde2ae55624d822eeea57d1b5e1223b6019a531@176.9.149.15:26656,4d2ea61e6195ee4e449c1e6132cabce98f7d94e1@5.9.40.222:26656,bceb776975aab62bcfd501969c0e1a2734ed7c2e@176.9.19.162:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.teritorid/config/config.toml
