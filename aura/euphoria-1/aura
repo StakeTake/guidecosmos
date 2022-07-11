@@ -67,7 +67,7 @@ echo "============================================================"
 echo "Be sure to write down the mnemonic!"
 echo "============================================================"
 #WALLET
-aurad keys add $WALLETNAME --recover
+aurad keys add $WALLETNAME
 
 aurad unsafe-reset-all
 rm $HOME/.aura/config/genesis.json
