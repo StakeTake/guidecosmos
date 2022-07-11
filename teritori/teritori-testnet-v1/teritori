@@ -59,16 +59,16 @@ cd teritori-chain
 git checkout teritori-testnet-v1
 make install
 
-strided init $NODENAME --chain-id $CHAIN_ID
+teritorid init $NODENAME --chain-id $CHAIN_ID
 
 
 echo "============================================================"
 echo "Be sure to write down the mnemonic!"
 echo "============================================================"
 #WALLET
-strided keys add $WALLETNAME
+teritorid keys add $WALLETNAME
 
-teritorid tendermint unsafe-reset-all --home $HOME/.stride
+teritorid tendermint unsafe-reset-all --home $HOME/.teritorid
 rm $HOME/.teritorid/config/genesis.json
 wget -O $HOME/.teritorid/config/genesis.json "https://raw.githubusercontent.com/TERITORI/teritori-chain/main/genesis/genesis.json"
 
