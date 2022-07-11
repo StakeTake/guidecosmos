@@ -72,11 +72,9 @@ teritorid tendermint unsafe-reset-all --home $HOME/.stride
 rm $HOME/.teritorid/config/genesis.json
 wget -O $HOME/.teritorid/config/genesis.json "https://raw.githubusercontent.com/TERITORI/teritori-chain/main/genesis/genesis.json"
 
-external_address=$(wget -qO- eth0.me)
-peers="0dde2ae55624d822eeea57d1b5e1223b6019a531@176.9.149.15:26656,4d2ea61e6195ee4e449c1e6132cabce98f7d94e1@5.9.40.222:26656,bceb776975aab62bcfd501969c0e1a2734ed7c2e@176.9.19.162:26656"
-sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.stride/config/config.toml
 SEEDS=""
-sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $HOME/.stride/config/config.toml
+PEERS="3a2fe8bb58a75a91394a456463ca08b6de170f87@167.235.78.2:26656,6bc9f80a5123d62c23aadb7b5d68b740a794b0c6@207.180.194.156:36656,3a2fe8bb58a75a91394a456463ca08b6de170f87@167.235.78.2:26656,0dde2ae55624d822eeea57d1b5e1223b6019a531@176.9.149.15:26656,4d2ea61e6195ee4e449c1e6132cabce98f7d94e1@5.9.40.222:26656,bceb776975aab62bcfd501969c0e1a2734ed7c2e@176.9.19.162:26656"; \
+sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.teritorid/config/config.toml
 
 
 # config pruning
