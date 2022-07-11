@@ -69,13 +69,13 @@ echo "============================================================"
 #WALLET
 aurad keys add $WALLETNAME --recover
 
-aurad tendermint unsafe-reset-all --home $HOME/.aura
+aurad unsafe-reset-all
 rm $HOME/.aura/config/genesis.json
 wget -O $HOME/.aura/config/genesis.json "https://raw.githubusercontent.com/aura-nw/testnets/main/euphoria-1/genesis.json"
 
 external_address=$(wget -qO- eth0.me)
 peers=""
-sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.sei/config/config.toml
+sed -i.bak -e "s/^external_address *=.*/external_address = \"$external_address:26656\"/; s/^persistent_peers *=.*/persistent_peers = \"$peers\"/" $HOME/.aura/config/config.toml
 SEEDS="705e3c2b2b554586976ed88bb27f68e4c4176a33@13.250.223.114:26656,b9243524f659f2ff56691a4b2919c3060b2bb824@13.214.5.1:26656"
 sed -i -e "/seeds =/ s/= .*/= \"$SEEDS\"/"  $HOME/.aura/config/config.toml
 
