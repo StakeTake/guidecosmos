@@ -10,7 +10,7 @@ To install, you just need to take the script and go through the installation ord
 ```
 sudo systemctl stop seid
 seid tendermint unsafe-reset-all --home $HOME/.sei
-wget -O $HOME/.sei/config/addrbook.json "https://raw.githubusercontent.com/sei-protocol/testnet/main/sei-devnet-1/addrbook.json"
+wget -O $HOME/.sei/config/addrbook.json "https://raw.githubusercontent.com/sei-protocol/testnet/master/sei-incentivized-testnet/addrbook.json"
 SNAP_RPC="http://144.76.224.246:66657"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
