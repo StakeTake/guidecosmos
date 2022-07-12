@@ -13,8 +13,8 @@ sudo systemctl stop quicksilverd
 quicksilverd tendermint unsafe-reset-all --home $HOME/.quicksilverd
 
 wget -O $HOME/.quicksilverd/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/quicksilver/killerqueen/addrbook.json"
-SNAP_RPC1="http://144.76.224.246:26656:26657" \
-&& SNAP_RPC2="http://144.76.224.246:26656:26657"
+SNAP_RPC1="http://144.76.224.246:26657" \
+&& SNAP_RPC2="http://144.76.224.246:26657"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC2/block | jq -r .result.block.header.height) \
 && BLOCK_HEIGHT=$((LATEST_HEIGHT - 500)) \
 && TRUST_HASH=$(curl -s "$SNAP_RPC2/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
