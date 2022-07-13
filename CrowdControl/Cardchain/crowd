@@ -68,6 +68,7 @@ Cardchain keys add $WALLETNAME
 Cardchain unsafe-reset-all
 rm $HOME/.Cardchain/config/genesis.json
 wget -O $HOME/.Cardchain/config/genesis.json "https://raw.githubusercontent.com/DecentralCardGame/Testnet1/main/genesis.json"
+wget -O $HOME/.Cardchain/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/CrowdControl/Cardchain/addrbook.json"
 
 SEEDS=""
 PEERS="407fd08d831eaec4be840bf762740a72c5c48ea6@159.69.11.174:36656,a506820ea90c5b0ddb9005ef720a121e9f6bbaeb@45.136.28.158:26658"; \
