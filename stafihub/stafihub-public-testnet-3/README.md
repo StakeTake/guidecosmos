@@ -12,7 +12,7 @@ sudo systemctl stop stafihubd
 stafihubd tendermint unsafe-reset-all --home $HOME/.stafihub
 wget -O $HOME/.stafihub/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stafihub/stafihub-public-testnet-3/addrbook.json"
 
-SNAP_RPC="http://23.88.100.175:36657"
+SNAP_RPC="http://stafi.stake-take.com:36657"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
