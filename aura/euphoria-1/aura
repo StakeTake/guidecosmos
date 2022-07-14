@@ -72,6 +72,7 @@ aurad keys add $WALLETNAME
 aurad unsafe-reset-all
 rm $HOME/.aura/config/genesis.json
 wget -O $HOME/.aura/config/genesis.json "https://raw.githubusercontent.com/aura-nw/testnets/main/euphoria-1/genesis.json"
+wget -O $HOME/.aura/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/aura/euphoria-1/addrbook.json"
 
 external_address=$(wget -qO- eth0.me)
 peers=""
