@@ -1,4 +1,4 @@
-## In this repository, we will post one-line full install scripts of full install and state sync guides for various projects on the Cosmos network
+## In this repository, we will post one-line scripts of full install and state sync guides for various projects Cosmos network.
 
 * ### [AssetMantle](https://github.com/StakeTake/guidecosmos/tree/main/AssetMantle/mantle-1)
   #### 1. [mantle-1](https://github.com/StakeTake/guidecosmos/tree/main/AssetMantle/mantle-1)
