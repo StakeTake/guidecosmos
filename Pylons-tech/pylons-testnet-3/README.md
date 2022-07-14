@@ -10,7 +10,7 @@ To install, you just need to take the script and go through the installation ord
 #START WITH STATE-SYNC
 ```
 sudo systemctl stop pylonsd
-pylonsd tendermint unsafe-reset-all --home $HOME/.pylons
+pylonsd unsafe-reset-all --home $HOME/.pylons
 SEEDS=""; \
 PEERS="53dbaa70a1f7769f74e46ada1597f854fd616c2d@http://pylons.stake-take.com:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.pylons/config/config.toml
