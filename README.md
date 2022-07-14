@@ -1,65 +1,65 @@
 ## In this repository, we will post one-line full install scripts of full install and state sync guides for various projects on the Cosmos network
 
-* ### AssetMantle
- #### 1. mantle-1
-* ### ChronicToken
- #### 1. morocco-1
-* ### CosmicHorizon
- #### 1. darkenergy-1
-* ### CrowdControl
- #### 1. Cardchain
-* ### Deweb
- #### 1. testnet-1
-* ### Idep
- #### 1. Antora
-* ### Kyve
- #### 1. korellia
- #### 2. kyve-beta
-* ### Pylons
- #### 1. pylons-testnet-3
-* ### Anone
- #### 1. anone-testnet-1
-* ### Archway
- #### 1. augusta-1
- #### 2. torii-1
-* ### Celestia
- #### 1. mamaki
-* ### Aura
- #### 1. euphoria-1
- #### 2. halo-testnet-001
-* ### Defund
- #### 1. defund-private-1
-* ### Evmos
- #### 1. evmos_9001_2
- #### 2. evmos_9000-3
- #### 3. evmos_9000-4
-* ### Galaxy
- #### 1. galaxy-1
-* ### Kujira
- #### 1. harpoon-3
- #### 2. harpoon-4
-* ### MeMe
- #### 1. meme-1
-* ### Paloma
- #### 1. paloma
- #### 2. paloma-testnet-5
-* ### QuickSilver
- #### 1. quicktest-1
- #### 2. quicktest-3
- #### 3. rhapsody-5
- #### 4. killerqueen
-* ### Sei
- #### 1. sei-devnet-1
- #### 2. sei-testnet-1
- #### 3. sei-testnet-2
- #### 4. atlantic-1
-* ### StafiHub
- #### 1. stafihub-public-testnet-2
- #### 2. stafihub-public-testnet-3
-* ### Stride
- #### 1. STRIDE-1
- #### 2. STRIDE
-* ### Tgrade
- #### 1. tgrade-dryrunnet
-* ### Uptick
- #### 1. uptick_7776-1
+* ### [AssetMantle](https://github.com/StakeTake/guidecosmos/tree/main/AssetMantle/mantle-1)
+  #### 1. [mantle-1](https://github.com/StakeTake/guidecosmos/tree/main/AssetMantle/mantle-1)
+* ### [ChronicToken](https://github.com/StakeTake/guidecosmos/tree/main/ChronicToken/morocco-1)
+  #### 1. [morocco-1](https://github.com/StakeTake/guidecosmos/tree/main/ChronicToken/morocco-1)
+* ### [CosmicHorizon](https://github.com/StakeTake/guidecosmos/tree/main/CoHo/darkenergy-1)
+  #### 1. [darkenergy-1](https://github.com/StakeTake/guidecosmos/tree/main/CoHo/darkenergy-1)
+* ### [CrowdControl](https://github.com/StakeTake/guidecosmos/tree/main/CrowdControl/Cardchain)
+  #### 1. [Cardchain](https://github.com/StakeTake/guidecosmos/tree/main/CrowdControl/Cardchain)
+* ### [Deweb](https://github.com/StakeTake/guidecosmos/tree/main/DWS/testnet-1)
+  #### 1. [testnet-1](https://github.com/StakeTake/guidecosmos/tree/main/DWS/testnet-1)
+* ### [Idep](https://github.com/StakeTake/guidecosmos/tree/main/IDEP/Antora)
+  #### 1. [Antora](https://github.com/StakeTake/guidecosmos/tree/main/IDEP/Antora)
+* ### [Kyve](https://github.com/StakeTake/guidecosmos/tree/main/KYVE)
+  #### 1. [korellia](https://github.com/StakeTake/guidecosmos/tree/main/KYVE/korellia)
+  #### 2. [kyve-beta](https://github.com/StakeTake/guidecosmos/tree/main/KYVE/kyve-beta)
+* ### [Pylons](https://github.com/StakeTake/guidecosmos/tree/main/Pylons-tech/pylons-testnet-3)
+  #### 1. [pylons-testnet-3](https://github.com/StakeTake/guidecosmos/tree/main/Pylons-tech/pylons-testnet-3)
+* ### [Anone](https://github.com/StakeTake/guidecosmos/tree/main/anone/anone-testnet-1)
+  #### 1. [anone-testnet-1](https://github.com/StakeTake/guidecosmos/tree/main/anone/anone-testnet-1)
+* ### [Archway](https://github.com/StakeTake/guidecosmos/tree/main/archway)
+  #### 1. [augusta-1](https://github.com/StakeTake/guidecosmos/tree/main/archway/augusta-1)
+  #### 2. [torii-1](https://github.com/StakeTake/guidecosmos/tree/main/archway/torii-1)
+* ### [Celestia](https://github.com/StakeTake/guidecosmos/tree/main/celestia/mamaki)
+  #### 1. [mamaki](https://github.com/StakeTake/guidecosmos/tree/main/celestia/mamaki)
+* ### [Aura](https://github.com/StakeTake/guidecosmos/tree/main/aura)
+  #### 1. [euphoria-1](https://github.com/StakeTake/guidecosmos/tree/main/aura/euphoria-1)
+  #### 2. [halo-testnet-001](https://github.com/StakeTake/guidecosmos/tree/main/aura/euphoria-1)
+* ### [Defund](https://github.com/StakeTake/guidecosmos/tree/main/defund-labs/defund-private-1)
+  #### 1. [defund-private-1](https://github.com/StakeTake/guidecosmos/tree/main/defund-labs/defund-private-1)
+* ### [Evmos](https://github.com/StakeTake/guidecosmos/tree/main/evmos)
+  #### 1. [evmos_9001_2](https://github.com/StakeTake/guidecosmos/tree/main/evmos/evmos_9001_2)
+  #### 2. [evmos_9000-3](https://github.com/StakeTake/guidecosmos/tree/main/evmos/evmos_9000-3)
+  #### 3. [evmos_9000-4](https://github.com/StakeTake/guidecosmos/tree/main/evmos/evmos_9000-4)
+* ### [Galaxy](https://github.com/StakeTake/guidecosmos/tree/main/galaxies-labs/galaxy-1)
+  #### 1. [galaxy-1](https://github.com/StakeTake/guidecosmos/tree/main/galaxies-labs/galaxy-1)
+* ### [Kujira](https://github.com/StakeTake/guidecosmos/tree/main/kujira)
+  #### 1. [harpoon-3](https://github.com/StakeTake/guidecosmos/tree/main/kujira/harpoon-3)
+  #### 2. [harpoon-4](https://github.com/StakeTake/guidecosmos/tree/main/kujira/harpoon-4)
+* ### [MeMe](https://github.com/StakeTake/guidecosmos/tree/main/meme/meme-1)
+  #### 1. [meme-1](https://github.com/StakeTake/guidecosmos/tree/main/meme/meme-1)
+* ### [Paloma](https://github.com/StakeTake/guidecosmos/tree/main/paloma)
+  #### 1. [paloma](https://github.com/StakeTake/guidecosmos/tree/main/paloma/paloma)
+  #### 2. [paloma-testnet-5](https://github.com/StakeTake/guidecosmos/tree/main/paloma/paloma-testnet-5)
+* ### [QuickSilver](https://github.com/StakeTake/guidecosmos/tree/main/quicksilver)
+  #### 1. [quicktest-1](https://github.com/StakeTake/guidecosmos/tree/main/quicksilver/quicktest-1)
+  #### 2. [quicktest-3](https://github.com/StakeTake/guidecosmos/tree/main/quicksilver/quicktest-3)
+  #### 3. [rhapsody-5](https://github.com/StakeTake/guidecosmos/tree/main/quicksilver/rhapsody-5)
+  #### 4. [killerqueen](https://github.com/StakeTake/guidecosmos/tree/main/quicksilver/killerqueen)
+* ### [Sei](https://github.com/StakeTake/guidecosmos/tree/main/sei)
+  #### 1. [sei-devnet-1](https://github.com/StakeTake/guidecosmos/tree/main/sei/sei-devnet-1)
+  #### 2. [sei-testnet-1](https://github.com/StakeTake/guidecosmos/tree/main/sei/sei-testnet-1)
+  #### 3. [sei-testnet-2](https://github.com/StakeTake/guidecosmos/tree/main/sei/sei-testnet-2)
+  #### 4. [atlantic-1](https://github.com/StakeTake/guidecosmos/tree/main/sei/atlantic-1)
+* ### [StafiHub](https://github.com/StakeTake/guidecosmos/tree/main/stafihub)
+  #### 1. [stafihub-public-testnet-2](https://github.com/StakeTake/guidecosmos/tree/main/stafihub/stafihub-public-testnet-2)
+  #### 2. [stafihub-public-testnet-3](https://github.com/StakeTake/guidecosmos/tree/main/stafihub/stafihub-public-testnet-3)
+* ### [Stride](https://github.com/StakeTake/guidecosmos/tree/main/stride)
+  #### 1. [STRIDE-1](https://github.com/StakeTake/guidecosmos/tree/main/stride/STRIDE-1)
+  #### 2. [STRIDE](https://github.com/StakeTake/guidecosmos/tree/main/stride/STRIDE)
+* ### [Tgrade](https://github.com/StakeTake/guidecosmos/tree/main/tgrade/tgrade-dryrunnet)
+  #### 1. [tgrade-dryrunnet](https://github.com/StakeTake/guidecosmos/tree/main/tgrade/tgrade-dryrunnet)
+* ### [Uptick](https://github.com/StakeTake/guidecosmos/tree/main/uptick/uptick_7776-1)
+  #### 1. [uptick_7776-1](https://github.com/StakeTake/guidecosmos/tree/main/uptick/uptick_7776-1)
