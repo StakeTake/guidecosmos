@@ -1,64 +1,65 @@
 ## In this repository, we will post one-line full install scripts of full install and state sync guides for various projects on the Cosmos network
-* AssetMantle
-  1. mantle-1
-* ChronicToken
-  1. morocco-1
-* CosmicHorizon
-  1. darkenergy-1
-* CrowdControl
-  1. Cardchain
-* Deweb
-  1. testnet-1
-* Idep
-  1. Antora
-* Kyve
-  1. korellia
-  2. kyve-beta
-* Pylons
-  1. pylons-testnet-3
-* Anone
-  1. anone-testnet-1
-* Archway
-  1. augusta-1
-  2. torii-1
-* Celestia
-  1. mamaki
-* Aura
-  1. euphoria-1
-  2. halo-testnet-001
-* Defund
-  1. defund-private-1
-* Evmos
-  1. evmos_9001_2
-  2. evmos_9000-3
-  3. evmos_9000-4
-* Galaxy
-  1. galaxy-1
-* Kujira
-  1. harpoon-3
-  2. harpoon-4
-* MeMe
-  1. meme-1
-* Paloma
-  1. paloma
-  2. paloma-testnet-5
-* QuickSilver
-  1. quicktest-1
-  2. quicktest-3
-  3. rhapsody-5
-  4. killerqueen
-* Sei
-  1. sei-devnet-1
-  2. sei-testnet-1
-  3. sei-testnet-2
-  4. atlantic-1
-* StafiHub
-  1. stafihub-public-testnet-2
-  2. stafihub-public-testnet-3
-* Stride
-  1. STRIDE-1
-  2. STRIDE
-* Tgrade
-  1. tgrade-dryrunnet
-* Uptick
-  1. uptick_7776-1
+
+* ### AssetMantle
+ #### 1. mantle-1
+* ### ChronicToken
+ #### 1. morocco-1
+* ### CosmicHorizon
+ #### 1. darkenergy-1
+* ### CrowdControl
+ #### 1. Cardchain
+* ### Deweb
+ #### 1. testnet-1
+* ### Idep
+ #### 1. Antora
+* ### Kyve
+ #### 1. korellia
+ #### 2. kyve-beta
+* ### Pylons
+ #### 1. pylons-testnet-3
+* ### Anone
+ #### 1. anone-testnet-1
+* ### Archway
+ #### 1. augusta-1
+ #### 2. torii-1
+* ### Celestia
+ #### 1. mamaki
+* ### Aura
+ #### 1. euphoria-1
+ #### 2. halo-testnet-001
+* ### Defund
+ #### 1. defund-private-1
+* ### Evmos
+ #### 1. evmos_9001_2
+ #### 2. evmos_9000-3
+ #### 3. evmos_9000-4
+* ### Galaxy
+ #### 1. galaxy-1
+* ### Kujira
+ #### 1. harpoon-3
+ #### 2. harpoon-4
+* ### MeMe
+ #### 1. meme-1
+* ### Paloma
+ #### 1. paloma
+ #### 2. paloma-testnet-5
+* ### QuickSilver
+ #### 1. quicktest-1
+ #### 2. quicktest-3
+ #### 3. rhapsody-5
+ #### 4. killerqueen
+* ### Sei
+ #### 1. sei-devnet-1
+ #### 2. sei-testnet-1
+ #### 3. sei-testnet-2
+ #### 4. atlantic-1
+* ### StafiHub
+ #### 1. stafihub-public-testnet-2
+ #### 2. stafihub-public-testnet-3
+* ### Stride
+ #### 1. STRIDE-1
+ #### 2. STRIDE
+* ### Tgrade
+ #### 1. tgrade-dryrunnet
+* ### Uptick
+ #### 1. uptick_7776-1
