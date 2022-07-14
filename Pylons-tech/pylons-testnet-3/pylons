@@ -74,8 +74,7 @@ pylonsd keys add $WALLETNAME
 
 pylonsd unsafe-reset-all
 rm $HOME/.pylons/config/genesis.json
-curl http://95.214.55.4:26657/genesis | jq .result.genesis > genesis.json
-mv genesis.json $HOME/.pylons/config/genesis.json
+curl http://pylons.stake-take.com:26657/genesis | jq .result.genesis > $HOME/.pylons/config/genesis.json
 wget -O $HOME/.pylons/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/Pylons-tech/pylons-testnet-3/addrbook.json"
 
 external_address=$(wget -qO- eth0.me)
