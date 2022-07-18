@@ -73,7 +73,7 @@ dewebd keys add $WALLETNAME
 dewebd unsafe-reset-all
 rm $HOME/.deweb/config/genesis.json
 wget -O $HOME/.deweb/config/genesis.json "https://raw.githubusercontent.com/deweb-services/deweb/main/genesis.json"
-wget -O $HOME/.deweb/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/DWS/testnet-1/addrbook%20.json"
+wget -O $HOME/.deweb/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/DWS/deweb-testnet-1/addrbook.json"
 
 external_address=$(wget -qO- eth0.me)
 peers=""
