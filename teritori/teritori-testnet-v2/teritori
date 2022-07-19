@@ -44,6 +44,8 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
 
 #INSTALL GO
+rm -r /usr/local/go
+rm -r /usr/lib/go-1.13
 wget https://golang.org/dl/go1.18.3.linux-amd64.tar.gz; \
 rm -rv /usr/local/go; \
 tar -C /usr/local -xzf go1.18.3.linux-amd64.tar.gz && \
@@ -133,7 +135,7 @@ break
 
 "Create Validator")
 teritorid tx staking create-validator \
-  --amount 1000000muon \
+  --amount 1000000utori \
   --from $WALLETNAME \
   --commission-max-change-rate "0.05" \
   --commission-max-rate "0.20" \
