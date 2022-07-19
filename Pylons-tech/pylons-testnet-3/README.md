@@ -11,9 +11,7 @@ To install, you just need to take the script and go through the installation ord
 ```
 sudo systemctl stop pylonsd
 pylonsd unsafe-reset-all --home $HOME/.pylons
-SEEDS=""; \
-PEERS="53dbaa70a1f7769f74e46ada1597f854fd616c2d@http://pylons.stake-take.com:26656"; \
-sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.pylons/config/config.toml
+
 wget -O $HOME/.pylons/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/Pylons-tech/pylons-testnet-3/addrbook.json"
 SNAP_RPC=http://pylons.stake-take.com:26657
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
