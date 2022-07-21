@@ -1,13 +1,13 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
-# One line script for full install
+## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-1/stride > stride.sh && chmod +x stride.sh && ./stride.sh
-To install, you just need to take the script and go through the installation order
 ```
+To install, you just need to take the script and go through the installation order
 
-# START WITH STATE-SYNC
+## Start with state sync
 ```
 sudo systemctl stop strided
 strided tendermint unsafe-reset-all --home $HOME/.stride
@@ -28,9 +28,7 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.stride/config/config.toml
 sudo systemctl restart strided && journalctl -u strided -f -o cat
 ```
-
-
-# DELETE NODE
+## DELETE NODE
 ```
 sudo systemctl stop strided && sudo systemctl disable strided
 rm -rf $HOME/stride $HOME/.stride /etc/systemd/system/strided.service /root/go/bin/strided
