@@ -7,6 +7,11 @@ curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stafihub/st
 ```
 To install, you just need to take the script and go through the installation order
 
+## RPC
+```
+http://stafi.stake-take.com:36657
+```
+
 ## Start via state-sync
 ```
 sudo systemctl stop stafihubd
