@@ -8,6 +8,7 @@ To install, you just need to take the script and go through the installation ord
 
 
 #START WITH STATE SYNC
+```
 sudo systemctl stop iond
 iond tendermint unsafe-reset-all --home ~/.ion
 SEEDS="6e52997400aaa1b3d2155e45cf2559bf7a4c5e76@164.92.161.91:26656"
