@@ -1,13 +1,16 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
-In this guide, we have made setting up a node as easy as possible
-
-    curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/Pylons-tech/pylons-testnet-3/pylons > pylons.sh && chmod +x pylons.sh && ./pylons.sh
+## One line script for full install
+```
+curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/Pylons-tech/pylons-testnet-3/pylons > pylons.sh && chmod +x pylons.sh && ./pylons.sh
+```
 To install, you just need to take the script and go through the installation order
-
-
-#START WITH STATE-SYNC
+## RPC
+```
+http://pylons.stake-take.com:26657
+```
+## Start with state sync
 ```
 sudo systemctl stop pylonsd
 pylonsd unsafe-reset-all --home $HOME/.pylons
@@ -17,7 +20,7 @@ sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persi
 wget -O $HOME/.pylons/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/Pylons-tech/pylons-testnet-3/addrbook.json"
 SNAP_RPC=http://pylons.stake-take.com:26657
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
-BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
 echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
 
@@ -27,3 +30,9 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.pylons/config/config.toml
 sudo systemctl restart pylonsd && journalctl -u pylonsd -f -o cat
+```
+## Delete node
+```
+sudo systemctl stop pylonsd && sudo systemctl disable pylonsd
+rm -rf $HOME/pylons $HOME/.pylons /etc/systemd/system/pylonsd.service $HOME/go/bin/pylonsd
+```
