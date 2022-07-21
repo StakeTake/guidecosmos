@@ -1,12 +1,13 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
-In this guide, we have made setting up a node as easy as possible
-
-    curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stafihub/stafihub-public-testnet-3/stafihub > stafihub.sh && chmod +x stafihub.sh && ./stafihub.sh
+## One line script for full install
+```
+curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stafihub/stafihub-public-testnet-3/stafihub > stafihub.sh && chmod +x stafihub.sh && ./stafihub.sh
+```
 To install, you just need to take the script and go through the installation order
 
-#START WITH STATE-SYNC
+## TART WITH STATE-SYNC
 ```
 sudo systemctl stop stafihubd
 stafihubd tendermint unsafe-reset-all --home $HOME/.stafihub
@@ -23,3 +24,9 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.stafihub/config/config.toml
 sudo systemctl restart stafihubd && journalctl -u stafihubd -f -o cat
+```
+## Delete node
+```
+sudo systemctl stop stafihubd && sudo systemctl disable stafihubd
+rm -rf $HOME/stafihub $HOME/.stafihub /etc/systemd/system/stafihubd.service $HOME/go/bin/stafihubd
+```
