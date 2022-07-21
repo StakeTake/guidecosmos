@@ -6,7 +6,10 @@
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-1/stride > stride.sh && chmod +x stride.sh && ./stride.sh
 ```
 To install, you just need to take the script and go through the installation order
-
+## RPC
+```
+http://stride.stake-take.com:26657
+```
 ## Start with state sync
 ```
 sudo systemctl stop strided
