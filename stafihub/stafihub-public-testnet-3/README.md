@@ -7,7 +7,7 @@ curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stafihub/st
 ```
 To install, you just need to take the script and go through the installation order
 
-## TART WITH STATE-SYNC
+## Start via state-sync
 ```
 sudo systemctl stop stafihubd
 stafihubd tendermint unsafe-reset-all --home $HOME/.stafihub
