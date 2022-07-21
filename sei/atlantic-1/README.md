@@ -1,12 +1,18 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
-In this guide, we have made setting up a node as easy as possible
-
-    curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/sei/atlantic-1/sei > sei.sh && chmod +x sei.sh && ./sei.sh
+## One line script for full install
+```
+curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/sei/atlantic-1/sei > sei.sh && chmod +x sei.sh && ./sei.sh
+```
 To install, you just need to take the script and go through the installation order
 
-#START WITH STATE-SYNC
+## RPC
+```
+http://sei.stake-take.com:36657
+```
+
+## Start with state sync
 ```
 sudo systemctl stop seid
 seid tendermint unsafe-reset-all --home $HOME/.sei
@@ -25,4 +31,10 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.sei/config/config.toml
 sudo systemctl restart seid && journalctl -u seid -f -o cat
+```
+
+## Delete node
+```
+sudo systemctl stop seid && sudo systemctl disable seid
+rm -rf $HOME/sei-chain $HOME/.sei /etc/systemd/system/seid.service $HOME/go/bin/seid /usr/bin/seid
 ```
