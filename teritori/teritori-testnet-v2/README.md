@@ -1,13 +1,16 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
-In this guide, we have made setting up a node as easy as possible
-
-    curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/teritori/teritori-testnet-v2/teritori > teritori.sh && chmod +x teritori.sh && ./teritori.sh
+## One line script for full install
+```
+curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/teritori/teritori-testnet-v2/teritori > teritori.sh && chmod +x teritori.sh && ./teritori.sh
+```
 To install, you just need to take the script and go through the installation order
-
-
-#START WITH STATE-SYNC
+## RPC
+```
+http://teritori.stake-take.com:26657
+```
+## Start with state sync
 ```
 sudo systemctl stop teritorid
 teritorid tendermint unsafe-reset-all --home $HOME/.teritorid
@@ -27,3 +30,10 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.teritorid/config/config.toml
 sudo systemctl restart teritorid && journalctl -u teritorid -f -o cat
+```
+## Delete node
+```
+sudo systemctl stop teritorid && sudo systemctl disable teritorid
+rm -rf $HOME/teritori-chain $HOME/.teritorid /etc/systemd/system/teritorid.service $HOME/go/bin/teritorid
+```
+
