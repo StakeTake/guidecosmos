@@ -28,7 +28,7 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.stride/config/config.toml
 sudo systemctl restart strided && journalctl -u strided -f -o cat
 ```
-## DELETE NODE
+## Delete node
 ```
 sudo systemctl stop strided && sudo systemctl disable strided
 rm -rf $HOME/stride $HOME/.stride /etc/systemd/system/strided.service /root/go/bin/strided
