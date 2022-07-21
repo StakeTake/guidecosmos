@@ -6,12 +6,10 @@
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/sei/atlantic-1/sei > sei.sh && chmod +x sei.sh && ./sei.sh
 ```
 To install, you just need to take the script and go through the installation order
-
 ## RPC
 ```
 http://sei.stake-take.com:36657
 ```
-
 ## Start with state sync
 ```
 sudo systemctl stop seid
@@ -32,7 +30,6 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.sei/config/config.toml
 sudo systemctl restart seid && journalctl -u seid -f -o cat
 ```
-
 ## Delete node
 ```
 sudo systemctl stop seid && sudo systemctl disable seid
