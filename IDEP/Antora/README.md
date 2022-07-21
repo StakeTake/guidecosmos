@@ -1,13 +1,12 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
-In this guide, we have made setting up a node as easy as possible
-
-    curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/IDEP/Antora/idep > idep.sh && chmod +x idep.sh && ./idep.sh
+## One line script for full install
+```
+curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/IDEP/Antora/idep > idep.sh && chmod +x idep.sh && ./idep.sh
+```
 To install, you just need to take the script and go through the installation order
-
-
-#START WITH STATE SYNC
+## Start with state sync
 ```
 sudo systemctl stop iond
 iond tendermint unsafe-reset-all --home ~/.ion
@@ -25,3 +24,9 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.ion/config/config.toml
 sudo systemctl restart iond && journalctl -u iond -f -o cat
+```
+## Delete node
+```
+sudo systemctl stop iond && sudo systemctl disable iond
+rm -rf $HOME/Antora $HOME/.ion /etc/systemd/system/iond.service /usr/local/bin/iond
+```
