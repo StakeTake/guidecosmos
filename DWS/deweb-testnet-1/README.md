@@ -6,7 +6,7 @@
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/DWS/deweb-testnet-1/DWS > DWS.sh && chmod +x DWS.sh && ./DWS.sh
 ```
 To install, you just need to take the script and go through the installation order
-# RPC
+## RPC
 ```
 http://deweb.stake-take.com:26657
 ```
