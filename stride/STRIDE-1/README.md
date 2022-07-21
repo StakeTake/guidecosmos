@@ -31,5 +31,5 @@ sudo systemctl restart strided && journalctl -u strided -f -o cat
 ## Delete node
 ```
 sudo systemctl stop strided && sudo systemctl disable strided
-rm -rf $HOME/stride $HOME/.stride /etc/systemd/system/strided.service /root/go/bin/strided
+rm -rf $HOME/stride $HOME/.stride /etc/systemd/system/strided.service $HOME/go/bin/strided
 ```
