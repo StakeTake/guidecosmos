@@ -8,7 +8,7 @@
 To install, you just need to take the script and go through the installation order
 ## RPC
 ```
-http://159.69.11.174:36657
+http://cc.stake-take.com:36657
 ```
 ## Start with state sync
 ```
