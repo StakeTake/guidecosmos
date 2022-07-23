@@ -34,5 +34,5 @@ sudo systemctl restart Cardchain && journalctl -u Cardchain -f -o cat
 ## Delete node
 ```
 sudo systemctl stop Cardchain && sudo systemctl disable Cardchain
-rm -rf $HOME/Cardchain $HOME/.Cardchain /etc/systemd/system/Cardchain.service $HOME/go/bin/Cardchain
+rm -rf $HOME/Cardchain $HOME/.Cardchain /etc/systemd/system/Cardchain.service /usr/local/bin/Cardchain
 ```
