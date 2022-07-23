@@ -3,7 +3,7 @@
 
 ## One line script for full install
 ```
-    curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/CrowdControl/Cardchain/crowd > crowd.sh && chmod +x crowd.sh && ./crowd.sh
+curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/CrowdControl/Cardchain/crowd > crowd.sh && chmod +x crowd.sh && ./crowd.sh
 ```
 To install, you just need to take the script and go through the installation order
 ## RPC
