@@ -1,13 +1,16 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
-In this guide, we have made setting up a node as easy as possible
-
+## One line script for full install
+```
     curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/CrowdControl/Cardchain/crowd > crowd.sh && chmod +x crowd.sh && ./crowd.sh
+```
 To install, you just need to take the script and go through the installation order
-
-
-#START WITH STATE-SYNC
+## RPC
+```
+http://159.69.11.174:36657
+```
+## Start with state sync
 ```
 sudo systemctl stop Cardchain
 Cardchain unsafe-reset-all
@@ -27,4 +30,9 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.Cardchain/config/config.toml
 sudo systemctl restart Cardchain && journalctl -u Cardchain -f -o cat
+```
+## Delete node
+```
+sudo systemctl stop Cardchain && sudo systemctl disable Cardchain
+rm -rf $HOME/Cardchain $HOME/.Cardchain /etc/systemd/system/Cardchain.service $HOME/go/bin/Cardchain
 ```
