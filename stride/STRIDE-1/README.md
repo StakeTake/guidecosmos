@@ -8,17 +8,17 @@ curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRI
 To install, you just need to take the script and go through the installation order
 ## RPC
 ```
-http://stride.stake-take.com:26657
+http://stride.stake-take.com:46657
 ```
 ## Start with state sync
 ```
 sudo systemctl stop strided
 strided tendermint unsafe-reset-all --home $HOME/.stride
 SEEDS=""; \
-PEERS="319e83d9831db49cd8b0a7183b6f6d71de657d3d@88.198.242.163:26656"; \
+PEERS="69249bb18f5cae0616338e78d91036d60358dc4b@23.88.100.175:46656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.stride/config/config.toml
 wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-1/addrbook.json"
-SNAP_RPC=http://stride.stake-take.com:26657
+SNAP_RPC=http://stride.stake-take.com:46657
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
