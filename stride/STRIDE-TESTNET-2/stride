@@ -36,7 +36,7 @@ echo "============================================================"
 read WALLETNAME
 echo export NODENAME=${NODENAME} >> $HOME/.bash_profile
 echo export WALLETNAME=${WALLETNAME} >> $HOME/.bash_profile
-echo export CHAIN_ID="STRIDE-TESTNET-1" >> $HOME/.bash_profile
+echo export CHAIN_ID="STRIDE-TESTNET-2" >> $HOME/.bash_profile
 source ~/.bash_profile
 
 #UPDATE APT
@@ -73,7 +73,7 @@ strided keys add $WALLETNAME
 strided tendermint unsafe-reset-all --home $HOME/.stride
 rm $HOME/.stride/config/genesis.json
 wget -O $HOME/.stride/config/genesis.json "https://raw.githubusercontent.com/Stride-Labs/testnet/main/poolparty/genesis.json"
-wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-1/addrbook.json"
+wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/addrbook.json"
 
 SEEDS="baee9ccc2496c2e3bebd54d369c3b788f9473be9@seedv1.poolparty.stridenet.co:26656"
 PEERS=""; \
