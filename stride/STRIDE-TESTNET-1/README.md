@@ -1,8 +1,8 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 ## Explorers:
-Ping Pub - https://poolparty.stride.zone
-NodesGuru - https://stride.explorers.guru
+Ping Pub - https://poolparty.stride.zone  
+NodesGuru - https://stride.explorers.guru 
 Cosmostation - https://testnet.mintscan.io/stride-testnet
 ## One line script for full install
 ```
