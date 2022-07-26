@@ -22,7 +22,7 @@ mkdir -p $HOME/go/bin
 go build -mod=readonly -trimpath -o $HOME/go/bin ./...
 wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/addrbook.json"
 wget -O $HOME/.stride/config/genesis.json "https://raw.githubusercontent.com/Stride-Labs/testnet/main/poolparty/genesis.json"
-sudo systemctl restart strided
+sudo systemctl restart strided && journalctl -u strided -f -o cat
 ```
 ## Start with state sync
 ```
