@@ -6,7 +6,7 @@ NodesGuru - https://stride.explorers.guru
 Cosmostation - https://testnet.mintscan.io/stride-testnet
 ## One line script for full install
 ```
-curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-1/stride > stride.sh && chmod +x stride.sh && ./stride.sh
+curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/stride > stride.sh && chmod +x stride.sh && ./stride.sh
 ```
 To install, you just need to take the script and go through the installation order
 ## Guide for migrate STRIDE-1 --> STRIDE-TESTNET-2
