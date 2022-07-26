@@ -17,7 +17,7 @@ strided tendermint unsafe-reset-all --home $HOME/.stride
 SEEDS=""; \
 PEERS="69249bb18f5cae0616338e78d91036d60358dc4b@23.88.100.175:46656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.stride/config/config.toml
-wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-1/addrbook.json"
+wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-1/addrbook.json"
 SNAP_RPC=http://stride.stake-take.com:46657
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
