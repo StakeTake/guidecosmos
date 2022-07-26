@@ -78,7 +78,7 @@ wget -O $HOME/.stride/config/genesis.json "https://raw.githubusercontent.com/Str
 wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/addrbook.json"
 
 SEEDS="baee9ccc2496c2e3bebd54d369c3b788f9473be9@seedv1.poolparty.stridenet.co:26656"
-PEERS="b61ea4c2c549e24c1a4d2d539b4d569d2ff7dd7b@stride-node1.poolparty.stridenet.co:26656,edfece4d3e7e5d4ad8658d6184b589965466ca0b@stride-node2.poolparty.stridenet.co:26656,0b501b0ff22b91a627363b21332a4a89c826cfa9@stride-node3.poolparty.stridenet.co:26656"; \
+PEERS="3eb9ad0185d960219e3ff83c8565f850d158bcd9@88.198.242.163:26656,d5a52e246601ea09f4543e43aab65fea113ce080@65.108.101.50:60556,b61ea4c2c549e24c1a4d2d539b4d569d2ff7dd7b@stride-node1.poolparty.stridenet.co:26656,edfece4d3e7e5d4ad8658d6184b589965466ca0b@stride-node2.poolparty.stridenet.co:26656,0b501b0ff22b91a627363b21332a4a89c826cfa9@stride-node3.poolparty.stridenet.co:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.stride/config/config.toml
 
 
