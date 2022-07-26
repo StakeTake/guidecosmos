@@ -10,8 +10,6 @@ To install, you just need to take the script and go through the installation ord
 ```
 sudo systemctl stop strided
 strided tendermint unsafe-reset-all --home $HOME/.stride
-rm $HOME/.stride/config/genesis.json
-strided init NODENAME --chain-id STRIDE-TESTNET-1
 wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-1/addrbook.json"
 wget -O $HOME/.stride/config/genesis.json "https://raw.githubusercontent.com/Stride-Labs/testnet/main/poolparty/genesis.json"
 sudo systemctl restart strided
