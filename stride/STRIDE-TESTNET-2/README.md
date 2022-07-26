@@ -21,7 +21,7 @@ sudo systemctl restart strided
 ```
 sudo systemctl stop strided
 strided tendermint unsafe-reset-all --home $HOME/.stride
-SEEDS=""; \
+SEEDS="baee9ccc2496c2e3bebd54d369c3b788f9473be9@seedv1.poolparty.stridenet.co:26656"; \
 PEERS="69249bb18f5cae0616338e78d91036d60358dc4b@23.88.100.175:46656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.stride/config/config.toml
 wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-1/addrbook.json"
