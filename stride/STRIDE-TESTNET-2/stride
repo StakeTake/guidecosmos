@@ -59,8 +59,7 @@ git clone https://github.com/Stride-Labs/stride.git
 cd stride
 git checkout 644c7574ee79128970a81cf8b9f23351dcdeec62
 mkdir -p $HOME/go/bin
-make build
-mv $HOME/stride/build/strided $HOME/go/bin
+go build -mod=readonly -trimpath -o $HOME/go/bin
 
 strided init $NODENAME --chain-id $CHAIN_ID
 
@@ -77,7 +76,7 @@ wget -O $HOME/.stride/config/genesis.json "https://raw.githubusercontent.com/Str
 wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/addrbook.json"
 
 SEEDS="baee9ccc2496c2e3bebd54d369c3b788f9473be9@seedv1.poolparty.stridenet.co:26656"
-PEERS="edfece4d3e7e5d4ad8658d6184b589965466ca0b@stride-node2.poolparty.stridenet.co,0b501b0ff22b91a627363b21332a4a89c826cfa9@stride-node3.poolparty.stridenet.co"; \
+PEERS="b61ea4c2c549e24c1a4d2d539b4d569d2ff7dd7b@stride-node1.poolparty.stridenet.co:26656,edfece4d3e7e5d4ad8658d6184b589965466ca0b@stride-node2.poolparty.stridenet.co,0b501b0ff22b91a627363b21332a4a89c826cfa9@stride-node3.poolparty.stridenet.co"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.stride/config/config.toml
 
 
