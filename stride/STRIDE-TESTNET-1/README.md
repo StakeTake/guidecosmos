@@ -1,6 +1,9 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
-
+## Explorers:
+Ping Pub - https://poolparty.stride.zone
+NodesGuru - https://stride.explorers.guru
+Cosmostation - https://testnet.mintscan.io/stride-testnet
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-1/stride > stride.sh && chmod +x stride.sh && ./stride.sh
@@ -13,11 +16,6 @@ strided tendermint unsafe-reset-all --home $HOME/.stride
 wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-1/addrbook.json"
 wget -O $HOME/.stride/config/genesis.json "https://raw.githubusercontent.com/Stride-Labs/testnet/main/poolparty/genesis.json"
 sudo systemctl restart strided
-```
-
-## RPC
-```
-http://stride-node2.poolparty.stridenet.co:26657, http://stride-node3.poolparty.stridenet.co:26657
 ```
 ## Start with state sync
 ```
@@ -44,4 +42,8 @@ sudo systemctl restart strided && journalctl -u strided -f -o cat
 ```
 sudo systemctl stop strided && sudo systemctl disable strided
 rm -rf $HOME/stride $HOME/.stride /etc/systemd/system/strided.service $HOME/go/bin/strided
+```
+## RPC
+```
+http://stride-node2.poolparty.stridenet.co:26657, http://stride-node3.poolparty.stridenet.co:26657
 ```
