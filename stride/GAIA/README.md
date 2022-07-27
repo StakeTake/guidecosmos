@@ -30,8 +30,8 @@ sudo systemctl restart gaiad && journalctl -u gaiad -f -o cat
 ```
 ## Delete node
 ```
-sudo systemctl stop strided && sudo systemctl disable strided
-rm -rf $HOME/stride $HOME/.stride /etc/systemd/system/strided.service $HOME/go/bin/strided
+sudo systemctl stop gaiad && sudo systemctl disable gaiad
+rm -rf $HOME/gaia $HOME/.gaia /etc/systemd/system/gaiad.service $HOME/go/bin/gaiad
 ```
 ## RPC
 ```
