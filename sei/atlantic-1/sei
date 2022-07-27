@@ -58,7 +58,7 @@ rm -rf $HOME/sei-chain $HOME/.sei $HOME/.sei-chain
 git clone https://github.com/sei-protocol/sei-chain
 cd $HOME/sei-chain
 git checkout master && git pull
-git checkout 1.0.6beta-val-count-fix
+git checkout 1.0.7beta-postfix
 make install
 mv $HOME/go/bin/seid /usr/bin/
 
