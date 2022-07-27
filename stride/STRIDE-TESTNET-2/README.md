@@ -28,13 +28,13 @@ sudo systemctl restart strided && journalctl -u strided -f -o cat
 ```
 sudo systemctl stop strided
 strided tendermint unsafe-reset-all --home $HOME/.stride
-SEEDS="baee9ccc2496c2e3bebd54d369c3b788f9473be9@seedv1.poolparty.stridenet.co:26656"; \
-PEERS="3eb9ad0185d960219e3ff83c8565f850d158bcd9@88.198.242.163:26656,d5a52e246601ea09f4543e43aab65fea113ce080@65.108.101.50:60556,b61ea4c2c549e24c1a4d2d539b4d569d2ff7dd7b@stride-node1.poolparty.stridenet.co:26656,edfece4d3e7e5d4ad8658d6184b589965466ca0b@stride-node2.poolparty.stridenet.co:26656,0b501b0ff22b91a627363b21332a4a89c826cfa9@stride-node3.poolparty.stridenet.co:26656"; \
+SEEDS=""; \
+PEERS="48b1310bc81deea3eb44173c5c26873c23565d33@34.135.129.186:26656,0f45eac9af97f4b60d12fcd9e14a114f0c085491@stride-library.poolparty.stridenet.co:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.stride/config/config.toml
 wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/addrbook.json"
-SNAP_RPC=http://stride-node3.poolparty.stridenet.co:26657
+SNAP_RPC=https://stride-library.poolparty.stridenet.co:443
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
-BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
 echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
 
@@ -52,5 +52,5 @@ rm -rf $HOME/stride $HOME/.stride /etc/systemd/system/strided.service $HOME/go/b
 ```
 ## RPC
 ```
-http://stride-node2.poolparty.stridenet.co:26657, http://stride-node3.poolparty.stridenet.co:26657
+https://stride-library.poolparty.stridenet.co:443
 ```
