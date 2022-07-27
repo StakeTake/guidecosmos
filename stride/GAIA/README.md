@@ -10,12 +10,12 @@ To install, you just need to take the script and go through the installation ord
 ## Start with state sync
 ```
 sudo systemctl stop gaiad
-gaiad tendermint unsafe-reset-all --home $HOME/.stride
+gaiad tendermint unsafe-reset-all --home $HOME/.gaia
 SEEDS=""; \
 PEERS="5b1bd3fb081c79b7bdc5c1fd0a3d90928437266a@78.107.234.44:36656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.gaia/config/config.toml
 wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/GAIA/addrbook.json"
-SNAP_RPC="https://gaia-fleet.poolparty.stridenet.co:443"
+SNAP_RPC="http://stride.stake-take.com:46657"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
@@ -35,5 +35,5 @@ rm -rf $HOME/gaia $HOME/.gaia /etc/systemd/system/gaiad.service $HOME/go/bin/gai
 ```
 ## RPC
 ```
-https://gaia-fleet.poolparty.stridenet.co:443
+https://gaia-fleet.poolparty.stridenet.co:443, http://stride.stake-take.com:46657
 ```
