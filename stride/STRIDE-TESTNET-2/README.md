@@ -11,10 +11,10 @@ curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRI
 To install, you just need to take the script and go through the installation order
 ## Guide for migrate STRIDE-1 --> STRIDE-TESTNET-2
 ```
+cd
 sudo systemctl stop strided
 strided tendermint unsafe-reset-all --home $HOME/.stride
 rm -rf $HOME/stride $HOME/go/bin/strided $HOME/.stride/config/genesis.json
-cd $HOME
 git clone https://github.com/Stride-Labs/stride.git
 cd stride
 git checkout 644c7574ee79128970a81cf8b9f23351dcdeec62
