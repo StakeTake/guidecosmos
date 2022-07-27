@@ -137,7 +137,7 @@ break
 
 "Create Validator")
 gaiad tx staking create-validator \
-  --amount 1000000ustrd \
+  --amount 1000000uatom \
   --from $WALLETNAME \
   --commission-max-change-rate "0.05" \
   --commission-max-rate "0.20" \
