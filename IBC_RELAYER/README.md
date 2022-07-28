@@ -129,7 +129,6 @@ hermes config validate
 ```
 ![image](https://user-images.githubusercontent.com/93165931/181566948-191a8d67-399d-4cd7-9fe7-a11f049f6066.png)
 ## Create wallets(if there is no wallet):
-```
 ### Stride Wallet
 ```
 strided keys add $STRIDE_WALLET
