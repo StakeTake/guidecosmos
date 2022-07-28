@@ -1,4 +1,4 @@
-                         Hermes_setup_manual
+#                                                                         Hermes_setup_manual
 ##                                                        Easy installation of IBC Relayer(Hermes) Stride & Gaia
 ![image](https://user-images.githubusercontent.com/93165931/181603865-ae62aa9b-bddb-4382-8ac6-280728cd6330.png)
 
@@ -8,13 +8,10 @@
 cd $HOME
 mkdir -p $HOME/.hermes/bin
 ```
-
 ## Install dependencies
-
 ```
 sudo apt update && sudo apt upgrade -y
 sudo apt install unzip -y
-
 ```
 ## Install software
 ```
@@ -25,12 +22,8 @@ rm hermes-v0.15.0-x86_64-unknown-linux-gnu.tar.gz
 echo "export PATH=$PATH:$HOME/.hermes/bin" >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
-
 ## Installing configurations
-
-
 ### STRIDE CHAIN
-
 ```
 STRIDE_RPC="stride.stake-take.com"
 STRIDE_RPC_PORT="26657"
@@ -41,7 +34,6 @@ STRIDE_DENOM="ustrd"
 STRIDE_WALLET="ENTER_YOUR_WALLET_NAME"
 MEMO_PREFIX="ENTER_YOUR_RELAYER_NAME"
 ```
-
 ### GAIA CHAIN
 ```
 GAIA_RPC="stride.stake-take.com"
@@ -52,9 +44,7 @@ GAIA_ACC_PREFIX="cosmos"
 GAIA_DENOM="uatom"
 GAIA_WALLET="ENTER_YOUR_WALLET_NAME"
 ```
-
 ### Save variables
-
 ```
 echo "
 export STRIDE_CHAIN_ID=${STRIDE_CHAIN_ID}
@@ -68,9 +58,7 @@ export MEMO_PREFIX=${MEMO_PREFIX}
 
 source $HOME/.bash_profile
 ```
-
 ## Create config  (Copy everything and paste)  
-
 ```
 echo "[global]
 log_level = 'info'
@@ -135,51 +123,34 @@ trust_threshold = { numerator = '1', denominator = '3' }" > $HOME/.hermes/config
 
 ```
 #Path config /root/.hermes/config.toml
-
-
 ## Output result
-
 ```
 hermes config validate
 ```
 ![image](https://user-images.githubusercontent.com/93165931/181566948-191a8d67-399d-4cd7-9fe7-a11f049f6066.png)
-
 ## Create wallets(if there is no wallet):
-
 ```
 ### Stride Wallet
-
 ```
 strided keys add $STRIDE_WALLET
-
 ```
 (please save mnemonic and wallet address)
-
 ### Gaia wallet
-
 ```
 gaiad keys add $GAIA_WALLET
-
 ```
 (please save mnemonic and wallet address)
-
 ## Add wallet to Hermes
-
 ### Add wallet Stride
-
 ```
 hermes keys restore $STRIDE_CHAIN_ID -n $STRIDE_WALLET -m "your mnemonic phrase"
 ```
 ### Add wallet Gaia
-
 ```
 hermes keys restore $GAIA_CHAIN_ID -n $GAIA_WALLET -m "your mnemonic phrase"
 ```
-
 ## Connecting to the channel
-
 ### Enter vars channel from output
-
 ```
 HERMES_STRIDE_GAIA_CHANNEL_ID="channel-0"
 HERMES_GAIA_STRIDE_CHANNEL_ID="channel-0"
@@ -188,13 +159,9 @@ echo "
 export HERMES_STRIDE_GAIA_CHANNEL_ID=${HERMES_STRIDE_GAIA_CHANNEL_ID}
 export HERMES_GAIA_STRIDE_CHANNEL_ID=${HERMES_GAIA_STRIDE_CHANNEL_ID}
 " >> $HOME/.bash_profile
-
 source $HOME/.bash_profile
-
 ```
-
 ### Run the service file
-
 ```
 sudo tee /etc/systemd/system/hermesd.service > /dev/null <<EOF
 [Unit]
@@ -210,26 +177,19 @@ LimitNOFILE=6000
 [Install]
 WantedBy=multi-user.target
 EOF
-
 ```
 ### Restart Hermes for start and run logs
-
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable hermesd
 sudo systemctl restart hermesd && journalctl -u hermesd -f
-
 ```
 ![image](https://user-images.githubusercontent.com/93165931/181575387-9d95e2e9-2f65-4a2a-91d1-e62c270db89c.png)
-
 ### Launch was successful
-
 ### You can send tokens by example
-
 ```
 strided tx ibc-transfer transfer channel-0  YOUR_WALLET_ADDRESS_STRIDE 777ustrd --from=STRIDE_WALLET --fees 3000ustrd
 ```
-
 ```
 gaiad  tx ibc-transfer transfer channel-0 YOUR_WALLET_ADDRESS_GAIA 777uatom --from=GAIA_WALLET --fees 3000uatom
 ```
