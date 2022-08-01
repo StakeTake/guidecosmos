@@ -71,7 +71,7 @@ echo "============================================================"
 #WALLET
 rebusd keys add $WALLETNAME
 
-rebusd  tendermint unsafe-reset-all 
+rebusd tendermint unsafe-reset-all --home ~/.rebusd
 rm $HOME/.rebusd/config/genesis.json
 wget -O $HOME/.rebusd/config/genesis.json "https://raw.githubusercontent.com/rebuschain/rebus.testnet/master/rebus_3333-1/genesis.json"
 
