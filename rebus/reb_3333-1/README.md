@@ -30,8 +30,8 @@ sudo systemctl restart rebusd && journalctl -u rebusd -f -o cat
 ```
 ## Delete node
 ```
-sudo systemctl stop gaiad && sudo systemctl disable gaiad
-rm -rf $HOME/gaia $HOME/.gaia /etc/systemd/system/gaiad.service $HOME/go/bin/gaiad
+sudo systemctl stop rebusd && sudo systemctl disable rebusd
+rm -rf $HOME/rebus.core $HOME/.rebusd /etc/systemd/system/rebusd.service $HOME/go/bin/rebusd
 ```
 ## RPC
 ```
