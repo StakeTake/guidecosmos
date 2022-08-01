@@ -10,7 +10,7 @@ To install, you just need to take the script and go through the installation ord
 ## Start with state sync
 ```
 sudo systemctl stop rebusd
-rebusd unsafe-reset-all
+rebusd tendermint unsafe-reset-all --home ~/.rebusd
 SEEDS="a6d710cd9baac9e95a55525d548850c91f140cd9@3.211.101.169:26656,c296ee829f137cfe020ff293b6fc7d7c3f5eeead@54.157.52.47:26656"; \
 PEERS=""; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.gaia/config/config.toml
