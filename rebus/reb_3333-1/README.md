@@ -1,7 +1,7 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 ## Explorers:
-Ping Pub - https://poolparty.stride.zone/GAIA
+Ping Pub - https://exp.nodeist.net/Rebus
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/rebus/reb_3333-1/rebus > rebus.sh && chmod +x rebus.sh && ./rebus.sh
