@@ -10,7 +10,7 @@ To install, you just need to take the script and go through the installation ord
 ## Start with state sync
 ```
 sudo systemctl stop sourced
-sourced tendermint unsafe-reset-all --home $HOME/.source
+sourced unsafe-reset-all --home $HOME/.source
 SEEDS="6ca675f9d949d5c9afc8849adf7b39bc7fccf74f@164.92.98.17:26656"; \
 PEERS=""; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.source/config/config.toml
