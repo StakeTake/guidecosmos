@@ -11,8 +11,8 @@ To install, you just need to take the script and go through the installation ord
 ```
 sudo systemctl stop sourced
 sourced unsafe-reset-all --home $HOME/.source
-SEEDS="6ca675f9d949d5c9afc8849adf7b39bc7fccf74f@164.92.98.17:26656"; \
-PEERS=""; \
+SEEDS=""; \
+PEERS="9d16b552697cdce3c8b4f23de53708533d99bc59@165.232.144.133:26656,d565dd0cb92fa4b830662eb8babe1dcdc340c321@44.234.26.62:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.source/config/config.toml
 # wget -O $HOME/.source/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/source/sourcechain-testnet/addrbook.json"
 SNAP_RPC="https://testnet.sourceprotocol.io:26657"
