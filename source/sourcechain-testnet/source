@@ -70,7 +70,7 @@ echo "============================================================"
 #WALLET
 sourced keys add $WALLETNAME
 
-sourced tendermint unsafe-reset-all --home $HOME/.source
+sourced unsafe-reset-all --home $HOME/.source
 rm $HOME/.source/config/genesis.json
 wget -O $HOME/.source/config/genesis.json "https://raw.githubusercontent.com/Source-Protocol-Cosmos/testnets/master/sourcechain-testnet/genesis.json"
 wget -O $HOME/.source/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/source/sourcechain-testnet/addrbook.json"
