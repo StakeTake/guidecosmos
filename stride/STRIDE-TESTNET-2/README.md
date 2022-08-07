@@ -30,6 +30,18 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.stride/config/config.toml
 sudo systemctl restart strided && journalctl -u strided -f -o cat
 ```
+## Snapshot 125309 block 1.3gb
+```
+sudo systemctl stop strided
+strided tendermint unsafe-reset-all --home $HOME/.stride
+cd
+wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/addrbook.json"
+rm -rf ~/.stride/data; \
+wget -O - http://144.76.224.246:8000/archive.tar.gz | tar xf -
+mv $HOME/root/.stride/data $HOME/.stride
+rm -rf $HOME/root
+sudo systemctl restart strided && journalctl -u strided -f -o cat
+```
 ## Add addrbook
 ```
 sudo systemctl stop strided
