@@ -30,6 +30,13 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.stride/config/config.toml
 sudo systemctl restart strided && journalctl -u strided -f -o cat
 ```
+## Add addrbook
+```
+sudo systemctl stop strided
+rm $HOME/.stride/config/addrbook.json
+wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/addrbook.json"
+sudo systemctl restart strided && journalctl -u strided -f -o cat
+```
 ## Delete node
 ```
 sudo systemctl stop strided && sudo systemctl disable strided
