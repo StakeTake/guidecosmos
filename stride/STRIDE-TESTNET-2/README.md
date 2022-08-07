@@ -9,21 +9,6 @@ Cosmostation - https://testnet.mintscan.io/stride-testnet
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/stride > stride.sh && chmod +x stride.sh && ./stride.sh
 ```
 To install, you just need to take the script and go through the installation order
-## Guide for migrate STRIDE-1 --> STRIDE-TESTNET-2
-```
-cd
-sudo systemctl stop strided
-strided tendermint unsafe-reset-all --home $HOME/.stride
-rm -rf $HOME/stride $HOME/go/bin/strided $HOME/.stride/config/genesis.json
-git clone https://github.com/Stride-Labs/stride.git
-cd stride
-git checkout 644c7574ee79128970a81cf8b9f23351dcdeec62
-mkdir -p $HOME/go/bin
-go build -mod=readonly -trimpath -o $HOME/go/bin ./...
-wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/addrbook.json"
-wget -O $HOME/.stride/config/genesis.json "https://raw.githubusercontent.com/Stride-Labs/testnet/main/poolparty/genesis.json"
-sudo systemctl restart strided && journalctl -u strided -f -o cat
-```
 ## Start with state sync
 ```
 sudo systemctl stop strided
