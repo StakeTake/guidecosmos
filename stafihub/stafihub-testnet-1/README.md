@@ -1,5 +1,7 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
+## Explorer
+https://testnet-explorer.stafihub.io/stafi-hub-testnet/staking
 
 ## One line script for full install
 ```
