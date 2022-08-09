@@ -15,7 +15,7 @@ chaind tendermint unsafe-reset-all --home $HOME/.kyve
 SEEDS=""; \
 PEERS="2823ef5801b138802d076bf3e0478ec9be4e7bde@95.216.157.18:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.kyve/config/config.toml
-# wget -O $HOME/.kyve/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/KYVE/korellia/addrbook.json"
+wget -O $HOME/.kyve/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/KYVE/korellia/addrbook.json"
 SNAP_RPC="kyve.stake-take.com:16657"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
@@ -31,7 +31,7 @@ sudo systemctl restart kyved && journalctl -u kyved -f -o cat
 ```
 ## Add addrbook
 ```
-sudo systemctl stop strided
+sudo systemctl stop kyved
 rm $HOME/.kyve/config/addrbook.json
 wget -O $HOME/.kyve/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/KYVE/korellia/addrbook.json"
 sudo systemctl restart kyved && journalctl -u kyved -f -o cat
@@ -39,7 +39,7 @@ sudo systemctl restart kyved && journalctl -u kyved -f -o cat
 ## Delete node
 ```
 sudo systemctl stop kyved && sudo systemctl disable kyved
-rm -rf $HOME/stride $HOME/.stride /etc/systemd/system/strided.service $HOME/go/bin/strided
+rm /etc/systemd/system/kyved.service .kyve /usr/bin/chaind $HOME/go/bin/chaind
 ```
 ## RPC
 ```
