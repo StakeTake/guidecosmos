@@ -32,17 +32,17 @@ sudo systemctl restart kyved && journalctl -u kyved -f -o cat
 ## Add addrbook
 ```
 sudo systemctl stop strided
-rm $HOME/.stride/config/addrbook.json
-wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/KYVE/korellia/addrbook.json"
-sudo systemctl restart strided && journalctl -u strided -f -o cat
+rm $HOME/.kyve/config/addrbook.json
+wget -O $HOME/.kyve/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/KYVE/korellia/addrbook.json"
+sudo systemctl restart kyved && journalctl -u kyved -f -o cat
 ```
 ## Delete node
 ```
-sudo systemctl stop strided && sudo systemctl disable strided
+sudo systemctl stop kyved && sudo systemctl disable kyved
 rm -rf $HOME/stride $HOME/.stride /etc/systemd/system/strided.service $HOME/go/bin/strided
 ```
 ## RPC
 ```
-http://stride.stake-take.com:26657, https://stride-library.poolparty.stridenet.co:443
+http://kyve.stake-take.com:16657
 ```
 
