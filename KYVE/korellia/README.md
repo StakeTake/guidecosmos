@@ -39,7 +39,7 @@ sudo systemctl restart kyved && journalctl -u kyved -f -o cat
 ## Delete node
 ```
 sudo systemctl stop kyved && sudo systemctl disable kyved
-rm /etc/systemd/system/kyved.service .kyve /usr/bin/chaind $HOME/go/bin/chaind
+rm -rf /etc/systemd/system/kyved.service $HOME/.kyve /usr/bin/chaind $HOME/go/bin/chaind
 ```
 ## RPC
 ```
