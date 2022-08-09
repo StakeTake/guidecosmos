@@ -25,6 +25,7 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.sei/config/config.toml
 sudo systemctl restart seid && journalctl -u seid -f -o cat
+```
 ## RPC
 ```
 http://sei.stake-take.com:36657
