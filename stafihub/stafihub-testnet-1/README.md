@@ -1,8 +1,7 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
-## Explorer
-https://testnet-explorer.stafihub.io/stafi-hub-testnet/staking
-
+## Explorers
+Ping Pub - https://testnet-explorer.stafihub.io/stafi-hub-testnet/staking
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stafihub/stafihub-testnet-1/stafihub > stafihub.sh && chmod +x stafihub.sh && ./stafihub.sh
