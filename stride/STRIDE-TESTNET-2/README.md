@@ -33,7 +33,7 @@ sudo systemctl restart strided && journalctl -u strided -f -o cat
 ## Snapshot 144818 height 1.1gb
 ```
 sudo systemctl stop strided
-strided tendermint unsafe-reset-all --home $HOME/.stride
+strided tendermint unsafe-reset-all --home $HOME/.stride --keep-addr-book
 pruning="custom"
 pruning_keep_recent="100"
 pruning_keep_every="0"
@@ -43,7 +43,6 @@ sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_rec
 sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.stride/config/app.toml
 sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.stride/config/app.toml
 cd
-wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/addrbook.json"
 rm -rf ~/.stride/data; \
 wget -O - http://snap.stake-take.com:8000/stride.tar.gz | tar xf -
 mv $HOME/root/.stride/data $HOME/.stride
