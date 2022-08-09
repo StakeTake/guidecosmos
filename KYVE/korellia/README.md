@@ -1,13 +1,13 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
+## Explorers: 
+NodesGuru - https://kyve.explorers.guru   
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/KYVE/korellia/kyve > kyve.sh && chmod +x kyve.sh && ./kyve.sh
 ```
 To install, you just need to take the script and go through the installation order
-## Explorers: 
-NodesGuru - https://kyve.explorers.guru   
 ## Start with state sync
 ```
 sudo systemctl stop kyved
