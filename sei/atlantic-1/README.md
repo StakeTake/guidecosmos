@@ -6,6 +6,33 @@
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/sei/atlantic-1/sei > sei.sh && chmod +x sei.sh && ./sei.sh
 ```
 To install, you just need to take the script and go through the installation order
+## Snapshot 0.4gb height 2369526
+```
+sudo systemctl stop seid
+seid tendermint unsafe-reset-all --home $HOME/.sei
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.sei/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.sei/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.sei/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.sei/config/app.toml
+cd
+wget -O $HOME/.sei/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/sei/atlantic-1/addrbook.json"
+rm -rf ~/.sei/data; \
+wget -O - http://snap.stake-take.com:8000/sei.tar.gz | tar xf -
+mv $HOME/root/.sei/data $HOME/.sei
+rm -rf $HOME/root
+sudo systemctl restart seid && journalctl -u seid -f -o cat
+```
+## Add addrbook
+```
+sudo systemctl stop seid
+rm $HOME/.sei/config/addrbook.json
+wget -O $HOME/.sei/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/sei/atlantic-1/addrbook.json"
+sudo systemctl restart seid && journalctl -u seid -f -o cat
+```
 ## Start with state sync
 ```
 sudo systemctl stop seid
