@@ -30,7 +30,6 @@ sudo systemctl restart seid && journalctl -u seid -f -o cat
 ```
 http://sei.stake-take.com:36657
 ```
-```
 ## Delete node
 ```
 sudo systemctl stop seid && sudo systemctl disable seid
