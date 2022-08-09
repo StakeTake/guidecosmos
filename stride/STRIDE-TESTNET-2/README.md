@@ -30,14 +30,24 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.stride/config/config.toml
 sudo systemctl restart strided && journalctl -u strided -f -o cat
 ```
-## Snapshot 125309 block 1.3gb
+## Snapshot 144818 block 1.1gb
 ```
 sudo systemctl stop strided
 strided tendermint unsafe-reset-all --home $HOME/.stride
+indexer="null"
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+sed -i -e "s/^indexer *=.*/indexer = \"$indexer\"/" $HOME/.stride/config/config.toml
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.stride/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.stride/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.stride/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.stride/config/app.toml
 cd
 wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/addrbook.json"
 rm -rf ~/.stride/data; \
-wget -O - http://144.76.224.246:8000/archive.tar.gz | tar xf -
+wget -O - http://144.76.224.246:8000/stride.tar.gz | tar xf -
 mv $HOME/root/.stride/data $HOME/.stride
 rm -rf $HOME/root
 sudo systemctl restart strided && journalctl -u strided -f -o cat
