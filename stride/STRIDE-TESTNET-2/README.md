@@ -30,7 +30,7 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.stride/config/config.toml
 sudo systemctl restart strided && journalctl -u strided -f -o cat
 ```
-## Snapshot 144818 block 1.1gb
+## Snapshot 144818 height 1.1gb
 ```
 sudo systemctl stop strided
 strided tendermint unsafe-reset-all --home $HOME/.stride
