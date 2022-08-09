@@ -45,7 +45,7 @@ sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $
 cd
 wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/addrbook.json"
 rm -rf ~/.stride/data; \
-wget -O - http://144.76.224.246:8000/stride.tar.gz | tar xf -
+wget -O - http://snap.stake-take.com:8000/stride.tar.gz | tar xf -
 mv $HOME/root/.stride/data $HOME/.stride
 rm -rf $HOME/root
 sudo systemctl restart strided && journalctl -u strided -f -o cat
