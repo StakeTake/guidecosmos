@@ -6,7 +6,7 @@
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/sei/atlantic-1/sei > sei.sh && chmod +x sei.sh && ./sei.sh
 ```
 To install, you just need to take the script and go through the installation order
-## Snapshot 0.4gb height 2369526
+## Snapshot height 2369526 0.4gb 
 ```
 sudo systemctl stop seid
 seid tendermint unsafe-reset-all --home $HOME/.sei
