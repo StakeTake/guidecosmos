@@ -7,10 +7,10 @@ Ping Pub - https://explorer.testnet.sourceprotocol.io/source
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/source/sourcechain-testnet/source > source.sh && chmod +x source.sh && ./source.sh
 ```
 To install, you just need to take the script and go through the installation order
-## Snapshot height 
+## Snapshot height 1829168 0.05gb
 ```
 sudo systemctl stop sourced
-dewebd unsafe-reset-all --home $HOME/.source
+sourced unsafe-reset-all
 pruning="custom"
 pruning_keep_recent="100"
 pruning_keep_every="0"
@@ -21,7 +21,7 @@ sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every
 sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.source/config/app.toml
 wget -O $HOME/.source/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/source/sourcechain-testnet/addrbook.json"
 cd
-rm -rf ~/.deweb/data; \
+rm -rf ~/.source/data; \
 wget -O - http://snap.stake-take.com:8000/source.tar.gz | tar xf -
 mv $HOME/root/.source/data $HOME/.source
 rm -rf $HOME/root
