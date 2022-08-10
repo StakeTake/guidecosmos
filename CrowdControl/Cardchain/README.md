@@ -1,6 +1,8 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
+## Explorers
+PingPub - https://explorers.acloud.pp.ua/cardchain
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/CrowdControl/Cardchain/crowd > crowd.sh && chmod +x crowd.sh && ./crowd.sh
