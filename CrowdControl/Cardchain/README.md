@@ -47,6 +47,13 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.Cardchain/config/config.toml
 sudo systemctl restart Cardchain && journalctl -u Cardchain -f -o cat
 ```
+## Add addrbook
+```
+sudo systemctl stop Cardchain
+rm $HOME/.Cardchain/config/addrbook.json
+wget -O $HOME/.Cardchain/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/CrowdControl/Cardchain/addrbook.json"
+sudo systemctl restart Cardchain && journalctl -u Cardchain -f -o cat
+```
 ## RPC
 ```
 http://cc.stake-take.com:36657
