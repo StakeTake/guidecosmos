@@ -8,6 +8,25 @@ NodesGuru - https://kyve.explorers.guru
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/KYVE/korellia/kyve > kyve.sh && chmod +x kyve.sh && ./kyve.sh
 ```
 To install, you just need to take the script and go through the installation order
+## Snapshot 1837051 height 1gb
+```
+sudo systemctl stop kyved
+seid tendermint unsafe-reset-all --home $HOME/.kyve --keep-addr-book
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.kyve/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.kyve/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.kyve/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.kyve/config/app.toml
+cd
+rm -rf ~/.kyve/data; \
+wget -O - http://snap.stake-take.com:8000/kyve.tar.gz | tar xf -
+mv $HOME/root/.kyve/data $HOME/.kyve
+rm -rf $HOME/root
+sudo systemctl restart kyved && journalctl -u kyved -f -o cat
+```
 ## Start with state sync
 ```
 sudo systemctl stop kyved
