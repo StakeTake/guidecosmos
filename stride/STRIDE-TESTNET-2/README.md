@@ -9,7 +9,7 @@ Cosmostation - https://testnet.mintscan.io/stride-testnet
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/stride > stride.sh && chmod +x stride.sh && ./stride.sh
 ```
 To install, you just need to take the script and go through the installation order
-## Snapshot 154026 height 0.9gb
+## Snapshot 158007 height 0.9gb
 ```
 sudo systemctl stop strided
 strided tendermint unsafe-reset-all --home $HOME/.stride --keep-addr-book
