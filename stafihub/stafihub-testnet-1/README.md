@@ -7,6 +7,25 @@ Ping Pub - https://testnet-explorer.stafihub.io/stafi-hub-testnet/staking
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stafihub/stafihub-testnet-1/stafihub > stafihub.sh && chmod +x stafihub.sh && ./stafihub.sh
 ```
 To install, you just need to take the script and go through the installation order
+## Snapshot
+```
+sudo systemctl stop stafihubd
+stafihubd tendermint unsafe-reset-all --home $HOME/.stafihub --keep-addr-book
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.stafihub/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.stafihub/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.stafihub/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.stafihub/config/app.toml
+cd
+rm -rf ~/.stafihub/data; \
+wget -O - http://snap.stake-take.com:8000/stafi.tar.gz | tar xf -
+mv $HOME/root/.stafihub/data $HOME/.stafihub
+rm -rf $HOME/root
+sudo systemctl restart stafihubd && journalctl -u stafihubd -f -o cat
+```
 ## Start via state-sync
 ```
 sudo systemctl stop stafihubd
