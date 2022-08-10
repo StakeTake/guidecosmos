@@ -7,6 +7,25 @@ Ping Pub - https://exp.nodeist.net/Rebus
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/rebus/reb_3333-1/rebus > rebus.sh && chmod +x rebus.sh && ./rebus.sh
 ```
 To install, you just need to take the script and go through the installation order
+## Snapshot height 240483 0.3gb
+```
+sudo systemctl stop rebusd
+rebusd tendermint unsafe-reset-all --home $HOME/.rebusd --keep-addr-book
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.rebusd/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.rebusd/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.rebusd/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.rebusd/config/app.toml
+cd
+rm -rf ~/.rebusd/data; \
+wget -O - http://snap.stake-take.com:8000/rebus.tar.gz | tar xf -
+mv $HOME/root/.rebusd/data $HOME/.rebusd
+rm -rf $HOME/root
+sudo systemctl restart rebusd && journalctl -u rebusd -f -o cat
+```
 ## Start with state sync
 ```
 sudo systemctl stop rebusd
@@ -28,12 +47,20 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.rebusd/config/config.toml
 sudo systemctl restart rebusd && journalctl -u rebusd -f -o cat
 ```
+## Add addrbook
+```
+sudo systemctl stop rebusd
+rm $HOME/.rebusd/config/addrbook.json
+wget -O $HOME/.rebusd/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/rebus/reb_3333-1/addrbook.json"
+sudo systemctl restart rebusd && journalctl -u rebusd -f -o cat
+```
+## RPC
+```
+https://rpc-t.rebus.nodestake.top:443, http://rebus.stake-take.com:46657
+```
 ## Delete node
 ```
 sudo systemctl stop rebusd && sudo systemctl disable rebusd
 rm -rf $HOME/rebus.core $HOME/.rebusd /etc/systemd/system/rebusd.service $HOME/go/bin/rebusd
 ```
-## RPC
-```
-http://rebus.stake-take.com:46657, https://rpc-t.rebus.nodestake.top:443
-```
+
