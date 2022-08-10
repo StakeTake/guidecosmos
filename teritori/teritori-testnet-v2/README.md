@@ -6,9 +6,24 @@
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/teritori/teritori-testnet-v2/teritori > teritori.sh && chmod +x teritori.sh && ./teritori.sh
 ```
 To install, you just need to take the script and go through the installation order
-## RPC
+## Snapshot height 438128 0.3gb
 ```
-http://teritori.stake-take.com:26657
+sudo systemctl stop teritorid
+teritorid tendermint unsafe-reset-all --home $HOME/.teritorid --keep-addr-book
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.teritorid/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.teritorid/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.teritorid/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.teritorid/config/app.toml
+cd
+rm -rf ~/.teritorid/data; \
+wget -O - http://snap.stake-take.com:8000/teritori.tar.gz | tar xf -
+mv $HOME/root/.teritorid/data $HOME/.teritorid
+rm -rf $HOME/root
+sudo systemctl restart teritorid && journalctl -u teritorid -f -o cat
 ```
 ## Start with state sync
 ```
@@ -30,6 +45,10 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.teritorid/config/config.toml
 sudo systemctl restart teritorid && journalctl -u teritorid -f -o cat
+```
+## RPC
+```
+http://teritori.stake-take.com:26657
 ```
 ## Delete node
 ```
