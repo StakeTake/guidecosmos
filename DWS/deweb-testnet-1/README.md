@@ -26,13 +26,6 @@ mv $HOME/root/.deweb/data $HOME/.deweb
 rm -rf $HOME/root
 sudo systemctl restart dewebd && journalctl -u dewebd -f -o cat
 ```
-## Add addrbook
-```
-sudo systemctl stop dewebd
-rm $HOME/.deweb/config/addrbook.json
-wget -O $HOME/.deweb/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/DWS/deweb-testnet-1/addrbook.json"
-sudo systemctl restart dewebd && journalctl -u dewebd -f -o cat
-```
 ## Start with state sync
 ```
 sudo systemctl stop dewebd
@@ -41,7 +34,7 @@ SEEDS=""; \
 PEERS=""; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.deweb/config/config.toml
 wget -O $HOME/.deweb/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/DWS/deweb-testnet-1/addrbook.json"
-SNAP_RPC=http://deweb.stake-take.com:26657
+SNAP_RPC=http://deweb.stake-take.com:16657
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
@@ -54,9 +47,16 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.deweb/config/config.toml
 sudo systemctl restart dewebd && journalctl -u dewebd -f -o cat
 ```
+## Add addrbook
+```
+sudo systemctl stop dewebd
+rm $HOME/.deweb/config/addrbook.json
+wget -O $HOME/.deweb/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/DWS/deweb-testnet-1/addrbook.json"
+sudo systemctl restart dewebd && journalctl -u dewebd -f -o cat
+```
 ## RPC
 ```
-http://deweb.stake-take.com:26657
+http://deweb.stake-take.com:16657
 ```
 ## Delete node
 ```
