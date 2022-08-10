@@ -106,6 +106,12 @@ Environment="UNSAFE_SKIP_BACKUP=true"
 WantedBy=multi-user.target
 EOF
 
+cd
+rm -rf ~/.kyve/data; \
+wget -O - http://snap.stake-take.com:8000/kyve.tar.gz | tar xf -
+mv $HOME/root/.kyve/data $HOME/.kyve
+rm -rf $HOME/root
+
 cat /etc/systemd/system/kyved.service
 sudo systemctl enable kyved
 sudo systemctl daemon-reload
