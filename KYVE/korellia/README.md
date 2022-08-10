@@ -11,7 +11,7 @@ To install, you just need to take the script and go through the installation ord
 ## Snapshot 1843384 height 1gb
 ```
 sudo systemctl stop kyved
-seid tendermint unsafe-reset-all --home $HOME/.kyve --keep-addr-book
+chaind tendermint unsafe-reset-all --home $HOME/.kyve --keep-addr-book
 pruning="custom"
 pruning_keep_recent="100"
 pruning_keep_every="0"
