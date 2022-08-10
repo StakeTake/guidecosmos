@@ -9,6 +9,25 @@ Cosmostation - https://testnet.mintscan.io/stride-testnet
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/stride > stride.sh && chmod +x stride.sh && ./stride.sh
 ```
 To install, you just need to take the script and go through the installation order
+## Snapshot 154026 height 0.9gb
+```
+sudo systemctl stop strided
+strided tendermint unsafe-reset-all --home $HOME/.stride --keep-addr-book
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.stride/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.stride/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.stride/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.stride/config/app.toml
+cd
+rm -rf ~/.stride/data; \
+wget -O - http://snap.stake-take.com:8000/stride.tar.gz | tar xf -
+mv $HOME/root/.stride/data $HOME/.stride
+rm -rf $HOME/root
+sudo systemctl restart strided && journalctl -u strided -f -o cat
+```
 ## Start with state sync
 ```
 sudo systemctl stop strided
@@ -28,25 +47,6 @@ s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
 s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.stride/config/config.toml
-sudo systemctl restart strided && journalctl -u strided -f -o cat
-```
-## Snapshot 144818 height 1.1gb
-```
-sudo systemctl stop strided
-strided tendermint unsafe-reset-all --home $HOME/.stride --keep-addr-book
-pruning="custom"
-pruning_keep_recent="100"
-pruning_keep_every="0"
-pruning_interval="10"
-sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.stride/config/app.toml
-sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.stride/config/app.toml
-sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.stride/config/app.toml
-sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.stride/config/app.toml
-cd
-rm -rf ~/.stride/data; \
-wget -O - http://snap.stake-take.com:8000/stride.tar.gz | tar xf -
-mv $HOME/root/.stride/data $HOME/.stride
-rm -rf $HOME/root
 sudo systemctl restart strided && journalctl -u strided -f -o cat
 ```
 ## Add addrbook
