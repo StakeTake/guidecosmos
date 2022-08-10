@@ -7,7 +7,7 @@ Ping Pub - https://testnet-explorer.stafihub.io/stafi-hub-testnet/staking
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stafihub/stafihub-testnet-1/stafihub > stafihub.sh && chmod +x stafihub.sh && ./stafihub.sh
 ```
 To install, you just need to take the script and go through the installation order
-## Snapshot
+## Snapshot 61365 height 0.15gb
 ```
 sudo systemctl stop stafihubd
 stafihubd tendermint unsafe-reset-all --home $HOME/.stafihub --keep-addr-book
