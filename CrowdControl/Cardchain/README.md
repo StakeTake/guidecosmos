@@ -6,9 +6,25 @@
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/CrowdControl/Cardchain/crowd > crowd.sh && chmod +x crowd.sh && ./crowd.sh
 ```
 To install, you just need to take the script and go through the installation order
-## RPC
+## Snapshot height 294097 0.4gb
 ```
-http://cc.stake-take.com:36657
+sudo systemctl stop Cardchain
+Cardchain unsafe-reset-all --home $HOME/.Cardchain
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.Cardchain/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.Cardchain/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.Cardchain/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.Cardchain/config/app.toml
+wget -O $HOME/.Cardchain/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/CrowdControl/Cardchain/addrbook.json"
+cd
+rm -rf ~/.Cardchain/data; \
+wget -O - http://snap.stake-take.com:8000/crowdcontrol.tar.gz | tar xf -
+mv $HOME/root/.Cardchain/data $HOME/.Cardchain
+rm -rf $HOME/root
+sudo systemctl restart Cardchain && journalctl -u Cardchain -f -o cat
 ```
 ## Start with state sync
 ```
@@ -30,6 +46,10 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.Cardchain/config/config.toml
 sudo systemctl restart Cardchain && journalctl -u Cardchain -f -o cat
+```
+## RPC
+```
+http://cc.stake-take.com:36657
 ```
 ## Delete node
 ```
