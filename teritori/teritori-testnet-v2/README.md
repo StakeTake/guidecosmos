@@ -1,6 +1,8 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
+## Explorers
+NodesGuru - https://teritori.explorers.guru
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/teritori/teritori-testnet-v2/teritori > teritori.sh && chmod +x teritori.sh && ./teritori.sh
