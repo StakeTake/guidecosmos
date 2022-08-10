@@ -8,7 +8,7 @@ NodesGuru - https://kyve.explorers.guru
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/KYVE/korellia/kyve > kyve.sh && chmod +x kyve.sh && ./kyve.sh
 ```
 To install, you just need to take the script and go through the installation order
-## Snapshot 1837051 height 1gb
+## Snapshot 1843384 height 1gb
 ```
 sudo systemctl stop kyved
 seid tendermint unsafe-reset-all --home $HOME/.kyve --keep-addr-book
