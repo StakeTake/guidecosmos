@@ -55,13 +55,13 @@ rm $HOME/.kyve/config/addrbook.json
 wget -O $HOME/.kyve/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/KYVE/korellia/addrbook.json"
 sudo systemctl restart kyved && journalctl -u kyved -f -o cat
 ```
+## RPC
+```
+http://kyve.stake-take.com:16657
+```
 ## Delete node
 ```
 sudo systemctl stop kyved && sudo systemctl disable kyved
 rm -rf /etc/systemd/system/kyved.service $HOME/.kyve /usr/bin/chaind $HOME/go/bin/chaind
-```
-## RPC
-```
-http://kyve.stake-take.com:16657
 ```
 
