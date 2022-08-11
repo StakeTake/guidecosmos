@@ -1,6 +1,8 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
+## Explorers
+PingPub - https://explorer.erialos.me/aura/staking
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/aura/euphoria-1/aura > aura.sh && chmod +x aura.sh && ./aura.sh
