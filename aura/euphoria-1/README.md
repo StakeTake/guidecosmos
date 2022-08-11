@@ -6,7 +6,7 @@
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/aura/euphoria-1/aura > aura.sh && chmod +x aura.sh && ./aura.sh
 ```
 To install, you just need to take the script and go through the installation order
-## Snapshot 
+## Snapshot 435038 height 0.2gb
 ```
 sudo systemctl stop aurad
 aurad unsafe-reset-all --home $HOME/.aura
@@ -24,7 +24,7 @@ rm -rf ~/.aura/data; \
 wget -O - http://snap.stake-take.com:8000/aura.tar.gz | tar xf -
 mv $HOME/root/.aura/data $HOME/.aura
 rm -rf $HOME/root
-sudo systemctl restart strided && journalctl -u aurad -f -o cat
+sudo systemctl restart aurad && journalctl -u aurad -f -o cat
 ```
 ## Start with state sync
 ```
