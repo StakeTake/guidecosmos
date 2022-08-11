@@ -1,15 +1,13 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
+## Explorers
+NodesGuru - https://pylons.explorers.guru
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/Pylons-tech/pylons-testnet-3/pylons > pylons.sh && chmod +x pylons.sh && ./pylons.sh
 ```
 To install, you just need to take the script and go through the installation order
-## RPC
-```
-http://pylons.stake-take.com:26657
-```
 ## Start with state sync
 ```
 sudo systemctl stop pylonsd
@@ -30,6 +28,17 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.pylons/config/config.toml
 sudo systemctl restart pylonsd && journalctl -u pylonsd -f -o cat
+```
+## Add addrbook
+```
+sudo systemctl stop pylonsd
+rm $HOME/.pylons/config/addrbook.json
+wget -O $HOME/.pylons/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/Pylons-tech/pylons-testnet-3/addrbook.json"
+sudo systemctl restart pylonsd && journalctl -u pylonsd -f -o cat
+```
+## RPC
+```
+http://pylons.stake-take.com:26657
 ```
 ## Delete node
 ```
