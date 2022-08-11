@@ -28,12 +28,20 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.gaia/config/config.toml
 sudo systemctl restart gaiad && journalctl -u gaiad -f -o cat
 ```
-## Delete node
+## Add addrbook
 ```
-sudo systemctl stop gaiad && sudo systemctl disable gaiad
-rm -rf $HOME/gaia $HOME/.gaia /etc/systemd/system/gaiad.service $HOME/go/bin/gaiad
+sudo systemctl stop gaiad
+rm $HOME/.gaia/config/addrbook.json
+wget -O $HOME/.gaia/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/GAIA/addrbook.json"
+sudo systemctl restart gaiad && journalctl -u gaiad -f -o cat
 ```
 ## RPC
 ```
 https://gaia-fleet.poolparty.stridenet.co:443, http://stride.stake-take.com:46657
 ```
+## Delete node
+```
+sudo systemctl stop gaiad && sudo systemctl disable gaiad
+rm -rf $HOME/gaia $HOME/.gaia /etc/systemd/system/gaiad.service $HOME/go/bin/gaiad
+```
+
