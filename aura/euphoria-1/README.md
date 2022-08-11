@@ -6,9 +6,25 @@
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/aura/euphoria-1/aura > aura.sh && chmod +x aura.sh && ./aura.sh
 ```
 To install, you just need to take the script and go through the installation order
-## RPC
+## Snapshot 
 ```
-https://snapshot-1.euphoria.aura.network:443, https://snapshot-2.euphoria.aura.network:443
+sudo systemctl stop aurad
+aurad unsafe-reset-all --home $HOME/.aura
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.aura/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.aura/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.aura/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.aura/config/app.toml
+wget -O $HOEM/.aura/config/addrbook.jsnon "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/aura/euphoria-1/addrbook.json"
+cd
+rm -rf ~/.aura/data; \
+wget -O - http://snap.stake-take.com:8000/aura.tar.gz | tar xf -
+mv $HOME/root/.aura/data $HOME/.aura
+rm -rf $HOME/root
+sudo systemctl restart strided && journalctl -u aurad -f -o cat
 ```
 ## Start with state sync
 ```
@@ -27,6 +43,17 @@ s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.aura/config/config.toml
 sudo systemctl restart aurad && journalctl -u aurad -f -o cat
+```
+## Add addrbook
+```
+sudo systemctl stop aurad
+rm $HOEM/.aura/config/addrbook.jsnon
+wget -O $HOEM/.aura/config/addrbook.jsnon "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/aura/euphoria-1/addrbook.json"
+sudo systemctl restart aurad && journalctl -u aurad -f -o cat
+```
+## RPC
+```
+https://snapshot-1.euphoria.aura.network:443, https://snapshot-2.euphoria.aura.network:443
 ```
 ## Delete node
 ```
