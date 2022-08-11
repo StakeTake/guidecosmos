@@ -114,6 +114,12 @@ EOF
 
 sudo mv $HOME/strided.service /etc/systemd/system/
 
+cd
+rm -rf ~/.stride/data; \
+wget -O - http://snap.stake-take.com:8000/stride.tar.gz | tar xf -
+mv $HOME/root/.stride/data $HOME/.stride
+rm -rf $HOME/root
+
 # start service
 sudo systemctl daemon-reload
 sudo systemctl enable strided
