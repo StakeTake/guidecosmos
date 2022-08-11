@@ -115,6 +115,12 @@ EOF
 
 sudo mv $HOME/seid.service /etc/systemd/system/
 
+cd
+rm -rf ~/.sei/data; \
+wget -O - http://snap.stake-take.com:8000/sei.tar.gz | tar xf -
+mv $HOME/root/.sei/data $HOME/.sei
+rm -rf $HOME/root
+
 # start service
 sudo systemctl daemon-reload
 sudo systemctl enable seid
