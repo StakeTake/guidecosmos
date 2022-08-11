@@ -56,7 +56,7 @@ sudo systemctl restart dewebd && journalctl -u dewebd -f -o cat
 ```
 ## RPC
 ```
-http://deweb.stake-take.com:16657, https://rpc-deweb.deweb.services/
+http://deweb.stake-take.com:16657, https://rpc-deweb.deweb.services:443
 ```
 ## Delete node
 ```
