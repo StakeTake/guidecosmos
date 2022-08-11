@@ -57,11 +57,12 @@ go version
 rm -rf $HOME/stride $HOME/.stride
 #INSTALL
 cd $HOME
-git clone https://github.com/Stride-Labs/stride.git
-cd stride
+git clone https://github.com/Stride-Labs/stride.git 
+cd stride 
 git checkout 4ec1b0ca818561cef04f8e6df84069b14399590e
+make build
 mkdir -p $HOME/go/bin
-go build -mod=readonly -trimpath -o $HOME/go/bin ./...
+cp $HOME/stride/build/strided $HOME/go/bin
 
 strided init $NODENAME --chain-id $CHAIN_ID
 
