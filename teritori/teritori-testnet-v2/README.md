@@ -48,6 +48,13 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.teritorid/config/config.toml
 sudo systemctl restart teritorid && journalctl -u teritorid -f -o cat
 ```
+## Add addrbook
+```
+sudo systemctl stop teritorid
+rm $HOME/.teritorid/config/addrbook.json
+wget -O $HOME/.teritorid/config/addrbook.json https://raw.githubusercontent.com/StakeTake/guidecosmos/main/teritori/teritori-testnet-v2/addrbook.json
+sudo systemctl restart teritorid && journalctl -u teritorid -f -o cat
+```
 ## RPC
 ```
 http://teritori.stake-take.com:26657
