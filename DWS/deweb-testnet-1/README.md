@@ -6,7 +6,7 @@
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/DWS/deweb-testnet-1/DWS > DWS.sh && chmod +x DWS.sh && ./DWS.sh
 ```
 To install, you just need to take the script and go through the installation order
-## Snapshot 1406072 height 0.4gb
+## Snapshot 1424063 height 0.4gb
 ```
 sudo systemctl stop dewebd
 dewebd unsafe-reset-all
