@@ -187,8 +187,8 @@ sudo systemctl restart hermesd && journalctl -u hermesd -f
 ### Launch was successful
 ### You can send tokens by example
 ```
-strided tx ibc-transfer transfer channel-0  YOUR_WALLET_ADDRESS_STRIDE 777ustrd --from=STRIDE_WALLET --fees 3000ustrd
+strided tx ibc-transfer transfer channel-0  YOUR_WALLET_ADDRESS_GAIA 777ustrd --from=STRIDE_WALLET --fees 3000ustrd
 ```
 ```
-gaiad  tx ibc-transfer transfer channel-0 YOUR_WALLET_ADDRESS_GAIA 777uatom --from=GAIA_WALLET --fees 3000uatom
+gaiad  tx ibc-transfer transfer channel-0 YOUR_WALLET_ADDRESS_STRIDE 777uatom --from=GAIA_WALLET --fees 3000uatom
 ```
