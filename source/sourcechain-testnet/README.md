@@ -58,7 +58,7 @@ sudo systemctl restart sourced && journalctl -u sourced -f -o cat
 ## Delete node
 ```
 sudo systemctl stop sourced && sudo systemctl disable sourced
-rm -rf $HOME/source $HOME/.sourcee /etc/systemd/system/sourced.service $HOME/go/bin/sourced
+rm -rf $HOME/source $HOME/.source /etc/systemd/system/sourced.service $HOME/go/bin/sourced
 ```
 ## RPC
 ```
