@@ -6,6 +6,10 @@ Ping Pub - https://explorer.testnet.sourceprotocol.io/source
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/source/sourcechain-testnet/source > source.sh && chmod +x source.sh && ./source.sh
 ```
+## Install node with cosmovisor
+```
+curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/source/sourcechain-testnet/sourcecosmo > sourcecosmo.sh && chmod +x sourcecosmo.sh && ./sourcecosmo.sh
+```
 To install, you just need to take the script and go through the installation order
 ## Snapshot height 1847709 0.05gb
 ```
