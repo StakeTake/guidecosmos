@@ -59,12 +59,13 @@ rm $HOME/.source/config/addrbook.json
 wget -O $HOME/.source/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/source/sourcechain-testnet/addrbook.json"
 sudo systemctl restart sourced && journalctl -u sourced -f -o cat
 ```
+## RPC
+```
+https://testnet.sourceprotocol.io:26657
+```
 ## Delete node
 ```
 sudo systemctl stop sourced && sudo systemctl disable sourced
 rm -rf $HOME/source $HOME/.source /etc/systemd/system/sourced.service $HOME/go/bin/sourced
 ```
-## RPC
-```
-https://testnet.sourceprotocol.io:26657
-```
+
