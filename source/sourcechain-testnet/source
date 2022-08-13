@@ -56,6 +56,7 @@ go version
 
 rm -rf $HOME/source $HOME/.source
 #INSTALL
+cd $HOME
 sudo curl https://get.ignite.com/cli! | sudo bash
 git clone -b testnet https://github.com/Source-Protocol-Cosmos/source.git
 cd ~/source
