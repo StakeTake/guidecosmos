@@ -1,9 +1,7 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 ## Explorers:
-Ping Pub - https://poolparty.stride.zone  
-NodesGuru - https://stride.explorers.guru   
-Cosmostation - https://testnet.mintscan.io/stride-testnet
+
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/canto/canto_7700-1/canto > canto.sh && chmod +x canto.sh && ./canto.sh
