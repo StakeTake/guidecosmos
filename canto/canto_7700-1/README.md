@@ -1,7 +1,7 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 ## Explorers:
-
+PingPub https://explorer.nodestake.top/canto/staking
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/canto/canto_7700-1/canto > canto.sh && chmod +x canto.sh && ./canto.sh
@@ -37,7 +37,7 @@ SEEDS=""; \
 PEERS=""; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.cantod/config/config.toml
 wget -O $HOME/.cantod/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/canto/canto_7700-1/addrbook.json"
-SNAP_RPC=""
+SNAP_RPC="https://rpc.canto.nodestake.top:443"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
@@ -59,7 +59,7 @@ sudo systemctl restart cantod && journalctl -u cantod -f -o cat
 ```
 ## RPC
 ```
-
+https://rpc.canto.nodestake.top:443
 ```
 ## Delete node
 ```
