@@ -9,10 +9,7 @@ Cosmostation - https://testnet.mintscan.io/stride-testnet
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/stride > stride.sh && chmod +x stride.sh && ./stride.sh
 ```
 To install, you just need to take the script and go through the installation order
-Save your mnemonic and backup $HOME/.stride/config/priv_validator_key.json
-[<img width="500" alt="665875" src="https://user-images.githubusercontent.com/93165931/184550643-68095e44-c657-405a-a500-ce19930af15e.png">
-](https://user-images.githubusercontent.com/93165931/184550692-91debe0a-a08a-4ec3-9882-577188fbdb8d.png)
-
+**Please save your mnemonic and backup $HOME/.stride/config/priv_validator_key.json**
 ### For example mnemonic phrase:
 ![image](https://user-images.githubusercontent.com/93165931/184551172-16cb2f1a-3145-4e5b-8092-c966e2f3e5ef.png)
 ## Snapshot 171593 height 1.4gb
