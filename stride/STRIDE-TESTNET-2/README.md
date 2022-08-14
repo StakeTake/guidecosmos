@@ -8,15 +8,8 @@ Cosmostation - https://testnet.mintscan.io/stride-testnet
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/stride > stride.sh && chmod +x stride.sh && ./stride.sh
 ```
-To install, you just need to take the script and go through the installation order## Command to create a backup key
-
-## Command to create a backup key
-
-```
-cd $HOME
-mkdir backup
-cp $HOME/.stride/config/priv_validator_key.json $HOME/backup/
-```
+To install, you just need to take the script and go through the installation order
+Save your mnemonic and backup $HOME/.stride/config/priv_validator_key.json
 [<img width="500" alt="665875" src="https://user-images.githubusercontent.com/93165931/184550643-68095e44-c657-405a-a500-ce19930af15e.png">
 ](https://user-images.githubusercontent.com/93165931/184550692-91debe0a-a08a-4ec3-9882-577188fbdb8d.png)
 
