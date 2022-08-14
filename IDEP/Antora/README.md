@@ -17,7 +17,7 @@ sudo systemctl stop iond
 iond tendermint unsafe-reset-all --home ~/.ion
 SEEDS="6e52997400aaa1b3d2155e45cf2559bf7a4c5e76@164.92.161.91:26656"
 PEERS="f14e7dd78fd2462541f59eac08a8107fca89c2b3@75.119.159.159:26641,8ffc74dbcd5ab32bc89e058ec53060d5762f88b5@178.63.100.102:26656,2a5c7fb6475f4edf5ea36dd1d40aecc70f55fa45@65.108.106.19:11343"; \
-sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.iond/config/config.toml
+sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.ion/config/config.toml
 SNAP_RPC="https://rpc.idep.nodestake.top:443"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 1000)); \
