@@ -31,7 +31,7 @@ sudo systemctl restart cantod && journalctl -u cantod -f -o cat
 ```
 ## Start with state sync
 ```
-sudo systemctl stop strided
+sudo systemctl stop cantod
 strided tendermint unsafe-reset-all --home $HOME/.cantod
 SEEDS=""; \
 PEERS=""; \
