@@ -59,12 +59,12 @@ rm $HOME/.stride/config/addrbook.json
 wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/addrbook.json"
 sudo systemctl restart strided && journalctl -u strided -f -o cat
 ```
+## RPC
+```
+http://stride.stake-take.com:26657, https://stride-library.poolparty.stridenet.co:443
+```
 ## Delete node
 ```
 sudo systemctl stop strided && sudo systemctl disable strided
 rm -rf $HOME/stride $HOME/.stride /etc/systemd/system/strided.service $HOME/go/bin/strided
-```
-## RPC
-```
-http://stride.stake-take.com:26657, https://stride-library.poolparty.stridenet.co:443
 ```
