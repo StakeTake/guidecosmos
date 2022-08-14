@@ -32,7 +32,7 @@ sudo systemctl restart cantod && journalctl -u cantod -f -o cat
 ## Start with state sync
 ```
 sudo systemctl stop cantod
-strided tendermint unsafe-reset-all --home $HOME/.cantod
+cantod tendermint unsafe-reset-all --home $HOME/.cantod
 SEEDS=""; \
 PEERS=""; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.cantod/config/config.toml
