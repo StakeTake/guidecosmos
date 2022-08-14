@@ -30,13 +30,6 @@ mv $HOME/root/.sei/data $HOME/.sei
 rm -rf $HOME/root
 sudo systemctl restart seid && journalctl -u seid -f -o cat
 ```
-## Add addrbook
-```
-sudo systemctl stop seid
-rm $HOME/.sei/config/addrbook.json
-wget -O $HOME/.sei/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/sei/atlantic-1/addrbook.json"
-sudo systemctl restart seid && journalctl -u seid -f -o cat
-```
 ## Start with state sync
 ```
 sudo systemctl stop seid
@@ -55,6 +48,13 @@ s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
 s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.sei/config/config.toml
+sudo systemctl restart seid && journalctl -u seid -f -o cat
+```
+## Add addrbook
+```
+sudo systemctl stop seid
+rm $HOME/.sei/config/addrbook.json
+wget -O $HOME/.sei/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/sei/atlantic-1/addrbook.json"
 sudo systemctl restart seid && journalctl -u seid -f -o cat
 ```
 ## RPC
