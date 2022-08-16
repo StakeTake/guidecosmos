@@ -75,7 +75,7 @@ cantod keys add $WALLETNAME
 cantod tendermint unsafe-reset-all --home $HOME/.cantod
 rm $HOME/.cantod/config/genesis.json
 wget -O $HOME/.cantod/config/genesis.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/canto/canto_7700-1/genesis.json"
-wget -O $HOME/.cantod/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-2/addrbook.json"
+wget -O $HOME/.cantod/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/canto/canto_7700-1/addrbook.json"
 
 SEEDS=""
 PEERS="ef45c32b232b772dd82b2f801f0e6abd3842e66c@164.90.154.41:26656"; \
