@@ -75,7 +75,7 @@ gaiad keys add $WALLETNAME
 gaiad tendermint unsafe-reset-all --home $HOME/.gaia
 rm $HOME/.gaia/config/genesis.json
 wget -O $HOME/.gaia/config/genesis.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/GAIA/genesis.json"
-wget -O $HOME/.gaia/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/GAIA/addrbook.json"
+# wget -O $HOME/.gaia/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/GAIA/addrbook.json"
 
 SEEDS=""
 PEERS="02145225db9611f315de6cca38fc2629a0011bc0@34.170.155.226:26656"; \
