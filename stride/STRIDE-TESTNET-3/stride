@@ -79,7 +79,7 @@ wget -O $HOME/.stride/config/genesis.json "https://raw.githubusercontent.com/Sta
 # wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-3/addrbook.json"
 
 SEEDS=""
-PEERS="da123c6eeb8a2c681890a42de20427899a2c12ef@34.69.179.243:26656,bf1414a4cbcfcc6c6fc11d1229f5cefcce1faef5@34.69.179.243:26656"; \
+PEERS="da123c6eeb8a2c681890a42de20427899a2c12ef@34.69.179.243:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.stride/config/config.toml
 
 
