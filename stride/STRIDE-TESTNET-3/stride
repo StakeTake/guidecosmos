@@ -76,7 +76,7 @@ strided keys add $WALLETNAME
 strided tendermint unsafe-reset-all --home $HOME/.stride
 rm $HOME/.stride/config/genesis.json
 wget -O $HOME/.stride/config/genesis.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-3/genesis.json"
-# wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-3/addrbook.json"
+wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-3/addrbook.json"
 
 SEEDS=""
 PEERS="da123c6eeb8a2c681890a42de20427899a2c12ef@34.69.179.243:26656"; \
