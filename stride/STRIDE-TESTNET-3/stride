@@ -59,7 +59,7 @@ rm -rf $HOME/stride $HOME/.stride
 cd $HOME
 git clone https://github.com/Stride-Labs/stride.git 
 cd stride 
-git checkout 4ec1b0ca818561cef04f8e6df84069b14399590e
+git checkout poolparty-v3
 make build
 mkdir -p $HOME/go/bin
 cp $HOME/stride/build/strided $HOME/go/bin
