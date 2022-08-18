@@ -61,7 +61,7 @@ git clone https://github.com/Stride-Labs/stride.git
 cd stride 
 git checkout poolparty-v3
 make build
-mv $HOME/stride/build/gaiad /usr/local/bin
+mv $HOME/stride/build/strided /usr/local/bin
 
 strided init $NODENAME --chain-id $CHAIN_ID
 
