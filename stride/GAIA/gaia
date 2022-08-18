@@ -60,8 +60,8 @@ cd $HOME
 git clone https://github.com/Stride-Labs/gaia.git
 cd gaia
 git checkout 5b47714dd5607993a1a91f2b06a6d92cbb504721
-mkdir -p $HOME/go/bin
-go build -mod=readonly -trimpath -o $HOME/go/bin ./...
+make build
+mv $HOME/gaia/build/gaiad /usr/local/bin
 
 gaiad init $NODENAME --chain-id $CHAIN_ID
 
