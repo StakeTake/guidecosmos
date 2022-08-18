@@ -59,7 +59,7 @@ rm -rf $HOME/gaia $HOME/.gaia
 cd $HOME
 git clone https://github.com/Stride-Labs/gaia.git
 cd gaia
-git checkout 5b47714dd5607993a1a91f2b06a6d92cbb504721
+git checkout 5b47714dd5607993a1a91f2b06a6d92cbb504721 git checkout poolparty-v3
 mkdir -p $HOME/go/bin
 go build -mod=readonly -trimpath -o $HOME/go/bin ./...
 
@@ -74,11 +74,11 @@ gaiad keys add $WALLETNAME
 
 gaiad tendermint unsafe-reset-all --home $HOME/.gaia
 rm $HOME/.gaia/config/genesis.json
-wget -O $HOME/.gaia/config/genesis.json "https://raw.githubusercontent.com/Stride-Labs/testnet/main/poolparty/gaia/gaia_genesis.json"
+wget -O $HOME/.gaia/config/genesis.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/GAIA/genesis.json"
 wget -O $HOME/.gaia/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/GAIA/addrbook.json"
 
 SEEDS=""
-PEERS="5b1bd3fb081c79b7bdc5c1fd0a3d90928437266a@78.107.234.44:36656"; \
+PEERS="02145225db9611f315de6cca38fc2629a0011bc0@34.170.155.226:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.gaia/config/config.toml
 
 
