@@ -66,5 +66,5 @@ http://stride.stake-take.com:26657, https://stride-library.poolparty.stridenet.c
 ## Delete node
 ```
 sudo systemctl stop strided && sudo systemctl disable strided
-rm -rf $HOME/stride $HOME/.stride /etc/systemd/system/strided.service $HOME/go/bin/strided
+rm -rf $HOME/stride $HOME/.stride /etc/systemd/system/strided.service $(which strided)
 ```
