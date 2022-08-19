@@ -54,9 +54,9 @@ echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
 source ~/.bash_profile && \
 go version
 
+cd $HOME
 rm -rf $HOME/stride $HOME/.stride
 #INSTALL
-cd $HOME
 git clone https://github.com/Stride-Labs/stride.git 
 cd stride 
 git checkout cf4e7f2d4ffe2002997428dbb1c530614b85df1b
