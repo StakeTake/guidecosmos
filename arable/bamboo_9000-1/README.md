@@ -59,7 +59,7 @@ sudo systemctl restart acred && journalctl -u acred -f -o cat
 ```
 ## RPC
 ```
-http://arable.stake-take.com:26657, https://rpc-t.acre.nodestake.top:443
+http://arable.stake-take.com:46657, https://rpc-t.acre.nodestake.top:443
 ```
 ## Delete node
 ```
