@@ -13,7 +13,7 @@ To install, you just need to take the script and go through the installation ord
 ### Please save your mnemonic and backup $HOME/.stride/config/priv_validator_key.json
 #### For example mnemonic phrase:
 ![image](https://user-images.githubusercontent.com/93165931/184551172-16cb2f1a-3145-4e5b-8092-c966e2f3e5ef.png)
-## Snapshot 11234 height 0.1gb
+## Snapshot 8550 height 1gb
 ```
 sudo systemctl stop strided
 strided tendermint unsafe-reset-all --home $HOME/.stride --keep-addr-book
@@ -36,10 +36,9 @@ sudo systemctl restart strided && journalctl -u strided -f -o cat
 ```
 sudo systemctl stop strided
 strided tendermint unsafe-reset-all --home $HOME/.stride
-SEEDS="d2ec8f968e7977311965c1dbef21647369327a29@seedv2.poolparty.stridenet.co:26656"
-PEERS="bf1414a4cbcfcc6c6fc11d1229f5cefcce1faef5@stride-node1.poolparty.stridenet.co:26656"; \
+SEEDS=""
+PEERS="6d3d7df642fd0cdf0c4b74c499cf4d5937a29d2b@23.88.100.175:26656,bf1414a4cbcfcc6c6fc11d1229f5cefcce1faef5@stride-node1.poolparty.stridenet.co:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.stride/config/config.toml
-wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-4/addrbook.json"
 SNAP_RPC="http://stride.stake-take.com:26657"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
