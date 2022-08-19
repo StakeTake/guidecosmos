@@ -37,9 +37,9 @@ acred tendermint unsafe-reset-all --home $HOME/.acred
 SEEDS=""
 PEERS="44dd124ca34742245ad906f9f6ea377fae3af0cf@168.100.9.100:26656,6477921cdd4ba4503a1a2ff1f340c9d6a0e7b4a0@168.100.10.133:26656,9b53496211e75dbf33680b75e617830e874c8d93@168.100.8.9:26656,c55d79d6f76045ff7b68dc2bf6655348ebbfd795@168.100.8.60:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.acred/config/config.toml
-SNAP_RPC="https://rpc-t.acre.nodestake.top:443"
+SNAP_RPC="http://arable.stake-take.com:46657"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
-BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 500)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
 echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
 
