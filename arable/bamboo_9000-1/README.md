@@ -64,5 +64,5 @@ http://arable.stake-take.com:46657, https://rpc-t.acre.nodestake.top:443
 ## Delete node
 ```
 sudo systemctl stop acred && sudo systemctl disable acred
-rm -rf rm -rf $HOME/acrechain $HOME/.acred /etc/systemd/system/acred.service $(which acred)
+rm -rf $HOME/acrechain $HOME/.acred /etc/systemd/system/acred.service $(which acred)
 ```
