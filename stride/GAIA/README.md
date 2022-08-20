@@ -45,6 +45,6 @@ https://gaia-fleet.poolparty.stridenet.co:443, http://stride.stake-take.com:4665
 ## Delete node
 ```
 sudo systemctl stop gaiad && sudo systemctl disable gaiad
-rm -rf $HOME/gaia $HOME/.gaia /etc/systemd/system/gaiad.service $HOME/go/bin/gaiad
+rm -rf $HOME/gaia $HOME/.gaia /etc/systemd/system/gaiad.service $(which gaiad)
 ```
 
