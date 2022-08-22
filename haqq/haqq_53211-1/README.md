@@ -10,7 +10,7 @@ To install, you just need to take the script and go through the installation ord
 ### Please save your mnemonic and backup $HOME/.haqqd/config/priv_validator_key.json
 #### For example mnemonic phrase:
 ![image](https://user-images.githubusercontent.com/93165931/184551172-16cb2f1a-3145-4e5b-8092-c966e2f3e5ef.png)
-## Snapshot 538183 height 0.2gb
+## Snapshot 646130 height 0.2gb
 ```
 sudo systemctl stop haqqd
 haqqd tendermint unsafe-reset-all --home $HOME/.haqqd --keep-addr-book
@@ -37,7 +37,7 @@ SEEDS="8f7b0add0523ec3648cb48bc12ac35357b1a73ae@195.201.123.87:26656,899eb370da6
 PEERS=""; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.haqqd/config/config.toml
 wget -O $HOME/.haqqd/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/haqq/haqq_53211-1/addrbook.json"
-SNAP_RPC="https://rpc.tm.testedge.haqq.network:443"
+SNAP_RPC="http://haqq.stake-take.com:36657"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
@@ -59,7 +59,7 @@ sudo systemctl restart haqqd && journalctl -u haqqd -f -o cat
 ```
 ## RPC
 ```
-https://rpc.tm.testedge.haqq.network:443, https://rpc-t.haqq.nodestake.top:443
+http://haqq.stake-take.com:36657, https://rpc.tm.testedge.haqq.network:443, https://rpc-t.haqq.nodestake.top:443
 ```
 ## Delete node
 ```
