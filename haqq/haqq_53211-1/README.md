@@ -4,7 +4,7 @@
 Ping Pub - https://explorer.nodestake.top/haqq/staking
 ## One line script for full install
 ```
-https://raw.githubusercontent.com/StakeTake/guidecosmos/main/haqq/haqq_53211-1/haqq > haqq.sh && chmod +x haqq.sh && ./haqq.sh
+curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/haqq/haqq_53211-1/haqq > haqq.sh && chmod +x haqq.sh && ./haqq.sh
 ```
 To install, you just need to take the script and go through the installation order
 ### Please save your mnemonic and backup $HOME/.haqqd/config/priv_validator_key.json
