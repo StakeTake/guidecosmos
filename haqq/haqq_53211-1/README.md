@@ -27,6 +27,7 @@ rm -rf ~/.haqqd/data; \
 wget -O - http://snap.stake-take.com:8000/haqq.tar.gz | tar xf -
 mv $HOME/root/.haqqd/data $HOME/.haqqd
 rm -rf $HOME/root
+wget -O $HOME/.haqqd/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/haqq/haqq_53211-1/addrbook.json"
 sudo systemctl restart haqqd && journalctl -u haqqd -f -o cat
 ```
 ## Start with state sync
