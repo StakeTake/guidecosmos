@@ -64,5 +64,5 @@ http://sei.stake-take.com:20657
 ## Delete node
 ```
 sudo systemctl stop seid && sudo systemctl disable seid
-rm -rf $HOME/sei-chain $HOME/.sei /etc/systemd/system/seid.service $HOME/go/bin/seid /usr/bin/seid
+rm -rf $HOME/sei-chain $HOME/.sei /etc/systemd/system/seid.service $(which seid)
 ```
