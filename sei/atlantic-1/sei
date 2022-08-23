@@ -58,7 +58,7 @@ rm -rf $HOME/sei-chain $HOME/.sei $HOME/.sei-chain
 git clone https://github.com/sei-protocol/sei-chain
 cd $HOME/sei-chain
 git checkout master && git pull
-git checkout 1.1.0beta
+git checkout 1.1.1beta
 make install
 mv $HOME/go/bin/seid /usr/bin/
 
@@ -115,11 +115,6 @@ EOF
 
 sudo mv $HOME/seid.service /etc/systemd/system/
 
-cd
-rm -rf ~/.sei/data; \
-wget -O - http://snap.stake-take.com:8000/sei.tar.gz | tar xf -
-mv $HOME/root/.sei/data $HOME/.sei
-rm -rf $HOME/root
 
 # start service
 sudo systemctl daemon-reload
