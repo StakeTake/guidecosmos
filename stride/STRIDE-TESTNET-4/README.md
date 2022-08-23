@@ -13,7 +13,7 @@ To install, you just need to take the script and go through the installation ord
 ### Please save your mnemonic and backup $HOME/.stride/config/priv_validator_key.json
 #### For example mnemonic phrase:
 ![image](https://user-images.githubusercontent.com/93165931/184551172-16cb2f1a-3145-4e5b-8092-c966e2f3e5ef.png)
-## Snapshot 14950 height 1gb
+## Snapshot 68780 height 1gb
 ```
 sudo systemctl stop strided
 strided tendermint unsafe-reset-all --home $HOME/.stride --keep-addr-book
@@ -50,6 +50,7 @@ s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
 s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.stride/config/config.toml
+wget -O $HOME/.stride/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-TESTNET-4/addrbook.json"
 sudo systemctl restart strided && journalctl -u strided -f -o cat
 ```
 ## Add addrbook
@@ -61,7 +62,7 @@ sudo systemctl restart strided && journalctl -u strided -f -o cat
 ```
 ## RPC
 ```
-http://stride.stake-take.com:26657, https://stride-library.poolparty.stridenet.co:443
+http://stride.stake-take.com:26657, https://stride-library.poolparty.stridenet.co:443, https://stride-testnet-rpc.polkachu.com:443
 ```
 ## Delete node
 ```
