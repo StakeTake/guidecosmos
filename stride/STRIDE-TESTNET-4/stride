@@ -59,7 +59,7 @@ rm -rf $HOME/stride $HOME/.stride
 #INSTALL
 git clone https://github.com/Stride-Labs/stride.git 
 cd stride 
-git checkout cf4e7f2d4ffe2002997428dbb1c530614b85df1b
+git checkout 90859d68d39b53333c303809ee0765add2e59dab
 make build
 mkdir -p $HOME/go/bin
 mv $HOME/stride/build/strided $HOME/go/bin
