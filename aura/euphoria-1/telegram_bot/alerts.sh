@@ -3,7 +3,7 @@
 # File name for saving parameters, e.g. "cosmos.log"
 LOG_FILE="$HOME/alerts/nodealerts.log"
 # Your node RPC address, e.g. "http://127.0.0.1:26657"
-NODE_RPC="http://127.0.0.1:26657"
+NODE_RPC="http://127.0.0.1:56657"
 source 
 # Trusted node RPC address, e.g. "https://rpc.cosmos.network:26657"
 SIDE_RPC="https://snapshot-1.euphoria.aura.network:443"
