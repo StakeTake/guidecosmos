@@ -3,10 +3,10 @@
 # File name for saving parameters, e.g. "cosmos.log"
 LOG_FILE="/root/alerts/nodealerts.log"
 # Your node RPC address, e.g. "http://127.0.0.1:26657"
-NODE_RPC="http://127.0.0.1:26657"
+NODE_RPC="http://127.0.0.1:56657"
 source 
 # Trusted node RPC address, e.g. "https://rpc.cosmos.network:26657"
-SIDE_RPC="http://localhost:26657"
+SIDE_RPC="https://snapshot-1.euphoria.aura.network:443"
 ip=$(wget -qO- eth0.me)
 
 touch $LOG_FILE
@@ -27,7 +27,7 @@ source $HOME/.bash_profile
 curl -s "$NODE_RPC/status"> /dev/null
 if [[ $? -ne 0 ]]; then
     MSG="$ip node is stopped!!! ( узел остановлен )"
-    MSG="$NODENAME $MSG"
+    MSG="AURA $MSG"
     SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG"); exit 1
 fi
 
@@ -57,6 +57,6 @@ if [[ $REAL_BLOCK -eq 0 ]]; then
 fi
 
 if [[ $MSG != "" ]]; then
-    MSG="$NODENAME $MSG"
+    MSG="AURA $MSG"
     SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG")
 fi
