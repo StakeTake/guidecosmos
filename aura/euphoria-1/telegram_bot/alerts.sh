@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # File name for saving parameters, e.g. "cosmos.log"
-LOG_FILE="/root/alerts/nodealerts.log"
+LOG_FILE="$HOME/alerts/nodealerts.log"
 # Your node RPC address, e.g. "http://127.0.0.1:26657"
 NODE_RPC="http://127.0.0.1:26657"
 source 
