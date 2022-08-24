@@ -5,7 +5,7 @@ ___In this guide, we wrote how to set up a bot to track the state of the Aura no
 To install, follow a few simple steps:
 
 1. Create a bot, get an api token (To get a token, you can use FatherBot in telegram) and a telegram chat id, you can read how to do it at the link - [(ENG)](https://sean-bradley.medium.com/get-telegram-chat-id-80b575520659 "") [(RU)](https://nastroyvse.ru/programs/review/telegram-id-kak-uznat-zachem-nuzhno.html "")  
-2. Run the script, select the installation stage, which will ask you to enter API_token,and telegram chat id.
+2. Run the script, select the installation stage, which will ask you to enter API_token and telegram chat id.
 ```html
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/aura/euphoria-1/telegram_bot/start > start.sh && chmod +x start.sh && ./start.sh
 ```
