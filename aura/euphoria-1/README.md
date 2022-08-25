@@ -47,6 +47,7 @@ s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
 s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
 s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.aura/config/config.toml
+wget -O $HOEM/.aura/config/addrbook.jsnon "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/aura/euphoria-1/addrbook.json"
 sudo systemctl restart aurad && journalctl -u aurad -f -o cat
 ```
 ## Add addrbook
