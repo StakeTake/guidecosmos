@@ -6,7 +6,7 @@ LOG_FILE="$HOME/alerts/nodealerts.log"
 NODE_RPC="http://127.0.0.1:26657"
 source 
 # Trusted node RPC address, e.g. "https://rpc.cosmos.network:26657"
-SIDE_RPC="https://snapshot-1.euphoria.aura.network:443"
+SIDE_RPC="https://rpc-t.aura.nodestake.top:443"
 ip=$(wget -qO- eth0.me)
 
 touch $LOG_FILE
