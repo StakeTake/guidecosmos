@@ -1,4 +1,4 @@
-# Manual guide with create gentx atlantic-sub-1 chain
+# Manual guide with create gentx atlantic-sub-2 chain
 
 ## Before publication of the genesis file
 ### Delete ur previous Sei node, if u use same server
