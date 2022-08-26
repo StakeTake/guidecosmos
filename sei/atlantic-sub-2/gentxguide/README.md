@@ -3,6 +3,7 @@
 ## Before publication of the genesis file
 ### Delete ur previous Sei node, if u use same server
 ```
+cd $HOME
 sudo systemctl stop seid && sudo systemctl disable seid
 rm -rf $HOME/sei-chain $HOME/.sei $(which seid)
 ```
@@ -27,6 +28,7 @@ go version
 #### Build binary
 ```
 #INSTALL
+cd $HOME
 git clone https://github.com/sei-protocol/sei-chain
 cd $HOME/sei-chain
 git checkout master && git pull
