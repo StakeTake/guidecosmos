@@ -55,36 +55,6 @@ seid config chain-id $CHAIN_ID
 ```
 seid keys add $WALLETNAME --recover
 ```
-#### Edit config (optional) add pruning, indexer
-```
-indexer="null"
-pruning="custom"
-pruning_keep_recent="100"
-pruning_keep_every="0"
-pruning_interval="10"
-sed -i -e "s/^indexer *=.*/indexer = \"$indexer\"/" $HOME/.sei/config/config.toml
-sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.sei/config/app.toml
-sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.sei/config/app.toml
-sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.sei/config/app.toml
-sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.sei/config/app.toml
-```
-#### Create service
-```
-tee /etc/systemd/system/seid.service > /dev/null <<EOF
-[Unit]
-Description=SEI
-After=network.target
-[Service]
-Type=simple
-User=$USER
-ExecStart=$(which seid) start
-Restart=on-failure
-RestartSec=10
-LimitNOFILE=65535
-[Install]
-WantedBy=multi-user.target
-EOF
-```
 ### Create gentx
 #### Add the account to your local genesis file with a given amount and key
 ```
