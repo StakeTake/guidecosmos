@@ -76,7 +76,7 @@ gaiad keys add $WALLETNAME
 gaiad tendermint unsafe-reset-all --home $HOME/.gaia
 rm $HOME/.gaia/config/genesis.json
 wget -O $HOME/.gaia/config/genesis.json "https://raw.githubusercontent.com/Stride-Labs/testnet/main/poolparty/gaia/gaia_genesis.json"
-# wget -O $HOME/.gaia/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/GAIA/addrbook.json"
+wget -O $HOME/.gaia/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/GAIA/addrbook.json"
 
 SEEDS=""
 PEERS="4091e937ef577bea13dc704bdb8c8b59eaa44635@gaia.poolparty.stridenet.co:26656,bcb8420c5a3c67a9c4a4803c2a1d02d32f09eb8d@20.224.44.231:23656,9db59d9a6dd10ea2d5247432e0a371bbb97811ba@65.108.80.183:23656,245d766d00e6f7d1afdefc6e09d7be4314e8cc71@65.108.206.56:23656,1a5adae36c507e2f9354fcd2a44a483d3638ddf0@135.181.91.177:23656,1fb0892581455b14990238b09e4ee928c9ad57be@38.242.225.140:23656,3dcf50b01e256bee62aae9973a6b14fd59bb977f@188.166.104.216:23656,782cb61f5f416cf637ef71d0d80d5cbda7846a94@135.181.151.107:26656"; \
