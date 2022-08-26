@@ -34,7 +34,7 @@ git checkout 1.1.2beta-internal
 make install
 mv $HOME/go/bin/seid /usr/bin/
 ```
-#### Add variables (change "<YOURNODENAME>" and "<YOURWALLETNAME>" without "<>")
+#### Add variables (change "YOURNODENAME" and "YOURWALLETNAME" without "<>")
 ```
 NODENAME=<YOURNODENAME>
 WALLETNAME=<YOURWALLETNAME>
