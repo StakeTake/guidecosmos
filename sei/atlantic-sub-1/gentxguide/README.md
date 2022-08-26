@@ -34,7 +34,7 @@ git checkout 1.1.2beta-internal
 make install
 mv $HOME/go/bin/seid /usr/bin/
 ```
-#### Add variables (change <YOURNODENAME> and <YOURWALLETNAME> without "<>")
+#### Add variables (change "<YOURNODENAME>" and "<YOURWALLETNAME>" without "<>")
 ```
 NODENAME=<YOURNODENAME>
 WALLETNAME=<YOURWALLETNAME>
@@ -90,7 +90,7 @@ EOF
 ```
 seid add-genesis-account $WALLETNAME 10000000usei
 ```
-#### Create gentx 
+#### Create gentx (security-contact, website, details, identity is optional flags)
 ```
  seid gentx $WALLETNAME 10000000usei \
  --chain-id=$CHAIN_ID \
@@ -104,6 +104,6 @@ seid add-genesis-account $WALLETNAME 10000000usei
  --details="" \
  --identity=""
 ```
-#### Create Pull Request to the [testnet repository](https://github.com/sei-protocol/testnet/tree/main/atlantic-subchains/atlantic-sub-1/gentx) with the file <your validator moniker>.json.
+#### Create Pull Request to the [testnet repository](https://github.com/sei-protocol/testnet/tree/main/atlantic-subchains/atlantic-sub-1/gentx) with the file your_validator_moniker.json.
 
 ## After publication of the genesis file:
