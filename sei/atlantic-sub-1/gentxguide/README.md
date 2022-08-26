@@ -27,7 +27,6 @@ go version
 ```
 #### Build binary
 ```
-#INSTALL
 cd $HOME
 git clone https://github.com/sei-protocol/sei-chain
 cd $HOME/sei-chain
