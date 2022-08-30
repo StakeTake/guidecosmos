@@ -1,5 +1,8 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
+
+## Explorer
+PingPub - https://explorer.stake-take.com/evmos
 ___In this guide, we have made setting up a beta node as easy as possible___
 
 
