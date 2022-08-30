@@ -1,6 +1,8 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
+## Explorers
+PingPub - https://explorer.stake-take.com/idep/staking
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/IDEP/Antora/idep > idep.sh && chmod +x idep.sh && ./idep.sh
