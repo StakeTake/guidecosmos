@@ -1,6 +1,5 @@
-# Manual guide with create gentx atlantic-sub-1 chain
+# Step by step guide for Sei node atlantic-sub-1 chain
 
-## Before publication of the genesis file
 ### Delete ur previous Sei node, if u use same server
 ```
 cd $HOME
@@ -52,29 +51,83 @@ seid init $NODENAME --chain-id $CHAIN_ID
 ```
 seid config chain-id $CHAIN_ID
 ```
-#### Restore your wallet
+#### Create wallet
+```
+seid keys add $WALLETNAME
+```
+or restore previous wallet
 ```
 seid keys add $WALLETNAME --recover
 ```
-### Create gentx
-#### Add the account to your local genesis file with a given amount and key
+### Download genesis
 ```
-seid add-genesis-account $WALLETNAME 10000000usei
+seid tendermint unsafe-reset-all --home $HOME/.sei
+rm $HOME/.sei/config/genesis.json
+wget -O $HOME/.sei/config/genesis.json "https://raw.githubusercontent.com/sei-protocol/testnet/main/atlantic-subchains/atlantic-sub-1/genesis.json"
 ```
-#### Create gentx (security-contact, website, details, identity is optional flags)
+### Turn on pruning and turn off indexing
 ```
- seid gentx $WALLETNAME 10000000usei \
- --chain-id=$CHAIN_ID \
- --moniker=$NODENAME \
- --commission-rate=0.05 \
- --commission-max-rate=0.2 \
- --commission-max-change-rate=0.05 \
- --pubkey $(seid tendermint show-validator) \
- --security-contact="" \
- --website="" \
- --details="" \
- --identity=""
-```
-#### Create Pull Request to the [testnet repository](https://github.com/sei-protocol/testnet/tree/main/atlantic-subchains/atlantic-sub-1/gentx) with the file your_validator_moniker.json.
+indexer="null"
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
 
-## After publication of the genesis file:
+sed -i -e "s/^indexer *=.*/indexer = \"$indexer\"/" $HOME/.sei/config/config.toml
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.sei/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.sei/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.sei/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.sei/config/app.toml
+```
+Add peers and seeds
+```
+SEEDS=""
+PEERS=""; \
+sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.stride/config/config.toml
+```
+### Create service
+```
+tee /etc/systemd/system/seid.service > /dev/null <<EOF
+[Unit]
+Description=SEI
+After=network.target
+[Service]
+Type=simple
+User=$USER
+ExecStart=$(which seid) start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+### Start service
+```
+sudo systemctl daemon-reload
+sudo systemctl enable seid
+sudo systemctl restart seid && journalctl -u seid -f -o cat
+```
+### Wait sync and create validator (if u is not in genesis file), backup $HOME/.sei/config/priv_validator_key.json file.
+```
+seid tx staking create-validator \
+  --amount 1000000usei \
+  --from $WALLETNAME \
+  --commission-max-change-rate "0.05" \
+  --commission-max-rate "0.20" \
+  --commission-rate "0.05" \
+  --min-self-delegation "1" \
+  --pubkey $(seid tendermint show-validator) \
+  --moniker $NODENAME \
+  --chain-id $CHAIN_ID \
+  --gas 300000 \
+  -y
+```
+#### check sync status and block number
+```
+curl localhost:26657/status
+```
+#### check balance
+```
+seid q bank balances $(seid keys show $WALLETNAME -a)
+```
