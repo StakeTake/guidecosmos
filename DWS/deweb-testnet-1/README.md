@@ -1,6 +1,8 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
+## Explorers
+PingPub - https://explorer.stake-take.com/dws/staking
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/DWS/deweb-testnet-1/DWS > DWS.sh && chmod +x DWS.sh && ./DWS.sh
