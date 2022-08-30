@@ -82,7 +82,7 @@ sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $
 Add peers and seeds
 ```
 SEEDS=""
-PEERS=""; \
+PEERS="38b4d78c7d6582fb170f6c19330a7e37e6964212@65.109.49.111:46656,dd8b73cad778d622c255e6dcebf42262985bae1d@65.21.151.93:36656,e14cb72edc5bf06a55efa7ad1f5b3a5b9a8b167d@65.108.140.222:12656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.stride/config/config.toml
 ```
 ### Create service
