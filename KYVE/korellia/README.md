@@ -2,6 +2,7 @@
 
 
 ## Explorers: 
+PingPub - https://explorer.stake-take.com/kyve/staking
 NodesGuru - https://kyve.explorers.guru   
 ## One line script for full install
 ```
