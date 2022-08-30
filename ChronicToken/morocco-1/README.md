@@ -1,6 +1,8 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
+## Explorers
+PingPub - https://explorer.stake-take.com/chronic-token/staking
 ## One-line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/ChronicToken/morocco-1/chtd > chtd.sh && chmod +x chtd.sh && ./chtd.sh
