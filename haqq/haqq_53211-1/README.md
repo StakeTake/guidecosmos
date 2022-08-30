@@ -1,7 +1,7 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 ## Explorers:
-Ping Pub - https://explorer.nodestake.top/haqq-testedge
+Ping Pub - https://explorer.stake-take.com/haqq/staking
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/haqq/haqq_53211-1/haqq > haqq.sh && chmod +x haqq.sh && ./haqq.sh
