@@ -1,9 +1,12 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
-In this guide, we have made setting up a node as easy as possible
-
-    curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/meme/meme-1/meme > meme.sh && chmod +x meme.sh && ./meme.sh
+## Explorers
+PingPub - https://explorer.stake-take.com/meme/staking
+## In this guide, we have made setting up a node as easy as possible
+```
+curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/meme/meme-1/meme > meme.sh && chmod +x meme.sh && ./meme.sh
+```
 To install, you just need to take the script and go through the installation order
 ### Please save your mnemonic and backup $HOME/.memed/config/priv_validator_key.json
 #### For example mnemonic phrase:
