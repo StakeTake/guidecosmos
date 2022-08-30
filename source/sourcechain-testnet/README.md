@@ -1,7 +1,7 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 ## Explorers:
-Ping Pub - https://explorer.testnet.sourceprotocol.io/source  
+Ping Pub - https://explorer.stake-take.com/source/staking  
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/source/sourcechain-testnet/source > source.sh && chmod +x source.sh && ./source.sh
