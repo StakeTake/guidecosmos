@@ -1,7 +1,7 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 ## Explorers:
-PingPub https://explorer.nodestake.top/canto/staking
+PingPub - https://explorer.stake-take.com/canto/staking
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/canto/canto_7700-1/canto > canto.sh && chmod +x canto.sh && ./canto.sh
