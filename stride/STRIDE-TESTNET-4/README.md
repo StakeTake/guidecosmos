@@ -2,7 +2,7 @@
 
 
 ## Explorers:
-Ping Pub - https://poolparty.stride.zone  
+Ping Pub - https://explorer.stake-take.com/stride-testnet/staking  
 NodesGuru - https://stride.explorers.guru   
 Cosmostation - https://testnet.mintscan.io/stride-testnet
 ## One line script for full install
