@@ -2,7 +2,7 @@
 
 
 ## Explorers:
-Ping Pub - https://explorer.nodestake.top/acre-testnet/staking
+Ping Pub - https://explorer.stake-take.com/acre-testnet/staking
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/arable/bamboo_9000-1/arable > arable.sh && chmod +x arable.sh && ./arable.sh
