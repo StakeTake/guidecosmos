@@ -59,7 +59,8 @@ rm -rf pylons .pylons
 #INSTALL
 git clone https://github.com/Pylons-tech/pylons
 cd pylons
-git checkout v0.4.2
+git pull
+git checkout 8650c11
 make install
 cd $HOME
 
