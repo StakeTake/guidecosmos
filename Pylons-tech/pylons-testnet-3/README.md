@@ -15,7 +15,7 @@ To install, you just need to take the script and go through the installation ord
 ## Start with state sync
 ```
 sudo systemctl stop pylonsd
-pylonsd unsafe-reset-all --home $HOME/.pylons
+pylonsd tendermint unsafe-reset-all --home $HOME/.pylons
 cd $HOME
 rm -rf pylons
 git clone https://github.com/Pylons-tech/pylons
