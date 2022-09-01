@@ -11,7 +11,25 @@ To install, you just need to take the script and go through the installation ord
 ### Please save your mnemonic and backup $HOME/.pylons/config/priv_validator_key.json
 #### For example mnemonic phrase:
 ![image](https://user-images.githubusercontent.com/93165931/184551172-16cb2f1a-3145-4e5b-8092-c966e2f3e5ef.png)
-
+## Snapshot height 1928309 0.2gb
+```
+sudo systemctl stop pylonsd
+pylonsd tendermint unsafe-reset-all --home $HOME/.pylons --keep-addr-book
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.pylons/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.pylons/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.pylons/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.pylons/config/app.toml
+cd
+rm -rf ~/.pylons/data; \
+wget -O - http://snap.stake-take.com:8000/pylons.tar.gz | tar xf -
+mv $HOME/root/.pylons/data $HOME/.pylons
+rm -rf $HOME/root
+sudo systemctl restart pylonsd && journalctl -u pylonsd -f -o cat
+```
 ## Start with state sync
 ```
 sudo systemctl stop pylonsd
