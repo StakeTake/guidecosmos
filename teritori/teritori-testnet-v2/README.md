@@ -3,6 +3,7 @@
 
 ## Explorers
 PingPub - https://explorer.stake-take.com/teritori-testnet/staking
+
 NodesGuru - https://teritori.explorers.guru
 ## One line script for full install
 ```
