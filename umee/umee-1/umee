@@ -73,7 +73,7 @@ echo "============================================================"
 #WALLET
 umeed keys add $WALLETNAME
 
-umeed tendermint unsafe-reset-all --home $HOME/.umee
+umeed unsafe-reset-all --home $HOME/.umee
 rm $HOME/.umee/config/genesis.json
 wget -O $HOME/.umee/config/genesis.json "https://github.com/umee-network/mainnet/raw/main/genesis.json"
 wget -O $HOME/.umee/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/umee/umee-1/addrbook.json"
