@@ -5,6 +5,7 @@
 Ping Pub - https://explorer.stake-take.com/umee/staking  
 NodesGuru - https://umee.explorers.guru   
 Cosmostation - https://www.mintscan.io/umee
+## OneLine script of full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/umee/umee-1/umee > umee.sh && chmod +x umee.sh && ./umee.sh
 ```
