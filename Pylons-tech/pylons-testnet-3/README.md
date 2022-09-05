@@ -72,5 +72,5 @@ http://pylons.stake-take.com:26657
 ## Delete node
 ```
 sudo systemctl stop pylonsd && sudo systemctl disable pylonsd
-rm -rf $HOME/pylons $HOME/.pylons /etc/systemd/system/pylonsd.service $HOME/go/bin/pylonsd
+rm -rf $HOME/pylons $HOME/.pylons /etc/systemd/system/pylonsd.service $(which pylonsd)
 ```
