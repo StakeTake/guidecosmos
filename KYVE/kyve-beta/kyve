@@ -62,8 +62,7 @@ chmod +x $HOME/go/bin/chaind
 
 chaind init $NODENAME --chain-id $CHAIN_ID
 chaind config chain-id kyve-beta
-
-mv genesis.json ~/.kyve/config/
+wget -O ~/.kyve/config/genesis.json "https://nc2.breithecker.de/s/z3bDsQk8D6snyWA/download/genesis-v0.7.0-beta.json"
 
 seeds=""
 peers="410bf0cb2cdb9a6e159c14b9d01531b9ecb1edd4@3.70.26.46:26656"
@@ -75,6 +74,8 @@ echo "============================================================"
 #WALLET
 kyved keys add $WALLETNAME
 
+
+chaind tendermint unsafe-reset-all --home $HOME/.kyve
 
 sudo tee <<EOF >/dev/null /etc/systemd/system/kyved.service
 [Unit]
