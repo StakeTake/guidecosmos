@@ -1,6 +1,10 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
+## Explorers:
+PingPub - https://explorer.stake-take.com/stride-1/staking
+MintScan - https://www.mintscan.io/stride
+NodesGuru - https://stride.explorers.guru/validators
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/stride/STRIDE-1/stride > stride.sh && chmod +x stride.sh && ./stride.sh
