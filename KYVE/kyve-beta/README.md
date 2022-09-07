@@ -1,6 +1,8 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 
+## Explorers:
+PingPub - https://explorer.stake-take.com/kyve-beta
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/KYVE/kyve-beta/kyve > kyve.sh && chmod +x kyve.sh && ./kyve.sh
