@@ -3,7 +3,9 @@
 
 ## Explorers:
 PingPub - https://explorer.stake-take.com/stride-1/staking
+
 MintScan - https://www.mintscan.io/stride
+
 NodesGuru - https://stride.explorers.guru/validators
 ## One line script for full install
 ```
