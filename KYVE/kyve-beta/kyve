@@ -62,7 +62,12 @@ chmod +x $HOME/go/bin/chaind
 
 chaind init $NODENAME --chain-id $CHAIN_ID
 chaind config chain-id kyve-beta
-wget -O ~/.kyve/config/genesis.json "https://nc2.breithecker.de/s/z3bDsQk8D6snyWA/download/genesis-v0.7.0-beta.json"
+wget -O $HOME/.kyve/config/genesis.json "https://nc2.breithecker.de/s/z3bDsQk8D6snyWA/download/genesis-v0.7.0-beta.json"
+wget -O $HOME/.kyve/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/KYVE/kyve-beta/addrbook.json"
+go install github.com/cosmos/cosmos-sdk/cosmovisor/cmd/cosmovisor@v1.0.0
+mkdir -p $HOME/.kyve/cosmovisor/genesis/bin
+mkdir $HOME/.kyve/cosmovisor/upgrades
+cp $(which chaind) $HOME/.kyve/cosmovisor/genesis/bin/
 
 seeds=""
 peers="410bf0cb2cdb9a6e159c14b9d01531b9ecb1edd4@3.70.26.46:26656"
@@ -77,32 +82,28 @@ kyved keys add $WALLETNAME
 
 chaind tendermint unsafe-reset-all --home $HOME/.kyve
 
-sudo tee <<EOF >/dev/null /etc/systemd/system/kyved.service
+sudo tee /etc/systemd/system/kyved.service > /dev/null <<EOF  
 [Unit]
-Description=Kyved Cosmos daemon
+Description=cosmovisor
 After=network-online.target
-
 [Service]
 User=$USER
-ExecStart=$(which chaind) start
+ExecStart=$(which cosmovisor) start
 Restart=on-failure
-RestartSec=3
-LimitNOFILE=4096
-
+RestartSec=12
+LimitNOFILE=65535
+Environment="DAEMON_HOME=$HOME/.kyve"
+Environment="DAEMON_NAME=chaind"
+Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=true"
+Environment="DAEMON_RESTART_AFTER_UPGRADE=true"
+Environment="UNSAFE_SKIP_BACKUP=true"
 [Install]
 WantedBy=multi-user.target
 EOF
 
-cat /etc/systemd/system/kyved.service
 sudo systemctl enable kyved
 sudo systemctl daemon-reload
 sudo systemctl restart kyved
-
-sed -i 's/#Storage=auto/Storage=persistent/g' /etc/systemd/journald.conf
-sudo systemctl restart systemd-journald
-
-echo export CHAIN_ID=kyve-beta >> $HOME/.bash_profile
-source ~/.bash_profile
 
 break
 ;;
