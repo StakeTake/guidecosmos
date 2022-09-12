@@ -74,7 +74,7 @@ dewebd keys add $WALLETNAME
 dewebd unsafe-reset-all
 rm $HOME/.deweb/config/genesis.json
 wget -O $HOME/.deweb/config/genesis.json "https://raw.githubusercontent.com/deweb-services/deweb/main/genesis.json"
-wget -O $HOME/.deweb/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/DWS/deweb-testnet-1/addrbook.json"
+# wget -O $HOME/.deweb/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/DWS/deweb-testnet-1/addrbook.json"
 
 sed -E -i 's/seeds = \".*\"/seeds = \"08b7968ec375444f86912c2d9c3d28e04a5f14c4@seed1.deweb.services:26656\"/' $HOME/.deweb/config/config.toml
 sed -E -i 's/minimum-gas-prices = \".*\"/minimum-gas-prices = \"0udws\"/' $HOME/.deweb/config/app.toml
