@@ -18,7 +18,7 @@ umeed unsafe-reset-all --home $HOME/.umee
 SEEDS=""
 PEERS="dc1b1b89a83873f20b613cdb1361f932afb84a97@35.215.72.45:26656,94ac8328b4b9f45b6f7b8e9569ae0253dc53c7eb@35.212.143.125:26656,5e01b69ead6e0781af0361d3ec4e436d96dba932@35.215.98.106:26656"; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.umee/config/config.toml
-SNAP_RPC="https://rpc.blossom.canon-1.network.umee.cc:443"
+SNAP_RPC=https://umee-testnet-rpc.polkachu.com:443"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
