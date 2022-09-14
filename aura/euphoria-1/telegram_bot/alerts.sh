@@ -27,7 +27,7 @@ source $HOME/.bash_profile
 curl -s "$NODE_RPC/status"> /dev/null
 if [[ $? -ne 0 ]]; then
     MSG="$ip node is stopped!!! ( узел остановлен )"
-    MSG="HAQQ $MSG"
+    MSG="AURA $MSG"
     SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG"); exit 1
 fi
 
@@ -57,6 +57,6 @@ if [[ $REAL_BLOCK -eq 0 ]]; then
 fi
 
 if [[ $MSG != "" ]]; then
-    MSG="HAQQ $MSG"
+    MSG="AURA $MSG"
     SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG")
 fi
