@@ -6,7 +6,7 @@ LOG_FILE="$HOME/alerts/nodealerts.log"
 NODE_RPC="http://127.0.0.1:26657"
 source 
 # Trusted node RPC address, e.g. "https://rpc.cosmos.network:26657"
-SIDE_RPC="https://rpc-t.aura.nodestake.top:443"
+SIDE_RPC="https://haqq-t.rpc.manticore.team:443"
 ip=$(wget -qO- eth0.me)
 
 touch $LOG_FILE
@@ -27,7 +27,7 @@ source $HOME/.bash_profile
 curl -s "$NODE_RPC/status"> /dev/null
 if [[ $? -ne 0 ]]; then
     MSG="$ip node is stopped!!! ( узел остановлен )"
-    MSG="AURA $MSG"
+    MSG="HAQQ $MSG"
     SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG"); exit 1
 fi
 
@@ -57,6 +57,6 @@ if [[ $REAL_BLOCK -eq 0 ]]; then
 fi
 
 if [[ $MSG != "" ]]; then
-    MSG="AURA $MSG"
+    MSG="HAQQ $MSG"
     SEND=$(curl -s -X POST -H "Content-Type:multipart/form-data" "https://api.telegram.org/bot$TG_API/sendMessage?chat_id=$TG_ID&text=$MSG")
 fi
