@@ -58,7 +58,7 @@ cd $HOME
 git clone https://github.com/umee-network/umee.git
 cd umee
 git pull
-git checkout tags/v1.0.3
+git checkout tags/v1.1.2
 make build
 mkdir -p /usr/local/bin
 sudo cp $HOME/umee/build/umeed /usr/local/bin
@@ -76,10 +76,10 @@ umeed keys add $WALLETNAME
 umeed unsafe-reset-all --home $HOME/.umee
 rm $HOME/.umee/config/genesis.json
 wget -O $HOME/.umee/config/genesis.json "https://raw.githubusercontent.com/umee-network/testnets/main/networks/canon-1/genesis.json"
-# wget -O $HOME/.umee/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/umee/umee-1/addrbook.json"
+wget -O $HOME/.umee/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/umee/canon-1/addrbook.json"
 
 SEEDS=""
-PEERS="dc1b1b89a83873f20b613cdb1361f932afb84a97@35.215.72.45:26656,"; \
+PEERS=""; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.umee/config/config.toml
 
 
