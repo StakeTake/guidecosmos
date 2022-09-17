@@ -30,7 +30,7 @@ cd $HOME
 git clone https://github.com/sei-protocol/sei-chain
 cd $HOME/sei-chain
 git checkout master && git pull
-git checkout 1.1.2beta-internal
+git checkout 1.2.0beta
 make install
 mv $HOME/go/bin/seid /usr/bin/
 ```
