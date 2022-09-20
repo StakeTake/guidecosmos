@@ -18,7 +18,7 @@ SEEDS=""
 PEERS=""; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.haqqd/config/config.toml
 wget -O $HOME/.haqqd/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/haqq/haqq_54211-2/addrbook.json"
-SNAP_RPC="https://haqq-t.rpc.manticore.team:443"
+SNAP_RPC="http://haqq.stake-take.com:206573"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
@@ -40,7 +40,7 @@ sudo systemctl restart haqqd && journalctl -u haqqd -f -o cat
 ```
 ## RPC
 ```
-https://haqq-t.rpc.manticore.team:443
+http://haqq.stake-take.com:20657
 ```
 ## Delete node
 ```
