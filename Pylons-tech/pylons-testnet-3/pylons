@@ -75,7 +75,7 @@ echo "============================================================"
 #WALLET
 pylonsd keys add $WALLETNAME
 
-pylonsd unsafe-reset-all
+pylonsd tendermint unsafe-reset-all --home $HOME/.pylons
 rm $HOME/.pylons/config/genesis.json
 curl http://pylons.stake-take.com:26657/genesis | jq .result.genesis > $HOME/.pylons/config/genesis.json
 wget -O $HOME/.pylons/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/Pylons-tech/pylons-testnet-3/addrbook.json"
