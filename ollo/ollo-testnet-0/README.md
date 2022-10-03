@@ -2,7 +2,7 @@
 
 
 ## Explorers: 
-PingPub - https://explorer.stake-take.com/ollo/staking
+PingPub - https://explorer.stake-take.com/ollo-testnet/staking
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/ollo/ollo-testnet-0/ollo > ollo.sh && chmod +x ollo.sh && ./ollo.sh
