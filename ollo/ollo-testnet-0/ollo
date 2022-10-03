@@ -72,7 +72,7 @@ ${PROJECT}d keys add $WALLETNAME
 
 ${PROJECT}d unsafe-reset-all --home $HOME/.${PROJECT}
 rm $HOME/.${PROJECT}/config/genesis.json
-curl http://pylons.stake-take.com:16657/genesis | jq .result.genesis > $HOME/.${PROJECT}/config/genesis.json
+curl http://ollo.stake-take.com:16657/genesis | jq .result.genesis > $HOME/.${PROJECT}/config/genesis.json
 wget -O $HOME/.${PROJECT}/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/ollo/ollo-testnet-0/addrbook.json"
 
 SEEDS=""
