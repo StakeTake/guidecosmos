@@ -39,9 +39,9 @@ SEEDS=""; \
 PEERS=""; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.ollo/config/config.toml
 wget -O $HOME/.ollo/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/ollo/ollo-testnet-0/addrbook.json"
-SNAP_RPC="ollo.stake-take.com:16657"
+SNAP_RPC="http://ollo.stake-take.com:16657"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
-BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 500)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
 echo $LATEST_HEIGHT $BLOCK_HEIGHT $TRUST_HASH
 
