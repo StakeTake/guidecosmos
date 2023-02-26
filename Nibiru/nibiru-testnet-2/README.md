@@ -161,7 +161,7 @@ The display `"catching_up":` shows `false` that it has been synchronized. Synchr
 [Up to sections ↑](#anchor)
 #### Replace addrbook
 ```
-wget -O $HOME/.nibid/config/addrbook.json "https://raw.githubusercontent.com/sergiomateiko/addrbooks/main/nibiru/addrbook.json"
+wget -O $HOME/.nibid/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/Nibiru/nibiru-testnet-2/addrbook.json"
 ```
 <a id="validator"></a>
 ### Create a validator
@@ -201,7 +201,8 @@ $daemon tx staking create-validator \
     --commission-max-change-rate=0.1 \
     --min-self-delegation=1000000 \
     --fees 5000unibi \
-    --from=WALLET_NAME
+    --from=WALLET_NAME\
+    --yes
 ```
 
 #### After that, you can go to the block [explorer](https://testnet-2.nibiru.fi/) to check whether your validator is created successfully.
