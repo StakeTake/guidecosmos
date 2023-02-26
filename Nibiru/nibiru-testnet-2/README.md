@@ -84,7 +84,7 @@ nibid config chain-id nibiru-testnet-2
 #### Download the Genesis file
 
 ```
-curl -s https://rpc.testnet-1.nibiru.fi/genesis | jq -r .result.genesis >  ~/.nibid/config/genesis.json
+curl -s https://rpc.testnet-2.nibiru.fi/genesis | jq -r .result.genesis >  ~/.nibid/config/genesis.json
 ```
 
 #### Set peer and seed
@@ -110,7 +110,7 @@ sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $
 ```
 #### State-sync fast synchronization
 ```
-SNAP_RPC="https://rpc.nibiru-testnet-1.silentvalidator.com:443" \
+SNAP_RPC="https://rpc.nibiru-testnet-2.silentvalidator.com:443" \
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 500)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash); \
