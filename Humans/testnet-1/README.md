@@ -221,7 +221,7 @@ $daemon tx staking create-validator \
     --yes
 ```
 
-#### After that, you can go to the block [explorer](http://explorer.stake-take.com/humans-testnet) to check whether your validator is created successfully.
+#### After that, you can go to the block [explorer](https://explorer.stake-take.com/humans-testnet) to check whether your validator is created successfully.
 And [other guides](https://github.com/StakeTake/guidecosmos)
 ----
 
