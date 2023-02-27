@@ -16,7 +16,7 @@
 | [Install other necessary environments](#go) | Clone repository. Compilation project |
 | [Run Node](#run) |  Initialize node. Create configuration files. Check logs & sync status. |
 | [Create Validator](#validator) |  Create valdator & wallet, check your balance. |
-| <a href="http://explorer.stake-take.com/humans-testnet" target="_explorer">Explorer</a> |  Check whether your validator is created successfully |
+| <a href="https://explorer.stake-take.com/humans-testnet" target="_explorer">Explorer</a> |  Check whether your validator is created successfully |
 
 
  <p align="center"><a href="https://docs.nibiru.fi/"><img align="right"width="100px"alt="humans" src="https://stake-take.com/img/humans.png"></p</a>
