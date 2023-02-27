@@ -17,7 +17,7 @@
 | [Install other necessary environments](#necessary) | Clone repository. Compilation project |
 | [Run Node](#run) |  Initialize node. Create configuration files. Check logs & sync status. |
 | [Create Validator](#validator) |  Create valdator & wallet, check your balance. |
-| <a href="http://explorer.stake-take.com/nibiru-testnet" target="_explorer">Explorer</a> |  Check whether your validator is created successfully |
+| <a href="https://explorer.stake-take.com/nibiru-testnet" target="_explorer">Explorer</a> |  Check whether your validator is created successfully |
 
 
  <p align="center"><a href="https://docs.nibiru.fi/"><img align="right"width="100px"alt="nibiru" src="https://i.ibb.co/865XFvQ/Niburu.png"></p</a>
@@ -200,12 +200,12 @@ $daemon tx staking create-validator \
     --commission-max-rate=0.1 \
     --commission-max-change-rate=0.1 \
     --min-self-delegation=1000000 \
-    --fees 5000unibi \
+    --fees 5000$denom \
     --from=WALLET_NAME\
     --yes
 ```
 
-#### After that, you can go to the block [explorer](https://testnet-2.nibiru.fi/) to check whether your validator is created successfully.
+#### After that, you can go to the block [explorer](https://explorer.stake-take.com/nibiru-testnet) to check whether your validator is created successfully.
 And [other guides](https://github.com/StakeTake/guidecosmos)
 ----
 
