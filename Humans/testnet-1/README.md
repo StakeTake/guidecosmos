@@ -61,9 +61,9 @@ sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bs
 ```
 
 ```
-cd\
-git clone https://github.com/humansdotai/humans\
-cd humans\
+cd \
+git clone https://github.com/humansdotai/humans \
+cd humans \
 git checkout v1.0.0
 ```
 
@@ -82,8 +82,6 @@ mv humansd /usr/local/go/bin
 
 ```
 moniker=YOUR_MONIKER_NAME
-
-humansd config keyring-backend test
 
 humansd config chain-id testnet-1
 
