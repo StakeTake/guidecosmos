@@ -56,7 +56,7 @@ sudo systemctl restart umeed && journalctl -u umeed -f -o cat
 ```
 sudo systemctl stop umeed
 rm $HOME/.umee/config/addrbook.json
-wget -O $HOME/.umee/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/umee/umee-1/addrbook.json"
+wget -O $HOME/.umee/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/umee/canon-2/addrbook.json"
 sudo systemctl restart umeed && journalctl -u umeed -f -o cat
 ```
 ## RPC
