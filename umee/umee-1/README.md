@@ -14,7 +14,7 @@ To install, you just need to take the script and go through the installation ord
 ## Snapshot 3061028  height 0.6gb
 ```
 sudo systemctl stop umeed
-umeed unsafe-reset-all --home $HOME/.umee
+umeed tendermint unsafe-reset-all --home $HOME/.umee
 pruning="custom"
 pruning_keep_recent="100"
 pruning_keep_every="0"
@@ -34,11 +34,11 @@ sudo systemctl restart umeed && journalctl -u umeed -f -o cat
 ## Start with state sync
 ```
 sudo systemctl stop umeed
-umeed unsafe-reset-all --home $HOME/.umee
+umeed tendermint unsafe-reset-all --home $HOME/.umee
 SEEDS=""
 PEERS=""; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.umee/config/config.toml
-SNAP_RPC="http://rpc.umee.blockscope.net:26657"
+SNAP_RPC="http://umee.stake-take.com:26657"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
@@ -61,7 +61,7 @@ sudo systemctl restart umeed && journalctl -u umeed -f -o cat
 ```
 ## RPC
 ```
-https://rpc.umee.testnet.run:443, http://rpc-umee-0.node75.org:26657, http://rpc.umee.blockscope.net:26657, https://umee-rpc.theamsolutions.info:443, http://5.189.166.167:26657
+http://umee.stake-take.com:26657, https://rpc.umee.testnet.run:443, http://rpc-umee-0.node75.org:26657, http://rpc.umee.blockscope.net:26657, https://umee-rpc.theamsolutions.info:443, http://5.189.166.167:26657
 ```
 ## Delete node
 ```
