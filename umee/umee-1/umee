@@ -58,7 +58,7 @@ cd $HOME
 git clone https://github.com/umee-network/umee.git
 cd umee
 git pull
-git checkout tags/v3.0.2
+git checkout tags/v4.1.0
 make build
 mkdir -p /usr/local/bin
 sudo cp $HOME/umee/build/umeed /usr/local/bin
@@ -132,7 +132,7 @@ break
 
 
 "Check balance")
-umeed q bank balances $(umeed keys show $WALLETNAME -a --bech acc)
+umeed q bank balances $(umeed keys show $WALLETNAME -a)
 break
 ;;
 
@@ -147,6 +147,7 @@ umeed tx staking create-validator \
   --pubkey $(umeed tendermint show-validator) \
   --moniker $NODENAME \
   --chain-id $CHAIN_ID \
+  --fees 40000uumee \
   --gas 300000 \
   -y
 break
