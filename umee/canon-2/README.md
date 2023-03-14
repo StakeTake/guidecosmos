@@ -11,10 +11,10 @@ To install, you just need to take the script and go through the installation ord
 ### Please save your mnemonic and backup $HOME/.umee/config/priv_validator_key.json
 #### For example mnemonic phrase:
 ![image](https://user-images.githubusercontent.com/93165931/184551172-16cb2f1a-3145-4e5b-8092-c966e2f3e5ef.png)
-## Snapshot 3061028  height 0.6gb
+## Snapshot 0.6gb
 ```
 sudo systemctl stop umeed
-umeed unsafe-reset-all --home $HOME/.umee
+umeed tendermint unsafe-reset-all --home $HOME/.umee
 pruning="custom"
 pruning_keep_recent="100"
 pruning_keep_every="0"
@@ -34,7 +34,7 @@ sudo systemctl restart umeed && journalctl -u umeed -f -o cat
 ## Start with state sync
 ```
 sudo systemctl stop umeed
-umeed unsafe-reset-all --home $HOME/.umee
+umeed tendermint unsafe-reset-all --home $HOME/.umee
 SEEDS=""
 PEERS=""; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.umee/config/config.toml
