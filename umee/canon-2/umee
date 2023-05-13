@@ -58,7 +58,7 @@ cd $HOME
 git clone https://github.com/umee-network/umee.git
 cd umee
 git pull
-git checkout v4.1.0-rc4
+git checkout v4.3.0
 make build
 mkdir -p /usr/local/bin
 sudo cp $HOME/umee/build/umeed /usr/local/bin
