@@ -58,7 +58,7 @@ cd $HOME
 git clone https://github.com/umee-network/umee.git
 cd umee
 git pull
-git checkout tags/v4.1.0
+git checkout tags/v4.3.0
 make build
 mkdir -p /usr/local/bin
 sudo cp $HOME/umee/build/umeed /usr/local/bin
@@ -84,7 +84,7 @@ sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persi
 
 
 # config pruning
-indexer="null"
+indexer="kv"
 pruning="custom"
 pruning_keep_recent="100"
 pruning_keep_every="0"
