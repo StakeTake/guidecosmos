@@ -19,7 +19,7 @@ umeed tendermint unsafe-reset-all --home $HOME/.umee
 SEEDS=""
 PEERS=""; \
 sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.umee/config/config.toml
-SNAP_RPC="http://umee-testnet.stake-take.com:26657"
+SNAP_RPC="https://rpc.umee-testnet.stake-take.com:443"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
 BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
 TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
@@ -42,7 +42,11 @@ sudo systemctl restart umeed && journalctl -u umeed -f -o cat
 ```
 ## RPC
 ```
-http://umee-testnet.stake-take.com:26657
+https://rpc.umee-testnet.stake-take.com
+```
+## API
+```
+https://api.umee-testnet.stake-take.com
 ```
 ## Delete node
 ```
