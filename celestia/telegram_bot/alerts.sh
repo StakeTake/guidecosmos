@@ -3,10 +3,10 @@
 # File name for saving parameters, e.g. "cosmos.log"
 LOG_FILE="$HOME/alerts/nodealerts.log"
 # Your node RPC address, e.g. "http://127.0.0.1:26657"
-NODE_RPC="https://rpc.celestia.stake-take.com:443"
+NODE_RPC="http://127.0.0.1:26657"
 source 
 # Trusted node RPC address, e.g. "https://rpc.cosmos.network:26657"
-SIDE_RPC="http://localhost:26657"
+SIDE_RPC="https://rpc.celestia.stake-take.com:443"
 ip=$(wget -qO- eth0.me)
 
 touch $LOG_FILE
