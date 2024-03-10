@@ -74,8 +74,8 @@ echo "============================================================"
 #WALLET
 crossfid keys add $WALLETNAME
 
-crossfid tendermint unsafe-reset-all --home ~/.mineplex-chain
 rm $HOME/.mineplex-chain/config/genesis.json
+crossfid tendermint unsafe-reset-all --home ~/.mineplex-chain
 wget -O $HOME/.mineplex-chain/config/genesis.json https://testnet-files.itrocket.net/crossfi/genesis.json
 wget -O $HOME/.mineplex-chain/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/crossfi/crossfi-evm-testnet-1/addrbook.json"
 
