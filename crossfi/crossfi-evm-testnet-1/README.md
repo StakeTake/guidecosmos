@@ -1,7 +1,7 @@
 ![](https://i.yapx.ru/RTuEU.jpg)
 
 ## Explorers:
-Ping Pub - https://explorer.stake-take.com/crossfi-testnet/staking
+Ping Pub - https://testnet.ping.pub/crossfi
 ## One line script for full install
 ```
 curl -s https://raw.githubusercontent.com/StakeTake/guidecosmos/main/crossfi/crossfi-evm-testnet-1/crossfi > crossfi.sh && chmod +x crossfi.sh && ./crossfi.sh
@@ -13,29 +13,17 @@ To install, you just need to take the script and go through the installation ord
 ## Snapshot (updating every 4h)
 ```
 sudo systemctl stop crossfid
-crossfid tendermint unsafe-reset-all --home $HOME/.mineplex-chain --keep-addr-book
-pruning="custom"
-pruning_keep_recent="100"
-pruning_keep_every="0"
-pruning_interval="10"
-sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.mineplex-chain/config/app.toml
-sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.mineplex-chain/config/app.toml
-sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.mineplex-chain/config/app.toml
-sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.mineplex-chain/config/app.toml
-cd
-rm -rf ~/.mineplex-chain/data; \
-wget -O - http://snap.stake-take.com:8000/crossfi.tar.gz | tar xf -
-mv $HOME//./data $HOME/.mineplex-chain
-
+crossfid tendermint unsafe-reset-all --home ~/.mineplex-chain
+wget -O $HOME/.mineplex-chain/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/crossfi/crossfi-evm-testnet-1/addrbook.json"
+rm -rf ~/.mineplex-chain/data/*
+wget -P ~/.mineplex-chain/data http://snapshot.crossfi.stake-take.com:8000/crossfi.tar.gz
+tar -zxvf ~/.mineplex-chain/data/crossfi.tar.gz -C ~/.mineplex-chain/data
 sudo systemctl restart crossfid && journalctl -u crossfid -f -o cat
 ```
 ## Start with state sync
 ```
 sudo systemctl stop crossfid
 crossfid tendermint unsafe-reset-all --home ~/.mineplex-chain
-SEEDS=""; \
-PEERS=""; \
-sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.mineplex-chain/config/config.toml
 wget -O $HOME/.mineplex-chain/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/crossfi/crossfi-evm-testnet-1/addrbook.json"
 SNAP_RPC="https://rpc.crossfi.stake-take.com:443"
 LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
