@@ -16,7 +16,7 @@ options=(
 "Install Node"
 "Check Log"
 "Check balance"
-"Request tokens in discord"
+"Request tokens"
 "Create Validator"
 "Exit")
 select opt in "${options[@]}"
