@@ -64,6 +64,7 @@ rm -rf crossfi-node_0.3.0-prebuild3_linux_amd64.tar.gz $HOME/bin
 git clone https://github.com/crossfichain/testnet.git
 mv $HOME/testnet/ $HOME/.mineplex-chain/
 
+rm $HOME/.mineplex-chain/config/genesis.json
 crossfid init $NODENAME --chain-id $CHAIN_ID
 
 
