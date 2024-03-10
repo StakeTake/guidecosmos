@@ -50,6 +50,11 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"| ; \
 s|^(seeds[[:space:]]+=[[:space:]]+).*$|\1\"\"|" $HOME/.mineplex-chain/config/config.toml
 sudo systemctl restart crossfid && journalctl -u crossfid -f -o cat
 ```
+## Delete node
+```
+systemctl stop crossfid
+rm -rf $HOME/.mineplex-chain $(which crossfid) /etc/systemd/system/crossfid.service
+```
 ## Add addrbook
 ```
 sudo systemctl stop crossfid
