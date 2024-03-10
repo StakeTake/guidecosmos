@@ -61,6 +61,8 @@ tar -xvf crossfi-node_0.3.0-prebuild3_linux_amd64.tar.gz
 chmod +x $HOME/bin/crossfid
 mv $HOME/bin/crossfid $HOME/go/bin
 rm -rf crossfi-node_0.3.0-prebuild3_linux_amd64.tar.gz $HOME/bin
+git clone https://github.com/crossfichain/testnet.git
+mv $HOME/testnet/ $HOME/.mineplex-chain/
 
 crossfid init $NODENAME --chain-id $CHAIN_ID
 
