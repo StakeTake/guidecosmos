@@ -1,0 +1,169 @@
+#!/bin/bash
+
+while true
+do
+
+# Logo
+
+echo "========================================================================================================================"
+curl -s https://raw.githubusercontent.com/StakeTake/script/main/logo.sh | bash
+echo "========================================================================================================================"
+
+# Menu
+
+PS3='Select an action: '
+options=(
+"Install Node"
+"Check Log"
+"Check balance"
+"Request tokens in discord"
+"Create Validator"
+"Exit")
+select opt in "${options[@]}"
+do
+case $opt in
+
+"Install Node")
+echo "============================================================"
+echo "Install start"
+echo "============================================================"
+echo "Setup NodeName:"
+echo "============================================================"
+read NODENAME
+echo "============================================================"
+echo "Setup WalletName:"
+echo "============================================================"
+read WALLETNAME
+echo export NODENAME=${NODENAME} >> $HOME/.bash_profile
+echo export WALLETNAME=${WALLETNAME} >> $HOME/.bash_profile
+echo export CHAIN_ID="crossfi-evm-testnet-1" >> $HOME/.bash_profile
+source ~/.bash_profile
+
+#UPDATE APT
+sudo apt update && sudo apt upgrade -y
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+
+#INSTALL GO
+rm -r /usr/local/go
+rm -r /usr/lib/go-1.13
+wget https://golang.org/dl/go1.20.1.linux-amd64.tar.gz; \
+rm -rv /usr/local/go; \
+tar -C /usr/local -xzf go1.20.1.linux-amd64.tar.gz && \
+rm -v go1.20.1.linux-amd64.tar.gz && \
+echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile && \
+source ~/.bash_profile && \
+go version
+
+#INSTALL
+cd $HOME
+wget https://github.com/crossfichain/crossfi-node/releases/download/v0.3.0-prebuild3/crossfi-node_0.3.0-prebuild3_linux_amd64.tar.gz && tar -xf crossfi-node_0.3.0-prebuild3_linux_amd64.tar.gz
+tar -xvf crossfi-node_0.3.0-prebuild3_linux_amd64.tar.gz
+chmod +x $HOME/bin/crossfid
+mv $HOME/bin/crossfid $HOME/go/bin
+rm -rf crossfi-node_0.3.0-prebuild3_linux_amd64.tar.gz $HOME/bin
+
+crossfid init $NODENAME --chain-id $CHAIN_ID
+
+
+echo "============================================================"
+echo "Be sure to write down the mnemonic!"
+echo "============================================================"
+#WALLET
+crossfid keys add $WALLETNAME
+
+crossfid tendermint unsafe-reset-all --home ~/.mineplex-chain
+rm $HOME/.mineplex-chain/config/genesis.json
+wget -O $HOME/.mineplex-chain/config/genesis.json https://testnet-files.itrocket.net/crossfi/genesis.json
+wget -O $HOME/.mineplex-chain/config/addrbook.json "https://raw.githubusercontent.com/StakeTake/guidecosmos/main/crossfi/crossfi-evm-testnet-1/addrbook.json"
+
+SEEDS=""
+PEERS=""; \
+sed -i.bak -e "s/^seeds *=.*/seeds = \"$SEEDS\"/; s/^persistent_peers *=.*/persistent_peers = \"$PEERS\"/" $HOME/.mineplex-chain/config/config.toml
+
+
+# config pruning
+indexer="null"
+pruning="custom"
+pruning_keep_recent="100"
+pruning_keep_every="0"
+pruning_interval="10"
+
+sed -i -e "s/^indexer *=.*/indexer = \"$indexer\"/" $HOME/.mineplex-chain/config/config.toml
+sed -i -e "s/^pruning *=.*/pruning = \"$pruning\"/" $HOME/.mineplex-chain/config/app.toml
+sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"$pruning_keep_recent\"/" $HOME/.mineplex-chain/config/app.toml
+sed -i -e "s/^pruning-keep-every *=.*/pruning-keep-every = \"$pruning_keep_every\"/" $HOME/.mineplex-chain/config/app.toml
+sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"$pruning_interval\"/" $HOME/.mineplex-chain/config/app.toml
+
+
+
+tee $HOME/crossfid.service > /dev/null <<EOF
+[Unit]
+Description=crossfi
+After=network.target
+[Service]
+Type=simple
+User=$USER
+ExecStart=$(which crossfid) start
+Restart=on-failure
+RestartSec=10
+LimitNOFILE=65535
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo mv $HOME/crossfid.service /etc/systemd/system/
+
+# start service
+sudo systemctl daemon-reload
+sudo systemctl enable crossfid
+sudo systemctl restart crossfid
+
+break
+;;
+
+"Check Log")
+
+journalctl -u crossfid -f -o cat
+
+break
+;;
+
+
+"Check balance")
+crossfid q bank balances $(crossfid keys show $WALLETNAME -a --bech acc)
+break
+;;
+
+"Create Validator")
+crossfid tx staking create-validator \
+  --amount 1000000000000mpx \
+  --from $WALLETNAME \
+  --commission-max-change-rate "0.05" \
+  --commission-max-rate "0.20" \
+  --commission-rate "0.05" \
+  --min-self-delegation "1" \
+  --pubkey $(crossfid tendermint show-validator) \
+  --moniker $NODENAME \
+  --chain-id $CHAIN_ID \
+  --gas 300000 \
+  --gas-adjustment 1.3 \
+  --fees 150000000000000000mpx \
+  -y
+break
+;;
+
+"Request tokens")
+echo "========================================================================================================================"
+echo "In order to receive tokens you need to receive tokens from the team after the validator's application is approved"
+echo "========================================================================================================================"
+
+break
+;;
+
+"Exit")
+exit
+;;
+*) echo "invalid option $REPLY";;
+esac
+done
+done
